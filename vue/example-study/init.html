@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">{{msg}}</div>
+    <div id="extend"></div>
+    <div id="extend2"></div>
+  </body>
+  <script>
+    //sonVue继承自基类
+    const sonVue = Vue.extend({
+      template: "<div>i am extend</div>",
+    });
+    //基类的options更新了,但sonVue子类的options还未更新
+    Vue.mixin({
+      destroyed() {
+        console.log("destroyed");
+      },
+    });
+    //sonVue.mixin更新了，sonVue.options更新了，但是sonVue.sealedOptions还是旧的
+    sonVue.mixin({
+      mounted() {
+        console.log("mounted1");
+      },
+    });
+
+    // 执行this._init(),走到resolveConstructorOptions里，进行判断，更新options
+    new sonVue({
+      el: "#extend",
+    });
+    
+    sonVue.mixin({
+      mounted() {
+        console.log("mounted2");
+      },
+    });
+
+    new sonVue({
+      el: "#extend2",
+    });
+  </script>
+</html>

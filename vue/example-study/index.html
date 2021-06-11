@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">{{msg}}11{{data}}</div>
+    <div id="extend1"></div>
+  </body>
+  <script>
+    // Vue.mixin({
+    //   data() {
+    //     return {
+    //       arr: this.str,
+    //     };
+    //   },
+    // });
+
+    new Vue({
+      el: "#app",
+      watch: {
+        msg: function () {},
+      },
+      props: {
+        str: {
+          type: String,
+          default: "str",
+        },
+      },
+      data() {
+        return {
+          msg: "msg",
+          data: this.str,
+        };
+      },
+      mounted() {
+        console.log(this); //输出为{msg: ƒ}  符合第2种情况
+        console.log(this.$options.watch); //输出为{msg: ƒ}  符合第2种情况
+      },
+    });
+  </script>
+</html>

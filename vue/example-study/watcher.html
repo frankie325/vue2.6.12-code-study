@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">
+      <div>{{msg1}}</div>
+      <div>{{temp1}}</div>
+      <div>{{temp1}}</div>
+      <div>{{temp2}}</div>
+    </div>
+    <div id="extend1"></div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      computed: {
+        temp1: {
+          get() {
+            return Math.random();
+          },
+        //   cache: false,
+        },
+        temp2: function () {
+          return this.msg2;
+        },
+      },
+      data() {
+        return {
+          msg1: "msg1",
+          msg2: "msg2",
+        };
+      },
+      mounted() {
+        console.log(this);
+      },
+    });
+  </script>
+</html>

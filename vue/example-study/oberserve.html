@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">
+      <!-- <div>{{msg}}</div> -->
+      <div>{{obj}}</div>
+      <div>{{arr[0]}}</div>
+      <!-- <div>{{obj.arr[0]}}</div> -->
+      <div @click="changeObj">btn</div>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      // watch: {
+      //   msg: function () {},
+      // },
+      data: () => {
+        return {
+          msg: "msg",
+          obj: {
+            name: "kfg",
+            obj: {
+              a: "1",
+            },
+          },
+          arr: [
+            {
+              obj: {
+                name: "xxx",
+              },
+            },
+            1,
+          ],
+        };
+      },
+      methods: {
+        changeObj() {
+          this.arr[0].a = 2;
+          // this.obj.arr[0] = 2;
+        },
+      },
+      mounted() {
+        console.log(this);
+        console.log(this._data);
+        // console.log(this.obj);
+      },
+      updated() {
+        console.log(this._data);
+      },
+    });
+
+    // function walk(obj) {
+    //   const keys = Object.keys(obj);
+    //   for (let i = 0; i < keys.length; i++) {
+    //     defineReactive(obj, keys[i]);
+    //   }
+    // }
+    // function defineReactive(obj, key) {
+    //   const value = obj[key];
+    //   if (typeof value == "object") {
+    //     walk(value);
+    //   }
+    //   Object.defineProperty(obj, key, {
+    //     enumerable: true,
+    //     configurable: true,
+    //     // get 拦截对 obj[key] 的读取操作
+    //     get: function reactiveGetter() {
+    //       console.log("hhhh");
+    //       return value;
+    //     },
+    //   });
+    // }
+    let objFather = {
+      name: "father",
+      sex: "boy",
+      objChild: {
+        name: "child",
+      },
+      arr: [1, 2],
+    };
+    // walk(objFather);
+    let value1 = objFather.objChild;
+    Object.defineProperty(objFather, "objChild", {
+      get: function getter() {
+        console.log("fatherGet");
+        return value1;
+      },
+    });
+    let value2 = objFather.objChild.name;
+    Object.defineProperty(objFather.objChild, "name", {
+      get: function getter() {
+        console.log("childGet");
+        return value2;
+      },
+    });
+    Object.defineProperty(objFather, "arr", {
+      get: function getter() {
+        console.log("arr");
+        return [2];
+      },
+    });
+
+    // console.log(objFather);
+    console.log(objFather.objChild.name); //访问子属性里的key，也会触发上级的get
+    console.log(objFather.arr[0]);
+    // objFather
+  </script>
+</html>

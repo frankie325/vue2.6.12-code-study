@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">{{msg}}{{str}}</div>
+    <div id="extend1"></div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      provide: {
+        str: "str",
+      },
+      inject: {
+        str: {
+          from: "str", //不会从自己的provide中找，而是从父级中找
+        },
+      },
+      data: () => {
+        return {
+          msg: "msg",
+        };
+      },
+      mounted() {
+        console.log(this);
+      },
+    });
+  </script>
+</html>
