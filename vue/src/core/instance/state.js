@@ -190,14 +190,14 @@ function initData(vm: Component) {
 }
 
 /*
-传入的data为合并data选项时返回的mergedInstanceDataFn方法，
-虽然在mergedInstanceDataFn方法中使用过了call保证data中的this指向，但是new Vue时传递
+传入的data为合并data选项时返回的mergedInstanceDataFn方法
 */
 export function getData(data: Function, vm: Component): any {
   // #7573 disable dep collection when invoking data getters
+  // 初始化数据的时候，不用去收集依赖，因为data中可以访问this['prop键值']，会触发prop的get
   pushTarget();
   try {
-    return data.call(vm, vm); //确保让data可以访问到this指向实例,也把组件实例作为参数传给了data
+    return data.call(vm, vm); 
   } catch (e) {
     handleError(e, vm, `data()`);
     return {};
@@ -298,6 +298,7 @@ export function defineComputed(
     process.env.NODE_ENV !== "production" &&
     sharedPropertyDefinition.set === noop
   ) {
+    // 如果set不存在，当改变计算属性的时候，会调用该方法报错
     sharedPropertyDefinition.set = function () {
       warn(
         `Computed property "${key}" was assigned to but it has no setter.`,
@@ -305,10 +306,11 @@ export function defineComputed(
       );
     };
   }
+  // 将计算属性定义到实例上
   Object.defineProperty(target, key, sharedPropertyDefinition);
 }
 
-// 返回一个函数，当通过this.xxx访问计算属性时，执行返回的get方法
+// 返回一个函数，当通过this.xxx访问计算属性时，执行返回的computedGetter
 function createComputedGetter(key) {
   return function computedGetter() {
     // 拿到该属性的computedWatchers
@@ -340,10 +342,9 @@ function createComputedGetter(key) {
       2.watcher.evaluate()执行完后又调用了popTarget()，将computedWatcher从targetStack队列中剔除，此时Dep.target为组件的渲染watcher
       执行下面的watcher.depend()，会遍历computedWatcher在上一步收集到的所有依赖变量的dep实例，将渲染watcher添加到dep实例
       所以当依赖变量更新时，页面也会进行更新。
-      妙哇，妙哇。不得不说一句，尤大，可真牛。
+      妙哇，妙哇
       */
       if (Dep.target) {
-        // 这个
         watcher.depend();
       }
       // 返回computedWatcher得到的
@@ -394,7 +395,6 @@ function initMethods(vm: Component, methods: Object) {
 
 /*
 watch可以传入下面多种形式
-
 watch: {
     a: function (val, oldVal) {
       console.log('new: %s, old: %s', val, oldVal)
@@ -438,6 +438,7 @@ function initWatch(vm: Component, watch: Object) {
   }
 }
 
+// 通过$watch创建观察者实例
 function createWatcher(
   vm: Component,
   expOrFn: string | Function,
@@ -457,18 +458,23 @@ function createWatcher(
   return vm.$watch(expOrFn, handler, options);
 }
 
+// 设置Vue原型上的属性和方法，$data，$props，$set，$del，$watch
 export function stateMixin(Vue: Class<Component>) {
   // flow somehow has problems with directly declared definition object
   // when using Object.defineProperty, so we have to procedurally build up
   // the object here.
+  // 定义$data的get方法
   const dataDef = {};
   dataDef.get = function () {
     return this._data;
   };
+  // 定义$props的get方法
   const propsDef = {};
   propsDef.get = function () {
     return this._props;
   };
+
+  // 修改$data和$props时会报错
   if (process.env.NODE_ENV !== "production") {
     dataDef.set = function () {
       warn(
@@ -481,9 +487,12 @@ export function stateMixin(Vue: Class<Component>) {
       warn(`$props is readonly.`, this);
     };
   }
+
+  // 定义$data和$props，用户可以通过 vm.$data 访问原始数据对象，实际是访问实例的_data,_props
   Object.defineProperty(Vue.prototype, "$data", dataDef);
   Object.defineProperty(Vue.prototype, "$props", propsDef);
 
+  // 原型上定义$set，$del，$watch方法
   Vue.prototype.$set = set;
   Vue.prototype.$delete = del;
 
@@ -526,8 +535,12 @@ export function stateMixin(Vue: Class<Component>) {
     // 创建watcher实例
     const watcher = new Watcher(vm, expOrFn, cb, options);
     if (options.immediate) {
+      // 如果immediate为true，说明立即执行
       const info = `callback for immediate watcher "${watcher.expression}"`;
+      //此时Dep.target为targetStack栈上一个watcher实例，不是当前watcher实例（new完之后就从栈中移除了）
+      //Dep.target置为undefined，当立即执行传入的回调时，里面访问的变量就不会进行依赖收集了
       pushTarget();
+      // 执行传入的回调，因为可能包含异步操作，进行错误拦截处理
       invokeWithErrorHandling(cb, vm, [watcher.value], vm, info);
       popTarget();
     }

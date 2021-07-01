@@ -53,7 +53,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 /**
-  对数据进行合并
+  对数据进行合并,to（childVal）在from（parentVal）中没有的属性会进行添加，有就不进行处理
  */
 function mergeData(to: Object, from: ?Object): Object {
   if (!from) return to;
@@ -64,15 +64,15 @@ function mergeData(to: Object, from: ?Object): Object {
 
   for (let i = 0; i < keys.length; i++) {
     key = keys[i];
-    // in case the object is already observed...
+    // 如果是__ob__,说明该属性时观察者实例，跳过
     if (key === "__ob__") continue;
     toVal = to[key];
     fromVal = from[key];
-    // 如果to没有该属性
     if (!hasOwn(to, key)) {
+      // 如果to没有该属性，为to添加该属性
       set(to, key, fromVal);
-      // 如果to,from都有该属性，判断to,from相等且是否为对象，成立的话继续递归判断
     } else if (
+      // 如果to,from都有该属性，判断to,from相等且是否为对象，成立的话继续递归判断
       toVal !== fromVal &&
       isPlainObject(toVal) &&
       isPlainObject(fromVal)
@@ -80,7 +80,7 @@ function mergeData(to: Object, from: ?Object): Object {
       mergeData(toVal, fromVal);
     }
   }
-  // 返回fo，直接覆盖
+  // 返回to
   return to;
 }
 

@@ -6,7 +6,9 @@
 ::: tip 文件目录
 /src/core/instance/index.js  
 :::
-找到vue源码的入口文件，该文件创建了Vue构造函数，并执行了一系列初始化方法
+找到vue源码的入口文件，该文件创建了Vue构造函数，并执行了一系列初始化方法  
+1. [initMixin](./entry.md#initmixin)方法
+2. [stateMixin](./state.md#statemixin)方法
 ```js
 import { initMixin } from './init'
 import { stateMixin } from './state'
@@ -542,10 +544,9 @@ export function mergeDataOrFn(
 }
 
 /**
-  对数据进行合并
+  对数据进行合并,to（childVal）在from（parentVal）中没有的属性会进行添加，有就不进行处理
  */
 function mergeData(to: Object, from: ?Object): Object {
-  // 如果传入的parentVal不存在，返回childVal
   if (!from) return to;
   let key, toVal, fromVal;
 
@@ -554,15 +555,15 @@ function mergeData(to: Object, from: ?Object): Object {
 
   for (let i = 0; i < keys.length; i++) {
     key = keys[i];
-    // in case the object is already observed...
+    // 如果是__ob__,说明该属性时观察者实例，跳过
     if (key === "__ob__") continue;
     toVal = to[key];
     fromVal = from[key];
-    // 如果to没有该属性
     if (!hasOwn(to, key)) {
+      // 如果to没有该属性，为to添加该属性
       set(to, key, fromVal);
-      // 如果to,from都有该属性，判断to,from相等且是否为对象，成立的话继续递归判断
     } else if (
+      // 如果to,from都有该属性，判断to,from相等且是否为对象，成立的话继续递归判断
       toVal !== fromVal &&
       isPlainObject(toVal) &&
       isPlainObject(fromVal)
@@ -570,9 +571,10 @@ function mergeData(to: Object, from: ?Object): Object {
       mergeData(toVal, fromVal);
     }
   }
-  // 返回to，直接覆盖
+  // 返回to
   return to;
 }
+
 
 ```
 ::: tip 

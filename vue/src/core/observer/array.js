@@ -27,7 +27,7 @@ methodsToPatch.forEach(function (method) {
   const original = arrayProto[method]
   def(arrayMethods, method, function mutator (...args) {
     const result = original.apply(this, args)
-    const ob = this.__ob__
+    const ob = this.__ob__//当操作该数组时，拿到该数组的观察者实例
     let inserted //新插入的值
     // 下面三个方法会插入新的值
     switch (method) {

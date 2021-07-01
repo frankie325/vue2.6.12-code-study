@@ -2,8 +2,7 @@
 
 export const emptyObject = Object.freeze({})
 
-// These helpers produce better VM code in JS engines due to their
-// explicitness and function inlining.
+// 为undefined或者null，返回true
 export function isUndef (v: any): boolean %checks {
   return v === undefined || v === null
 }
@@ -13,16 +12,18 @@ export function isDef (v: any): boolean %checks {
   return v !== undefined && v !== null
 }
 
+// 是否为true
 export function isTrue (v: any): boolean %checks {
   return v === true
 }
 
+// 是否为false
 export function isFalse (v: any): boolean %checks {
   return v === false
 }
 
 /**
- * Check if value is primitive.
+ * 检查是否是原始类型.
  */
 export function isPrimitive (value: any): boolean %checks {
   return (
@@ -63,16 +64,19 @@ export function isPlainObject (obj: any): boolean {
   return _toString.call(obj) === '[object Object]'
 }
 
+// 是否是正则表达式
 export function isRegExp (v: any): boolean {
   return _toString.call(v) === '[object RegExp]'
 }
 
 /**
- * Check if val is a valid array index.
+  检查是不是有效的数组索引
  */
 export function isValidArrayIndex (val: any): boolean {
+  // 提取数字部分
   const n = parseFloat(String(val))
-  return n >= 0 && Math.floor(n) === n && isFinite(val)
+  // 大于0，且为整数，是有限的，则返回true
+  return n >= 0 && Math.floor(n) === n && isFinite(val) //isFinite是js内置的，用于检查其参数是否是有限值
 }
 
 // 判断传入的值是不是Promise实例
@@ -136,19 +140,21 @@ export const isBuiltInTag = makeMap('slot,component', true)
 export const isReservedAttribute = makeMap('key,ref,slot,slot-scope,is')
 
 /**
- * Remove an item from an array.
+ 移除数组里指定的元素
  */
 export function remove (arr: Array<any>, item: any): Array<any> | void {
   if (arr.length) {
+    // 拿到指定元素的索引
     const index = arr.indexOf(item)
     if (index > -1) {
+      // 使用splice删除元素
       return arr.splice(index, 1)
     }
   }
 }
 
 /**
- * Check whether an object has the property.
+判断对象是否含有该属性
  */
 const hasOwnProperty = Object.prototype.hasOwnProperty
 // 判断对象是否含有该属性，不包括原型链上的属性
@@ -234,15 +240,21 @@ export const bind = Function.prototype.bind
   : polyfillBind
 
 /**
- * Convert an Array-like object to a real Array.
+ 将伪数组转化为真数组，可以传递索引，截取索引之后的值
  */
 export function toArray (list: any, start?: number): Array<any> {
+  // 截取的索引
   start = start || 0
+  // 新数组长度，伪数组减去指定索引
   let i = list.length - start
+  // 创建一个新数组
   const ret: Array<any> = new Array(i)
+  // 遍历伪数组
   while (i--) {
+    // 赋值给新数组
     ret[i] = list[i + start]
   }
+  // 返回新数组
   return ret
 }
 

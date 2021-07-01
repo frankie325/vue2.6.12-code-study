@@ -32,6 +32,49 @@ export const LIFECYCLE_HOOKS = [
 ]
 
 ```
+## isUndef
+```js
+// 为undefined或者null，返回true
+export function isUndef (v: any): boolean %checks {
+  return v === undefined || v === null
+}
+```
+## isDef
+```js
+// 不是undefined且不是null
+export function isDef (v: any): boolean %checks {
+  return v !== undefined && v !== null
+}
+```
+## isTrue
+```js
+// 是否为true
+export function isTrue (v: any): boolean %checks {
+  return v === true
+}
+```
+## isFalse
+```js
+// 是否为false
+export function isFalse (v: any): boolean %checks {
+  return v === false
+}
+```
+## isPrimitive
+```js
+/**
+ * 检查是否是原始类型.
+ */
+export function isPrimitive (value: any): boolean %checks {
+  return (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    // $flow-disable-line
+    typeof value === 'symbol' ||
+    typeof value === 'boolean'
+  )
+}
+```
 ## isObject
 ```js
 /**
@@ -70,6 +113,38 @@ export function toRawType (value: any): string {
  */
 export function isPlainObject (obj: any): boolean {
   return _toString.call(obj) === '[object Object]'
+}
+```
+## isRegExp  
+```js
+// 是否是正则表达式
+export function isRegExp (v: any): boolean {
+  return _toString.call(v) === '[object RegExp]'
+}
+```
+## isValidArrayIndex  
+```js
+/**
+  检查是不是有效的数组索引
+ */
+export function isValidArrayIndex (val: any): boolean {
+  // 提取数字部分
+  const n = parseFloat(String(val))
+  // 大于0，且为整数，是有限的，则返回true
+  return n >= 0 && Math.floor(n) === n && isFinite(val) //isFinite是js内置的，用于检查其参数是否是有限值
+}
+```
+## isPromise  
+```js
+// 判断传入的值是不是Promise实例
+export function isPromise (val: any): boolean {
+  return (
+    // isDef为true，往下执行
+    isDef(val) &&
+    // .then和.catch是不是方法
+    typeof val.then === 'function' &&
+    typeof val.catch === 'function'
+  )
 }
 ```
 ## makeMap  
@@ -207,6 +282,29 @@ function polyfillBind (fn: Function, ctx: Object): Function {
 
   boundFn._length = fn.length
   return boundFn
+}
+```
+## toArray   
+将伪数组转化为真数组
+
+```js
+/**
+ 将伪数组转化为真数组，可以传递索引，截取索引之后的值
+ */
+export function toArray (list: any, start?: number): Array<any> {
+  // 截取的索引
+  start = start || 0
+  // 新数组长度，伪数组减去指定索引
+  let i = list.length - start
+  // 创建一个新数组
+  const ret: Array<any> = new Array(i)
+  // 遍历伪数组
+  while (i--) {
+    // 赋值给新数组
+    ret[i] = list[i + start]
+  }
+  // 返回新数组
+  return ret
 }
 ```
 

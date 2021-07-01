@@ -94,22 +94,22 @@ export class Observer {
 // helpers
 
 /**
-  改写数组的7个方法
+  改写数组的7个方法添加到目标数组上
  */
 function protoAugment(target, src: Object) {
-  /* eslint-disable no-proto */
+  // 直接添加到数组的__proto__上
   target.__proto__ = src;
   /* eslint-enable no-proto */
 }
 
 /**
-  改写数组的7个方法
+  改写数组的7个方法添加到目标数组上
  */
 /* istanbul ignore next */
 function copyAugment(target: Object, src: Object, keys: Array<string>) {
   for (let i = 0, l = keys.length; i < l; i++) {
     const key = keys[i];
-    // 直接将对应的7个方法，赋值到目标数组上
+    // 直接将对应的7个方法，添加到目标数组上
     def(target, key, src[key]);
   }
 }
@@ -146,6 +146,7 @@ export function observe(value: any, asRootData: ?boolean): Observer | void {
     ob = new Observer(value);
   }
   if (asRootData && ob) {
+    // observe传入的第二个参数为true才会执行
     ob.vmCount++;
   }
   return ob;
@@ -162,11 +163,13 @@ export function observe(value: any, asRootData: ?boolean): Observer | void {
     }
   }
   对_data进行响应式处理时，属性为对象和数组，比如处理obj对象（数组同理）
-  1.创建new Observer()实例，里面也创建了dep实例，挂载到obj.__ob__,就是childOb
-  2.利用闭包，创建的new Dep()实例，这个是隐藏的
+  1.利用闭包，创建的new Dep()实例，这个是隐藏的
+  2.obj为对象，继续使用observe方法，创建new Observer()实例，里面也创建了dep实例，挂载到obj.__ob__（就是childOb）
   当访问obj时，触发它的get
   dep.depend()是为闭包的dep收集watcher
-  childOb.dep.depend()为obj.__ob__上的dep收集watcher,这个dep收集的watcher是为Vue.$set服务的
+  childOb.dep.depend()为obj.__ob__上的dep收集watcher,这个dep收集的watcher是为$set，$delete服务的
+  虽然两个dep都收集了同样的watcher，但是vue无法对新添加的属性和数组的修改进行响应式处理，
+  Observer中的dep，就是为了能够通过手动调用该dep，来通知watcher更新，间接实现响应式
 */
 
 /**
@@ -211,7 +214,7 @@ export function defineReactive(
       if (Dep.target) {
         dep.depend();
         if (childOb) {
-          // 如果childOb存在，给childOb的dep收集watcher
+          // 如果childOb存在，给当前值绑定的__ob__属性的dep收集watcher
           childOb.dep.depend();
           if (Array.isArray(value)) {
             // 子属性如果是数组，对数组里的对象进行依赖收集
@@ -221,6 +224,7 @@ export function defineReactive(
       }
       return value;
     },
+    // 拦截赋值操作
     set: function reactiveSetter(newVal) {
        
       const value = getter ? getter.call(obj) : val;
@@ -251,30 +255,35 @@ export function defineReactive(
 }
 
 /**
- * Set a property on an object. Adds the new property and
- * triggers change notification if the property doesn't
- * already exist.
+直接为对象添加属性，不是响应式的，需使用set方法去设置
  */
 export function set(target: Array<any> | Object, key: any, val: any): any {
   if (
     process.env.NODE_ENV !== "production" &&
     (isUndef(target) || isPrimitive(target))
   ) {
+    // null,undefined,4个原始类型不能使用set方法
     warn(
       `Cannot set reactive property on undefined, null, or primitive value: ${(target: any)}`
     );
   }
   if (Array.isArray(target) && isValidArrayIndex(key)) {
+    // 如果是数组，且索引有效
+    // 重新设置数组的长度
     target.length = Math.max(target.length, key);
+    // 通过splice插入新的元素，即是响应式的
     target.splice(key, 1, val);
     return val;
   }
   if (key in target && !(key in Object.prototype)) {
+    // 如果key值已经存在对象里，已经是响应式的，无需再处理，直接赋值即可
     target[key] = val;
     return val;
   }
+  // 拿到目标对象的__ob__属性
   const ob = (target: any).__ob__;
   if (target._isVue || (ob && ob.vmCount)) {
+    // 如果进行设置的是vue实例或者是根属性$data，报错
     process.env.NODE_ENV !== "production" &&
       warn(
         "Avoid adding reactive properties to a Vue instance or its root $data " +
@@ -283,32 +292,40 @@ export function set(target: Array<any> | Object, key: any, val: any): any {
     return val;
   }
   if (!ob) {
+    // ob不存在，说明不是响应式对象，直接赋值即可
     target[key] = val;
     return val;
   }
+  // ob存在，对新设置的值进行响应式处理
   defineReactive(ob.value, key, val);
+  // 通知该属性dep收集的watcher进行更新
   ob.dep.notify();
   return val;
 }
 
 /**
- * Delete a property and trigger change if necessary.
+ * 如果删除的元素是响应式的，需要通过del方法进行删除，才能是响应式的.
  */
 export function del(target: Array<any> | Object, key: any) {
   if (
     process.env.NODE_ENV !== "production" &&
     (isUndef(target) || isPrimitive(target))
   ) {
+    // target不能为undefined，null,和4个原始类型
     warn(
       `Cannot delete reactive property on undefined, null, or primitive value: ${(target: any)}`
     );
   }
   if (Array.isArray(target) && isValidArrayIndex(key)) {
+    // 如果是数组且索引有效，直接调用splice进行删除
     target.splice(key, 1);
     return;
   }
+
+  // 拿到目标对象的__ob__属性
   const ob = (target: any).__ob__;
   if (target._isVue || (ob && ob.vmCount)) {
+    // 如果删除的是vue实例或者是根属性$data的元素，报错
     process.env.NODE_ENV !== "production" &&
       warn(
         "Avoid deleting properties on a Vue instance or its root $data " +
@@ -317,12 +334,16 @@ export function del(target: Array<any> | Object, key: any) {
     return;
   }
   if (!hasOwn(target, key)) {
+    // 如果要删除的key在目标对象中不存在，直接返回
     return;
   }
+  // 删除目标属性
   delete target[key];
   if (!ob) {
+    // ob不存在，说明不是响应式对象，直接删除
     return;
   }
+  // ob存在，通知该属性dep收集的watcher进行更新
   ob.dep.notify();
 }
 

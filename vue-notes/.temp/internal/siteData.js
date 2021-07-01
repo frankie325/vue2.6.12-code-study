@@ -44,13 +44,6 @@ export const siteData = {
       "path": "/vue-code-study/"
     },
     {
-      "frontmatter": {},
-      "regularPath": "/guide/",
-      "relativePath": "guide/readme.md",
-      "key": "v-6a8d73d3",
-      "path": "/guide/"
-    },
-    {
       "title": "vue入口",
       "frontmatter": {},
       "regularPath": "/vue-code-study/entry/entry.html",
@@ -121,19 +114,61 @@ export const siteData = {
       ]
     },
     {
-      "title": "entry",
+      "title": "响应式入口",
       "frontmatter": {},
-      "regularPath": "/vue-code-study/entry/",
-      "relativePath": "vue-code-study/entry/readme.md",
-      "key": "v-2adf1d76",
-      "path": "/vue-code-study/entry/",
+      "regularPath": "/vue-code-study/entry/state.html",
+      "relativePath": "vue-code-study/entry/state.md",
+      "key": "v-9ee2d192",
+      "path": "/vue-code-study/entry/state.html",
       "headers": [
         {
           "level": 2,
-          "title": "entry",
-          "slug": "entry"
+          "title": "initState",
+          "slug": "initstate"
+        },
+        {
+          "level": 3,
+          "title": "proxy",
+          "slug": "proxy"
+        },
+        {
+          "level": 3,
+          "title": "initProps",
+          "slug": "initprops"
+        },
+        {
+          "level": 3,
+          "title": "initMethods",
+          "slug": "initmethods"
+        },
+        {
+          "level": 3,
+          "title": "initData",
+          "slug": "initdata"
+        },
+        {
+          "level": 3,
+          "title": "initComputed",
+          "slug": "initcomputed"
+        },
+        {
+          "level": 3,
+          "title": "initWatch",
+          "slug": "initwatch"
+        },
+        {
+          "level": 3,
+          "title": "stateMixin",
+          "slug": "statemixin"
         }
       ]
+    },
+    {
+      "frontmatter": {},
+      "regularPath": "/guide/",
+      "relativePath": "guide/readme.md",
+      "key": "v-6a8d73d3",
+      "path": "/guide/"
     },
     {
       "title": "全局方法",
@@ -145,15 +180,293 @@ export const siteData = {
       "headers": [
         {
           "level": 2,
-          "title": "Vue.extend",
-          "slug": "vue-extend"
+          "title": "入口",
+          "slug": "入口"
+        },
+        {
+          "level": 2,
+          "title": "initGlobalAPI",
+          "slug": "initglobalapi"
+        },
+        {
+          "level": 2,
+          "title": "Vue.set",
+          "slug": "vue-set"
+        },
+        {
+          "level": 2,
+          "title": "Vue.delete",
+          "slug": "vue-delete"
+        },
+        {
+          "level": 2,
+          "title": "Vue.nextTick",
+          "slug": "vue-nexttick"
+        },
+        {
+          "level": 2,
+          "title": "Vue.observable",
+          "slug": "vue-observable"
+        },
+        {
+          "level": 2,
+          "title": "Vue.use",
+          "slug": "vue-use"
         },
         {
           "level": 2,
           "title": "Vue.mixin",
           "slug": "vue-mixin"
+        },
+        {
+          "level": 2,
+          "title": "Vue.extend",
+          "slug": "vue-extend"
+        },
+        {
+          "level": 2,
+          "title": "Vue.component",
+          "slug": "vue-component"
+        },
+        {
+          "level": 2,
+          "title": "Vue.directive",
+          "slug": "vue-directive"
+        },
+        {
+          "level": 2,
+          "title": "Vue.filter",
+          "slug": "vue-filter"
         }
       ]
+    },
+    {
+      "title": "响应式原理",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/observe/observe.html",
+      "relativePath": "vue-code-study/observe/observe.md",
+      "key": "v-57cd00e6",
+      "path": "/vue-code-study/observe/observe.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "observe",
+          "slug": "observe"
+        },
+        {
+          "level": 2,
+          "title": "Observer类",
+          "slug": "observer类"
+        },
+        {
+          "level": 3,
+          "title": "数组的处理",
+          "slug": "数组的处理"
+        },
+        {
+          "level": 2,
+          "title": "defineReactive",
+          "slug": "definereactive"
+        },
+        {
+          "level": 2,
+          "title": "Dep类",
+          "slug": "dep类"
+        },
+        {
+          "level": 3,
+          "title": "pushTarget",
+          "slug": "pushtarget"
+        },
+        {
+          "level": 3,
+          "title": "popTarget",
+          "slug": "poptarget"
+        },
+        {
+          "level": 2,
+          "title": "Watcher类",
+          "slug": "watcher类"
+        },
+        {
+          "level": 3,
+          "title": "get",
+          "slug": "get"
+        },
+        {
+          "level": 3,
+          "title": "addDep",
+          "slug": "adddep"
+        },
+        {
+          "level": 3,
+          "title": "cleanupDeps",
+          "slug": "cleanupdeps"
+        },
+        {
+          "level": 3,
+          "title": "update",
+          "slug": "update"
+        },
+        {
+          "level": 3,
+          "title": "run",
+          "slug": "run"
+        },
+        {
+          "level": 3,
+          "title": "evaluate",
+          "slug": "evaluate"
+        },
+        {
+          "level": 3,
+          "title": "depend",
+          "slug": "depend"
+        },
+        {
+          "level": 3,
+          "title": "teardown",
+          "slug": "teardown"
+        },
+        {
+          "level": 2,
+          "title": "Q&A",
+          "slug": "q-a"
+        }
+      ]
+    },
+    {
+      "title": "异步队列",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/observe/queue.html",
+      "relativePath": "vue-code-study/observe/queue.md",
+      "key": "v-2160ea3a",
+      "path": "/vue-code-study/observe/queue.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "resetSchedulerState",
+          "slug": "resetschedulerstate"
+        },
+        {
+          "level": 2,
+          "title": "flushSchedulerQueue",
+          "slug": "flushschedulerqueue"
+        },
+        {
+          "level": 2,
+          "title": "queueWatcher",
+          "slug": "queuewatcher"
+        },
+        {
+          "level": 2,
+          "title": "nextTick",
+          "slug": "nexttick"
+        },
+        {
+          "level": 2,
+          "title": "timerFunc",
+          "slug": "timerfunc"
+        },
+        {
+          "level": 2,
+          "title": "flushCallbacks",
+          "slug": "flushcallbacks"
+        },
+        {
+          "level": 2,
+          "title": "Q&A",
+          "slug": "q-a"
+        }
+      ]
+    },
+    {
+      "title": "util目录",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/util/util.html",
+      "relativePath": "vue-code-study/util/util.md",
+      "key": "v-be32e7f2",
+      "path": "/vue-code-study/util/util.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "env.js",
+          "slug": "env-js"
+        },
+        {
+          "level": 3,
+          "title": "nativeWatch",
+          "slug": "nativewatch"
+        },
+        {
+          "level": 3,
+          "title": "isNative",
+          "slug": "isnative"
+        },
+        {
+          "level": 3,
+          "title": "hasSymbol",
+          "slug": "hassymbol"
+        },
+        {
+          "level": 2,
+          "title": "error.js",
+          "slug": "error-js"
+        },
+        {
+          "level": 3,
+          "title": "handleError",
+          "slug": "handleerror"
+        },
+        {
+          "level": 3,
+          "title": "invokeWithErrorHandling",
+          "slug": "invokewitherrorhandling"
+        },
+        {
+          "level": 2,
+          "title": "props.js",
+          "slug": "props-js"
+        },
+        {
+          "level": 3,
+          "title": "validateProp",
+          "slug": "validateprop"
+        },
+        {
+          "level": 3,
+          "title": "getPropDefaultValue",
+          "slug": "getpropdefaultvalue"
+        },
+        {
+          "level": 3,
+          "title": "assertProp",
+          "slug": "assertprop"
+        },
+        {
+          "level": 3,
+          "title": "assertType",
+          "slug": "asserttype"
+        },
+        {
+          "level": 3,
+          "title": "getTypeIndex",
+          "slug": "gettypeindex"
+        },
+        {
+          "level": 3,
+          "title": "getInvalidTypeMessage",
+          "slug": "getinvalidtypemessage"
+        }
+      ]
+    },
+    {
+      "title": "performance",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/window-api/window.html",
+      "relativePath": "vue-code-study/window-api/window.md",
+      "key": "v-093fc73e",
+      "path": "/vue-code-study/window-api/window.html"
     },
     {
       "title": "shared目录",
@@ -170,6 +483,31 @@ export const siteData = {
         },
         {
           "level": 2,
+          "title": "isUndef",
+          "slug": "isundef"
+        },
+        {
+          "level": 2,
+          "title": "isDef",
+          "slug": "isdef"
+        },
+        {
+          "level": 2,
+          "title": "isTrue",
+          "slug": "istrue"
+        },
+        {
+          "level": 2,
+          "title": "isFalse",
+          "slug": "isfalse"
+        },
+        {
+          "level": 2,
+          "title": "isPrimitive",
+          "slug": "isprimitive"
+        },
+        {
+          "level": 2,
           "title": "isObject",
           "slug": "isobject"
         },
@@ -182,6 +520,21 @@ export const siteData = {
           "level": 2,
           "title": "isPlainObject",
           "slug": "isplainobject"
+        },
+        {
+          "level": 2,
+          "title": "isRegExp",
+          "slug": "isregexp"
+        },
+        {
+          "level": 2,
+          "title": "isValidArrayIndex",
+          "slug": "isvalidarrayindex"
+        },
+        {
+          "level": 2,
+          "title": "isPromise",
+          "slug": "ispromise"
         },
         {
           "level": 2,
@@ -230,6 +583,11 @@ export const siteData = {
         },
         {
           "level": 2,
+          "title": "toArray",
+          "slug": "toarray"
+        },
+        {
+          "level": 2,
           "title": "extend",
           "slug": "extend"
         },
@@ -244,109 +602,6 @@ export const siteData = {
           "slug": "no"
         }
       ]
-    },
-    {
-      "title": "数据响应式",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/entry/state.html",
-      "relativePath": "vue-code-study/entry/state.md",
-      "key": "v-9ee2d192",
-      "path": "/vue-code-study/entry/state.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "initState",
-          "slug": "initstate"
-        },
-        {
-          "level": 3,
-          "title": "initProps",
-          "slug": "initprops"
-        },
-        {
-          "level": 3,
-          "title": "initMethods",
-          "slug": "initmethods"
-        },
-        {
-          "level": 3,
-          "title": "initData",
-          "slug": "initdata"
-        }
-      ]
-    },
-    {
-      "title": "util目录",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/util/util.html",
-      "relativePath": "vue-code-study/util/util.md",
-      "key": "v-be32e7f2",
-      "path": "/vue-code-study/util/util.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "env.js",
-          "slug": "env-js"
-        },
-        {
-          "level": 3,
-          "title": "nativeWatch",
-          "slug": "nativewatch"
-        },
-        {
-          "level": 3,
-          "title": "isNative",
-          "slug": "isnative"
-        },
-        {
-          "level": 3,
-          "title": "hasSymbol",
-          "slug": "hassymbol"
-        },
-        {
-          "level": 2,
-          "title": "props.js",
-          "slug": "props-js"
-        },
-        {
-          "level": 3,
-          "title": "validateProp",
-          "slug": "validateprop"
-        },
-        {
-          "level": 3,
-          "title": "getPropDefaultValue",
-          "slug": "getpropdefaultvalue"
-        },
-        {
-          "level": 3,
-          "title": "assertProp",
-          "slug": "assertprop"
-        },
-        {
-          "level": 3,
-          "title": "assertType",
-          "slug": "asserttype"
-        },
-        {
-          "level": 3,
-          "title": "getTypeIndex",
-          "slug": "gettypeindex"
-        },
-        {
-          "level": 3,
-          "title": "getInvalidTypeMessage",
-          "slug": "getinvalidtypemessage"
-        }
-      ]
-    },
-    {
-      "title": "performance",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/window-api/window.html",
-      "relativePath": "vue-code-study/window-api/window.md",
-      "key": "v-093fc73e",
-      "path": "/vue-code-study/window-api/window.html"
     }
   ],
   "themeConfig": {
@@ -366,6 +621,15 @@ export const siteData = {
           "children": [
             "entry/entry",
             "entry/state"
+          ],
+          "sidebarDepth": 2
+        },
+        {
+          "title": "响应式原理",
+          "collapsable": false,
+          "children": [
+            "observe/observe",
+            "observe/queue"
           ],
           "sidebarDepth": 2
         },

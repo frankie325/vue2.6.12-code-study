@@ -17,8 +17,6 @@ import Dep, { pushTarget, popTarget } from './dep'
 
 import type { SimpleSet } from '../util/index'
 
-let uid = 0
-
 /**
  * A watcher parses an expression, collects dependencies,
  * and fires callback when the expression value changes.
@@ -28,7 +26,8 @@ let uid = 0
 /*
   三个地方创建了Watcher
   1.渲染Watcher：mountComponent方法中，每个组件执行$mount时，创建了一个渲染watcher实例，挂载到了vm._watcher
-  渲染Watcher的id值比监听Watcher和computedWatcher的id要大,$mount时才创建了渲染Watcher
+  渲染Watcher的id值比监听Watcher和computedWatcher的id要大，从选项处理的顺序可知，$mount时才创建了渲染Watcher
+  所以一个vue实例中3种Watcher创建的顺序为：1.计算Watcher 2.监听Watcher 3.渲染Watcher
       new Watcher(vm, updateComponent, noop, {
           before: function before () {
             if (vm._isMounted && !vm._isDestroyed) {
@@ -38,9 +37,10 @@ let uid = 0
         }, true);
 
   2.监听Watcher：$watch方法创建的watcher实例
-      new Watcher(vm, expOrFn, cb, options)
+      options.user = true;
+      new Watcher(vm, expOrFn, cb, options);
 
-  3.computedWatcher：computed创建的watcher实例
+  3.计算Watcher（computedWatcher）：computed创建的watcher实例
       var computedWatcherOptions = { lazy: true };
       new Watcher(
               vm,
@@ -50,24 +50,25 @@ let uid = 0
             );
           }
 */
+let uid = 0
 export default class Watcher {
   vm: Component;
-  expression: string;
-  cb: Function;
-  id: number;
-  deep: boolean;
+  expression: string; //传入的expOrFn的字符串形式，报错需要用到
+  cb: Function;  //传入的回调，渲染Watcher和监听Watcher用到
+  id: number;    //Watcher实例的id，代表创建的顺序
+  deep: boolean;  //watch的deep选项
   user: boolean;  //监听Watcher传入为true
   lazy: boolean;  //computedWatcher传入的lazy参数，为true
-  sync: boolean;
-  dirty: boolean;
-  active: boolean; //创建watcher实例时就赋值为true
-  deps: Array<Dep>;
-  newDeps: Array<Dep>;
-  depIds: SimpleSet; 
-  newDepIds: SimpleSet; 
-  before: ?Function;
+  sync: boolean;  //
+  dirty: boolean; //计算属性缓存的原理
+  active: boolean; //创建watcher实例时就赋值为true，为false，说明该watcher实例已经拆除
+  deps: Array<Dep>; //newDeps的拷贝，当数据变化时，用来进行比较
+  newDeps: Array<Dep>; //访问变量时进行依赖收集，将dep实例添加进来，方法get执行完后，清空
+  depIds: SimpleSet; //newDepIds的拷贝，当数据变化时，用来进行比较
+  newDepIds: SimpleSet; //访问变量时进行依赖收集，将dep实例添加进来，方法get执行完后，清空
+  before: ?Function; //渲染watcher传入的before方法，在更新前执行beforeUpdate钩子，用户也可以传入自定义的before方法
   getter: Function;
-  value: any;
+  value: any; 
 
   constructor (
     vm: Component,
@@ -98,10 +99,10 @@ export default class Watcher {
     this.id = ++uid // uid for batching
     this.active = true
     this.dirty = this.lazy // for lazy watchers
-    this.deps = [] //newDeps的拷贝，但数据变化时，用来进行比较
-    this.newDeps = [] //访问变量时进行依赖收集，将dep实例添加进来，方法get执行完后，清空
-    this.depIds = new Set() //newDepIds的拷贝，但数据变化时，用来进行比较
-    this.newDepIds = new Set() //访问变量时进行依赖收集，将dep实例添加进来，方法get执行完后，清空
+    this.deps = [] 
+    this.newDeps = [] 
+    this.depIds = new Set() 
+    this.newDepIds = new Set() 
     this.expression = process.env.NODE_ENV !== 'production'
       ? expOrFn.toString()
       : ''
@@ -133,10 +134,14 @@ export default class Watcher {
   }
 
   /**
-   * Evaluate the getter, and re-collect dependencies.
+   会执行this.getter，触发依赖收集
+    当更新时又会执行get方法，又会重新收集依赖
+    为什么要重新收集依赖？
+    因为触发更新说明有响应式数据被更新了，这些新的响应式数据还没有收集依赖，
+    在重新render的过程，访问到新的响应式数据需要收集watcher
    */
   get () {
-    // 将当前watcher挂载到Dep.target
+    // 将当前watcher赋值给Dep.target
     pushTarget(this)
     let value
     const vm = this.vm
@@ -225,8 +230,7 @@ export default class Watcher {
   }
 
   /**
-   * Scheduler job interface.
-   * Will be called by the scheduler.
+   进行更新时，在任务队列里，会被flushSchedulerQueue调用
    */
   run () {
     if (this.active) {
@@ -275,7 +279,7 @@ export default class Watcher {
   }
 
   /**
-   * Remove self from all dependencies' subscriber list.
+   收集了该watcher的dep实例，都对它进行删除
    */
   teardown () {
     if (this.active) {
@@ -283,12 +287,15 @@ export default class Watcher {
       // this is a somewhat expensive operation so we skip it
       // if the vm is being destroyed.
       if (!this.vm._isBeingDestroyed) {
+        // 删除储存在vm._watchers数组中当前watcher
         remove(this.vm._watchers, this)
       }
       let i = this.deps.length
       while (i--) {
+        // 收集了该watcher的所有dep实例，都对该watcher进行删除
         this.deps[i].removeSub(this)
       }
+      // active置为false
       this.active = false
     }
   }

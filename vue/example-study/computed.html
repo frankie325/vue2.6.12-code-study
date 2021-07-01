@@ -8,38 +8,36 @@
   </head>
   <script src="../dist/vue.js"></script>
   <body>
-    <div id="app">{{msg}}{{name}}</div>
+    <div id="app">
+      <!-- <div>{{cp}}</div> -->
+      <input type="button" value="change" @click="changeMsg" />
+    </div>
     <div id="extend1"></div>
   </body>
   <script>
     new Vue({
       el: "#app",
-      props: {
-        str: {
-          default: "str",
-        },
-      },
       computed: {
-        getStr() {
-          return this.str;
+        cp() {
+          return this.msg;
         },
       },
       data() {
         return {
-          msg: this.str,
-          name: this.getStr,
-          fuc: this.fn,
+          msg: "msg",
         };
       },
+      watch: {
+        cp: function (nv, ov) {
+          console.log(nv, ov);
+        },
+      },
       methods: {
-        fn() {
-          console.log("fn");
+        changeMsg() {
+          this.msg = "new msg";
         },
       },
       mounted() {
-        console.log(this.msg);
-        console.log(this.name);
-        console.log(this.fuc);
         console.log(this);
       },
     });

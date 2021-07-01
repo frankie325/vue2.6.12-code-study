@@ -4,12 +4,13 @@
 export default {
   "v-19aff440": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\README.md"),
   "v-e67ddbba": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\vue-code-study\\README.md"),
-  "v-6a8d73d3": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\guide\\readme.md"),
   "v-13d7ff16": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\vue-code-study\\entry\\entry.md"),
-  "v-2adf1d76": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\vue-code-study\\entry\\readme.md"),
-  "v-099cd021": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\vue-code-study\\global-api\\global.md"),
-  "v-a6b0d07e": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\vue-code-study\\util\\shared.md"),
   "v-9ee2d192": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\vue-code-study\\entry\\state.md"),
+  "v-6a8d73d3": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\guide\\readme.md"),
+  "v-099cd021": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\vue-code-study\\global-api\\global.md"),
+  "v-57cd00e6": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\vue-code-study\\observe\\observe.md"),
+  "v-2160ea3a": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\vue-code-study\\observe\\queue.md"),
   "v-be32e7f2": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\vue-code-study\\util\\util.md"),
-  "v-093fc73e": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\vue-code-study\\window-api\\window.md") 
+  "v-093fc73e": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\vue-code-study\\window-api\\window.md"),
+  "v-a6b0d07e": () => import("D:\\代码\\vue2源码学习\\vue-notes\\docs\\vue-code-study\\util\\shared.md") 
 }

@@ -30,6 +30,12 @@ module.exports = {
                     sidebarDepth: 2,
                 },
                 {
+                    title: "响应式原理",
+                    collapsable: false,
+                    children: ["observe/observe","observe/queue"],
+                    sidebarDepth: 2,
+                },
+                {
                     title: "全局方法",
                     collapsable: false,
                     children: ["global-api/global"], 

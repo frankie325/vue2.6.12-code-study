@@ -8,39 +8,29 @@
   </head>
   <script src="../dist/vue.js"></script>
   <body>
-    <div id="app">{{msg}}{{name}}</div>
+    <div id="app">
+      <div v-if="flag">{{msg}}</div>
+      <button @click="changeMsg">changeMsg</button>
+      <button @click="toggle">toggle</button>
+    </div>
     <div id="extend1"></div>
   </body>
   <script>
     new Vue({
       el: "#app",
-      props: {
-        str: {
-          default: "str",
-        },
-      },
-      computed: {
-        getStr() {
-          return this.str;
-        },
-      },
       data() {
         return {
-          msg: this.str,
-          name: this.getStr,
-          fuc: this.fn,
+          flag: true,
+          msg: "msg",
         };
       },
       methods: {
-        fn() {
-          console.log("fn");
+        changeMsg() {
+          this.msg = "new msg";
         },
-      },
-      mounted() {
-        console.log(this.msg);
-        console.log(this.name);
-        console.log(this.fuc);
-        console.log(this);
+        toggle() {
+          this.flag = !this.flag;
+        },
       },
     });
   </script>

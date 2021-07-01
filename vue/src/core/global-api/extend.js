@@ -16,8 +16,12 @@ export function initExtend (Vue: GlobalAPI) {
     extendOptions = extendOptions || {}
     const Super = this//this为Vue基类构造函数
     const SuperId = Super.cid
+    // 给传入的extendOptions添加一个_Ctor对象，该对象会保存创建的子类Sub
+    // 如果多次调用Vue.extend，传入的extendOptions都是同一个对象，所以会存在_Ctor对象，
+    // 直接使用_Ctor对象里的缓存
     const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
     if (cachedCtors[SuperId]) {
+      // 直接返回缓存
       return cachedCtors[SuperId]
     }
 
@@ -43,15 +47,18 @@ export function initExtend (Vue: GlobalAPI) {
       Super.options,
       extendOptions
     )
+    // 记录自己的基类
     Sub['super'] = Super
 
     // For props and computed properties, we define the proxy getters on
     // the Vue instances at extension time, on the extended prototype. This
     // avoids Object.defineProperty calls for each instance created.
     if (Sub.options.props) {
+      // 初始化整合后的Sub.options.props
       initProps(Sub)
     }
     if (Sub.options.computed) {
+      // 初始化整合后的Sub.options.computed
       initComputed(Sub)
     }
 
@@ -66,7 +73,8 @@ export function initExtend (Vue: GlobalAPI) {
     ASSET_TYPES.forEach(function (type) {
       Sub[type] = Super[type]
     })
-    // name存在的话，子类构造函数的options.components.name指向该构造函数
+    // name存在的话，则将自己注册到自己的 components 选项中
+    // 递归组件的原理
     if (name) {
       Sub.options.components[name] = Sub
     }
@@ -78,13 +86,15 @@ export function initExtend (Vue: GlobalAPI) {
     Sub.extendOptions = extendOptions//为Vue.extend(options)里的options
     Sub.sealedOptions = extend({}, Sub.options) //Sub.options的拷贝（缓存），用来在resolveConstructorOptions中判断options是否更新（sealedOptions的值初始时就已经确定，不会再进行更改）
 
-    // cache constructor
+    // 给extendOptions._Ctor添加Sub，进行缓存
     cachedCtors[SuperId] = Sub
     return Sub
   }
 }
 
 function initProps (Comp) {
+  // 将props代理到 Sub.prototype._props 对象上，
+  // 这样每个创建的子类实例都可以通过this.propKey访问到
   const props = Comp.options.props
   for (const key in props) {
     proxy(Comp.prototype, `_props`, key)
@@ -94,6 +104,8 @@ function initProps (Comp) {
 function initComputed (Comp) {
   const computed = Comp.options.computed
   for (const key in computed) {
+    // 将计算属性定义到Sub.prototype上，
+    // 这样每个创建的子类实例可以通过this.computedKey方式访问
     defineComputed(Comp.prototype, key, computed[key])
   }
 }

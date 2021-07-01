@@ -93,17 +93,19 @@ export function nextTick (cb?: Function, ctx?: Object) {
   })
   if (!pending) {
     /*
-     pending为false，表示现在浏览器的任务队列中没有 flushCallbacks 函数
-     如果 pending 为 true，则表示浏览器的任务队列中已经被放入了 flushCallbacks 函数
+     如果 pending 为 true，则表示浏览器的任务队列中已经放入了 flushCallbacks 函数,正在等待被执行
+     pending 为 false 说明事件循环已经调用了该微任务 
      执行 flushCallbacks 函数时，pending 会被再次置为 false，表示下一个 flushCallbacks 函数可以进入
      浏览器的任务队列了
+     pending保证了flushCallbacks执行前，不会重复添加到任务队列
     */
     pending = true
     timerFunc()
   }
   // $flow-disable-line
   if (!cb && typeof Promise !== 'undefined') {
-    // 当不传回调函数时且浏览器支持Promise的，返回一个Promise
+    // 当不传回调函数时且浏览器支持Promise的，返回一个Promise，
+    // 可以使用this.$nextTick().then(()=>{})的形式或者await this.$nextTick()的形式
     return new Promise(resolve => {
       // 将resolve赋值给_resolve
       _resolve = resolve

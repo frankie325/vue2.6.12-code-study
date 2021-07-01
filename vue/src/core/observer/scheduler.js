@@ -18,7 +18,8 @@ const queue: Array<Watcher> = [] //存放watcher的队列
 const activatedChildren: Array<Component> = []
 let has: { [key: number]: ?true } = {} //是一个对象，存放watcher.id，用来过滤watcher,当watcher已经存在,不会重复添加
 let circular: { [key: number]: number } = {}
-let waiting = false  //waiting为true，表示将watcher队列注册到宏微任务，任务执行完毕，才会再次置为false
+let waiting = false  //waiting为true，表示将flushSchedulerQueue函数推入到callbacks数组中，任务执行完毕，才会再次置为false。
+// waiting保证了flushSchedulerQueue在等待被执行的过程中，不会重复推入到callbacks数组
 let flushing = false //flushing为true，表示watcher队列正在执行更新，任务执行完毕，才会再次置为false
 let index = 0  //正在执行的watcher的索引
 
@@ -159,7 +160,7 @@ function callActivatedHooks (queue) {
 }
 
 /**
-  queueWatcher将watcher放入watcher 队列
+  queueWatcher将watcher放入watcher队列，相同的watcher不会重复添加
  */
 export function queueWatcher (watcher: Watcher) {
   // 拿到watcher的id
@@ -176,7 +177,7 @@ export function queueWatcher (watcher: Watcher) {
       // watcher队列正在执行
       /* 从队列末尾开始倒序选择插入的位置,即将当前 watcher 放入已排序的队列中，且队列仍是有序的
         例如：
-        1.当queue队列中的watcher为[1,3,5,6,7]，当前已经执行到id为5的watcher，此时index=2，又推入新的watcher，id为1
+        当queue队列中的watcher为[1,3,5,6,7]，当前已经执行到id为5的watcher，此时index=2，又推入新的watcher，id为2。
           i > index，保证了新插入的watcher，位置一定会在当前执行的watcher后面,才能执行到插入的watcher
           queue[i].id > watcher.id，保证了新插入的watcher，插入后的未执行的部分循序仍然是升序的
           最终结果为[1,3,5,2,6,7]
