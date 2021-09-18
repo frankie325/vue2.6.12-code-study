@@ -9,33 +9,45 @@ type CompiledFunctionResult = {
   staticRenderFns: Array<Function>;
 };
 
+// 将函数字符串转为函数
 function createFunction (code, errors) {
   try {
     return new Function(code)
   } catch (err) {
+    // 创建函数时收集产生的错误，即传入的fnGenErrors数组中
     errors.push({ err, code })
     return noop
   }
 }
 
 export function createCompileToFunctionFn (compile: Function): Function {
+  // 缓存的编译结果
   const cache = Object.create(null)
-
   return function compileToFunctions (
     template: string,
     options?: CompilerOptions,
     vm?: Component
   ): CompiledFunctionResult {
+    // 复制一份传入的编译选项
     options = extend({}, options)
+    // 拿到错误信息提示函数
     const warn = options.warn || baseWarn
     delete options.warn
 
     /* istanbul ignore if */
     if (process.env.NODE_ENV !== 'production') {
       // detect possible CSP restriction
+      /*
+          检测可能的 CSP(Content Security Policy 内容安全策略) 限制
+          将模板字符串编译成渲染函数依赖 new Function()
+          如果策略比较严格，new Function() 将会受到影响，不可用
+          解决方案：1.放宽CSP策略。2.预编译
+      */
       try {
+        // 捕获错误
         new Function('return 1')
       } catch (e) {
+        // 错误的内容中包含如 'unsafe-eval' 或者 'CSP'的字段，则报错
         if (e.toString().match(/unsafe-eval|CSP/)) {
           warn(
             'It seems you are using the standalone build of Vue.js in an ' +
@@ -48,18 +60,19 @@ export function createCompileToFunctionFn (compile: Function): Function {
       }
     }
 
-    // check cache
+    // options.delimiters存在，将其转为字符串拼接template模板作为键值，缓存模板编译的结果
     const key = options.delimiters
       ? String(options.delimiters) + template
       : template
     if (cache[key]) {
+      // 如果存在缓存，直接返回缓存，防止重复编译
       return cache[key]
     }
 
-    // compile
+    // 执行编译函数
     const compiled = compile(template, options)
 
-    // check compilation errors/tips
+    // 检查编译期间产生的 error 和 tip，分别输出到控制台
     if (process.env.NODE_ENV !== 'production') {
       if (compiled.errors && compiled.errors.length) {
         if (options.outputSourceRange) {
@@ -90,7 +103,9 @@ export function createCompileToFunctionFn (compile: Function): Function {
     // turn code into functions
     const res = {}
     const fnGenErrors = []
+    // 往res对象添加render函数
     res.render = createFunction(compiled.render, fnGenErrors)
+    // 往res对象添加staticRenderFns属性
     res.staticRenderFns = compiled.staticRenderFns.map(code => {
       return createFunction(code, fnGenErrors)
     })
@@ -100,6 +115,7 @@ export function createCompileToFunctionFn (compile: Function): Function {
     // mostly for codegen development use
     /* istanbul ignore if */
     if (process.env.NODE_ENV !== 'production') {
+      // 打印生成渲染函数时的错误
       if ((!compiled.errors || !compiled.errors.length) && fnGenErrors.length) {
         warn(
           `Failed to generate render function:\n\n` +
@@ -109,6 +125,7 @@ export function createCompileToFunctionFn (compile: Function): Function {
       }
     }
 
+    // 返回编译生成的结果，并将结果缓存
     return (cache[key] = res)
   }
 }

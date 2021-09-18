@@ -111,6 +111,7 @@ export default ({
   /**
    * Parse the real tag name for the specific platform.
    */
+  // 解析特定平台的真实标签名称
   parsePlatformTagName: identity,
 
   /**

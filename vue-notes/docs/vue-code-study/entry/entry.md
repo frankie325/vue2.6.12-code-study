@@ -7,8 +7,9 @@
 /src/core/instance/index.js  
 :::
 找到vue源码的入口文件，该文件创建了Vue构造函数，并执行了一系列初始化方法  
-1. [initMixin](./entry.md#initmixin)方法
-2. [stateMixin](./state.md#statemixin)方法
+1. :point_right:[initMixin](./entry.md#initmixin)方法
+2. :point_right:[stateMixin](./state.md#statemixin)方法
+3. :point_right:[eventsMixin](../global-api/instance.md#eventsmixin)方法
 ```js
 import { initMixin } from './init'
 import { stateMixin } from './state'

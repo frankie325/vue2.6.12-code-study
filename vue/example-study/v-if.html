@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">
+      <!-- <p>{{msg}}</p> -->
+      <h1 v-if="show">11</h1>
+      <h2 v-else-if="show2">22</h2>
+      <h3 v-else-if="show3">33</h3>
+      文本
+      <h4 v-else></h4>
+    </div>
+    <div id="extend1"></div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          show: false,
+          show2: false,
+          show3: true,
+        };
+      },
+    });
+  </script>
+</html>

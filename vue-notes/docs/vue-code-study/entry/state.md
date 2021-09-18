@@ -207,7 +207,8 @@ function initData(vm: Component) {
           vm
         );
     } else if (!isReserved(key)) {
-      // 不是Vue保留属性,将data代理到vm._data上
+      // isReserved检查是不是以$和_字符开头的属性
+      // 不是，才会将data代理到vm._data上
       proxy(vm, `_data`, key);
     }
   }

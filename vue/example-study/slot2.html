@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">
+      <comp :todos="todos">
+        <template v-slot:todo="{ todo }">
+          <span> {{ todo.text }} </span>
+        </template>
+      </comp>
+    </div>
+    <div id="extend1"></div>
+  </body>
+  <script>
+    Vue.component("comp", {
+      template: `<div> 
+                    <li v-for="todo in todos" :key="todo.id">
+                        <slot name="todo" :todo="todo">
+                            {{ todo.text }}
+                        </slot>
+                    </li>
+                </div>`,
+      props: ["todos"],
+    });
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          todos: [
+            {
+              text: "todo1",
+            },
+            {
+              text: "todo2",
+            },
+          ],
+        };
+      },
+      methods: {},
+      mounted() {},
+    });
+  </script>
+</html>

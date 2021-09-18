@@ -2,16 +2,33 @@
 
 import { cached, extend, toObject } from 'shared/util'
 
+// 解析使用bind指令绑定的style属性值
 export const parseStyleText = cached(function (cssText) {
   const res = {}
+  // 负前瞻，查找;且后面不能是 非左圆括号和右圆括号
+  // 比如color:red;background:url(www.xxx.com?a=1&amp;copy=3);
+  // url中的分号不会匹配
   const listDelimiter = /;(?![^(]*\))/g
+  // 匹配:和除换行符的其他字符
   const propertyDelimiter = /:(.+)/
+
+  // <div style="color: red; background: green;"></div>为例
+  // 按照;分隔成数组，['color: red','background: green']
   cssText.split(listDelimiter).forEach(function (item) {
     if (item) {
+      // 继续按:分割 [color,red]
       const tmp = item.split(propertyDelimiter)
+      /*
+        长度大于1才会塞入对象
+        最终生成的对象{
+          color:"red",
+          background:"green"
+        }
+      */ 
       tmp.length > 1 && (res[tmp[0].trim()] = tmp[1].trim())
     }
   })
+  // 返回该对象
   return res
 })
 

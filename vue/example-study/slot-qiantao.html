@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">
+      <list>
+        <template v-slot:list>
+          <div>i am list</div>
+        </template>
+      </list>
+    </div>
+    <div id="extend1"></div>
+  </body>
+  <script>
+    Vue.component("comp", {
+      template: "<div></div>",
+    });
+
+    Vue.component("list-item", {
+      template: "<div><slot name='item'></slot></div>",
+    });
+
+    Vue.component("list", {
+      template:
+        "<div><list-item><template v-slot:item><slot name='list'></slot></template></list-item></div>",
+    });
+
+    new Vue({
+      el: "#app",
+      data() {
+        return {};
+      },
+      methods: {},
+      mounted() {},
+    });
+  </script>
+</html>

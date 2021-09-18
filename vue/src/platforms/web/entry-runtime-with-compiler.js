@@ -10,10 +10,12 @@ import { compileToFunctions } from './compiler/index'
 import { shouldDecodeNewlines, shouldDecodeNewlinesForHref } from './util/compat'
 
 const idToTemplate = cached(id => {
+  // 调用query找到DOM元素
   const el = query(id)
+  // 返回元素内的节点字符串
   return el && el.innerHTML
 })
-//在./runtime/index下定义的$mount方法拷贝过来，定义两个是因为在不带编译版本（runtime-only）的入口文件中没有定义$mount
+
 const mount = Vue.prototype.$mount
 Vue.prototype.$mount = function (
   el?: string | Element,
@@ -29,13 +31,16 @@ Vue.prototype.$mount = function (
     return this
   }
 
+  // 拿到实例的选项
   const options = this.$options
   // resolve template/el and convert to render function
   if (!options.render) {//1.如果没有render函数
+    // 拿到template模板，template可以是字符串形式，或者是DOM节点
     let template = options.template
     if (template) {//2.如果有template
       if (typeof template === 'string') {
         if (template.charAt(0) === '#') {
+          // 如果是#开头，调用idToTemplate拿到DOM节点字符串
           template = idToTemplate(template)
           /* istanbul ignore if */
           if (process.env.NODE_ENV !== 'production' && !template) {
@@ -46,8 +51,10 @@ Vue.prototype.$mount = function (
           }
         }
       } else if (template.nodeType) {//template不是字符串
+        // nodeType存在，说明是一个DOM元素
         template = template.innerHTML
       } else {
+        // 既不是字符串也不是DOM节点，报错
         if (process.env.NODE_ENV !== 'production') {
           warn('invalid template option:' + template, this)
         }
@@ -66,12 +73,19 @@ Vue.prototype.$mount = function (
       }
 
       const { render, staticRenderFns } = compileToFunctions(template, {
+        // 开发环境为true，为true时，会将编译产生的错误输出到控制台
         outputSourceRange: process.env.NODE_ENV !== 'production',
+        // 是否需要解码，对一般属性的值进行解码
         shouldDecodeNewlines,
+        // 是否需要解码，对a标签href属性内容进行解码
         shouldDecodeNewlinesForHref,
+        // delimiters选项作用是改变插值的符号，默认是{{}}
         delimiters: options.delimiters,
+      // 当设为 true 时，将会保留且渲染模板中的 HTML 注释。默认是舍弃它们
         comments: options.comments
       }, this)
+
+      //将解析得到render函数赋值给$options.render
       options.render = render
       options.staticRenderFns = staticRenderFns
 
@@ -82,7 +96,9 @@ Vue.prototype.$mount = function (
       }
     }
   }
-  return mount.call(this, el, hydrating)//render函数存在，直接调用mountComponent方法
+
+  // 没有走上面的判断，则说明用户在选项中自定义了render函数
+  return mount.call(this, el, hydrating)//直接调用mountComponent方法
 }
 
 /**

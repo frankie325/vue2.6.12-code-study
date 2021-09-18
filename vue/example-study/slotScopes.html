@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">
+      <comp>
+        <!-- <template>
+          <div>slot</div>
+        </template> -->
+      </comp>
+    </div>
+  </body>
+  <script>
+    Vue.component("comp", {
+      template:
+        "<div><div>情况3</div><slot></slot><slot name='slot1' :msg='msg'></slot></div>",
+      data() {
+        return {
+          msg: "i am comp",
+        };
+      },
+
+      //1.`<div><div>情况1</div><slot></slot></div>`
+      //   render: function (h) {
+      //     // this.$slots可以访问静态插槽内容
+      //     return h("div", [h("div", "情况1"), this.$slots.default]);
+      //   },
+
+      //2. `<div><div>情况2</div><slot :text="msg"></slot></div>`
+      //   render(h) {
+      //     return h("div", [
+      //        h("div", "情况2"),
+      //       // 使用$scopedSlots传递作用域插槽,即$scopedSlots可以访问绑定了作用域插槽的插槽内容
+      //       this.$scopedSlots.default({
+      //         text: this.msg,
+      //       }),
+      //     ]);
+      //   },
+    });
+    new Vue({
+      el: "#app",
+      data() {
+        return {};
+      },
+      //3. `<div><comp><span slot="data">{{ data.msg }}</span></comp></div>`
+      render: function (h) {
+        return h("div", [
+          h("comp", {
+            //定义组件comp时使用了插槽，当使用渲染函数时怎么写插槽内容？
+            // 可以在属性部分，添加scopedSlots属性，向插槽传递插槽内容
+            scopedSlots: {
+              //key值对应插槽名
+              //默认插槽内容
+              default: function () {
+                //  返回一个VNode
+                return h("h1", "默认插槽");
+              },
+              slot1: function (data) {
+                //  返回一个VNode
+                return h("span", data.msg);
+              },
+            },
+          }),
+        ]);
+      },
+    });
+  </script>
+</html>

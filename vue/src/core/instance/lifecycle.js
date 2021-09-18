@@ -67,9 +67,11 @@ export function lifecycleMixin (Vue: Class<Component>) {
     // based on the rendering backend used.
     if (!prevVnode) {
       // initial render
+      // 初次渲染走这
       vm.$el = vm.__patch__(vm.$el, vnode, hydrating, false /* removeOnly */)
     } else {
       // updates
+      // 更新时走这
       vm.$el = vm.__patch__(prevVnode, vnode)
     }
     restoreActiveInstance()
@@ -90,6 +92,7 @@ export function lifecycleMixin (Vue: Class<Component>) {
 
   Vue.prototype.$forceUpdate = function () {
     const vm: Component = this
+    // 如果渲染watcher存在，调用渲染Watcher的更新，也就是调用_update方法
     if (vm._watcher) {
       vm._watcher.update()
     }
@@ -98,21 +101,27 @@ export function lifecycleMixin (Vue: Class<Component>) {
   Vue.prototype.$destroy = function () {
     const vm: Component = this
     if (vm._isBeingDestroyed) {
+      // 实例已经被销毁
       return
     }
+    // 调用beforeDestroy钩子
     callHook(vm, 'beforeDestroy')
+    // _isBeingDestroyed置为true表示已被销毁
     vm._isBeingDestroyed = true
-    // remove self from parent
+
     const parent = vm.$parent
     if (parent && !parent._isBeingDestroyed && !vm.$options.abstract) {
+      // 将自己从父级的$children中移除
       remove(parent.$children, vm)
     }
-    // teardown watchers
+
     if (vm._watcher) {
+      // 销毁渲染Watcher
       vm._watcher.teardown()
     }
     let i = vm._watchers.length
     while (i--) {
+      // 销毁所有Watcher
       vm._watchers[i].teardown()
     }
     // remove reference from data ob
@@ -122,11 +131,11 @@ export function lifecycleMixin (Vue: Class<Component>) {
     }
     // call the last hook...
     vm._isDestroyed = true
-    // invoke destroy hooks on current rendered tree
+    // 调用 __patch__，销毁节点
     vm.__patch__(vm._vnode, null)
-    // fire destroyed hook
+    // 调用destroyed钩子
     callHook(vm, 'destroyed')
-    // turn off all instance listeners.
+    // 移除所有自定义事件
     vm.$off()
     // remove __vue__ reference
     if (vm.$el) {
@@ -339,16 +348,20 @@ export function deactivateChildComponent (vm: Component, direct?: boolean) {
 }
 
 export function callHook (vm: Component, hook: string) {
-  // #7573 disable dep collection when invoking lifecycle hooks
+  // 在执行生命周期钩子函数期间禁止依赖收集
   pushTarget()
+  // 拿到选项合并之后的生命周期钩子，为数组
   const handlers = vm.$options[hook]
   const info = `${hook} hook`
   if (handlers) {
+    // 遍历，
     for (let i = 0, j = handlers.length; i < j; i++) {
+      // 执行生命周期钩子
       invokeWithErrorHandling(handlers[i], vm, null, vm, info)
     }
   }
   if (vm._hasHookEvent) {
+    // 如果存在自定义的hook事件，执行对应生命周期的时候也会执行对应的自定义hook事件
     vm.$emit('hook:' + hook)
   }
   popTarget()

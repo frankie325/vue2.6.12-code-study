@@ -1,4 +1,4 @@
-# util目录
+# core文件下的util目录
 **util目录下的工具函数**
 :::tip 文件目录
 /src/core/util

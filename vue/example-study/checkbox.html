@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">
+      <input value="name" id="checkbox" true-value="yes" false-value="no"  type="checkbox" v-model="bool">
+      {{bool}}
+  </body>
+  <script>
+    window.onload = () => {
+      let checkbox = document.getElementById("checkbox");
+      checkbox.onchange = function (e) {
+        console.log(e);
+      };
+    };
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+            bool:["name"],
+        };
+      },
+      methods: {},
+    });
+  </script>
+</html>

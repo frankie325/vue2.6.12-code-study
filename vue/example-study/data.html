@@ -8,7 +8,10 @@
   </head>
   <script src="../dist/vue.js"></script>
   <body>
-    <div id="app">{{msg}}{{name}}</div>
+    <div id="app">
+      <p>{{msg}}</p>
+      <p>{{$msg}}</p>
+    </div>
     <div id="extend1"></div>
   </body>
   <script>
@@ -26,9 +29,12 @@
       },
       data() {
         return {
+          ceshi: "ceshi",
           msg: this.str,
           name: this.getStr,
           fuc: this.fn,
+          obj: this.ceshi,
+          $msg: "_msg",
         };
       },
       methods: {
@@ -37,10 +43,12 @@
         },
       },
       mounted() {
+        console.log(this);
         console.log(this.msg);
         console.log(this.name);
         console.log(this.fuc);
-        console.log(this);
+        console.log(this.obj);
+        console.log(this.$msg);
       },
     });
   </script>

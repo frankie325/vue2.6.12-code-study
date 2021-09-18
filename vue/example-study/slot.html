@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">
+      <!-- <div slot="header">header</div> -->
+      <comp>
+        <!-- <template v-slot="header">
+          <div>header</div>
+        </template> -->
+        <template v-slot:center="{msg}">
+          <div>{{msg}}</div>
+        </template>
+        <!-- <div slot="qiantao">qiantao</div>
+        <div slot="center">center</div> -->
+      </comp>
+    </div>
+    <div id="extend1"></div>
+  </body>
+  <script>
+    Vue.component("comp", {
+      template:
+        "<div><slot name='center' msg='center1'></slot><slot name='center' msg='center2'></slot><div>footer</div></div>",
+    });
+    new Vue({
+      el: "#app",
+      data() {
+        return {};
+      },
+      methods: {},
+      mounted() {},
+    });
+  </script>
+</html>

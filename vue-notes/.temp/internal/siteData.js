@@ -8,40 +8,471 @@ export const siteData = {
   "headTags": [],
   "pages": [
     {
-      "title": "Home",
-      "frontmatter": {
-        "home": true,
-        "heroImage": "/images/logo.png",
-        "actionText": "快速上手 →",
-        "actionLink": "/guide/",
-        "features": [
-          {
-            "title": "简洁至上",
-            "details": "以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。"
-          },
-          {
-            "title": "Vue驱动",
-            "details": "享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。"
-          },
-          {
-            "title": "高性能",
-            "details": "VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。"
-          }
-        ],
-        "footer": "MIT Licensed | Copyright © 2018-present Evan You"
-      },
-      "regularPath": "/",
-      "relativePath": "README.md",
-      "key": "v-19aff440",
-      "path": "/"
-    },
-    {
-      "title": "开始之前",
       "frontmatter": {},
       "regularPath": "/vue-code-study/",
       "relativePath": "vue-code-study/README.md",
       "key": "v-e67ddbba",
       "path": "/vue-code-study/"
+    },
+    {
+      "frontmatter": {},
+      "regularPath": "/guide/",
+      "relativePath": "guide/readme.md",
+      "key": "v-6a8d73d3",
+      "path": "/guide/"
+    },
+    {
+      "title": "生成的AST对象",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/ast.html",
+      "relativePath": "vue-code-study/compile/ast.md",
+      "key": "v-4b89b893",
+      "path": "/vue-code-study/compile/ast.html"
+    },
+    {
+      "title": "编译器入口",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/compile-entry.html",
+      "relativePath": "vue-code-study/compile/compile-entry.md",
+      "key": "v-62ff1727",
+      "path": "/vue-code-study/compile/compile-entry.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "$mount",
+          "slug": "mount"
+        },
+        {
+          "level": 3,
+          "title": "compileToFunctions",
+          "slug": "compiletofunctions"
+        },
+        {
+          "level": 3,
+          "title": "compile",
+          "slug": "compile"
+        },
+        {
+          "level": 3,
+          "title": "baseCompile",
+          "slug": "basecompile"
+        }
+      ]
+    },
+    {
+      "title": "生成渲染函数字符代码",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/generate.html",
+      "relativePath": "vue-code-study/compile/generate.md",
+      "key": "v-19ad6db5",
+      "path": "/vue-code-study/compile/generate.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "generate",
+          "slug": "generate"
+        },
+        {
+          "level": 2,
+          "title": "CodegenState",
+          "slug": "codegenstate"
+        },
+        {
+          "level": 2,
+          "title": "genElement",
+          "slug": "genelement"
+        },
+        {
+          "level": 2,
+          "title": "genChildren",
+          "slug": "genchildren"
+        },
+        {
+          "level": 3,
+          "title": "getNormalizationType",
+          "slug": "getnormalizationtype"
+        },
+        {
+          "level": 3,
+          "title": "needsNormalization",
+          "slug": "needsnormalization"
+        },
+        {
+          "level": 3,
+          "title": "genNode",
+          "slug": "gennode"
+        },
+        {
+          "level": 3,
+          "title": "genText-处理文本节点",
+          "slug": "gentext-处理文本节点"
+        },
+        {
+          "level": 3,
+          "title": "genComment-处理注释节点",
+          "slug": "gencomment-处理注释节点"
+        },
+        {
+          "level": 2,
+          "title": "genData",
+          "slug": "gendata"
+        },
+        {
+          "level": 2,
+          "title": "genDirectives-处理指令",
+          "slug": "gendirectives-处理指令"
+        },
+        {
+          "level": 3,
+          "title": "html-处理v-html",
+          "slug": "html-处理v-html"
+        },
+        {
+          "level": 3,
+          "title": "text-处理v-text",
+          "slug": "text-处理v-text"
+        },
+        {
+          "level": 3,
+          "title": "on-处理v-on的对象形式",
+          "slug": "on-处理v-on的对象形式"
+        },
+        {
+          "level": 3,
+          "title": "bind-处理v-bind的对象形式",
+          "slug": "bind-处理v-bind的对象形式"
+        },
+        {
+          "level": 3,
+          "title": "model-处理v-model",
+          "slug": "model-处理v-model"
+        },
+        {
+          "level": 3,
+          "title": "AST上新增内容",
+          "slug": "ast上新增内容"
+        },
+        {
+          "level": 2,
+          "title": "来自模块(class、style)的genData方法-处理class和style属性",
+          "slug": "来自模块-class、style-的gendata方法-处理class和style属性"
+        },
+        {
+          "level": 2,
+          "title": "genProps-处理HTML和DOM属性",
+          "slug": "genprops-处理html和dom属性"
+        },
+        {
+          "level": 2,
+          "title": "genHandlers-处理v-on事件绑定",
+          "slug": "genhandlers-处理v-on事件绑定"
+        },
+        {
+          "level": 2,
+          "title": "genScopedSlots-处理插槽节点",
+          "slug": "genscopedslots-处理插槽节点"
+        },
+        {
+          "level": 3,
+          "title": "hash",
+          "slug": "hash"
+        },
+        {
+          "level": 3,
+          "title": "containsSlotChild",
+          "slug": "containsslotchild"
+        },
+        {
+          "level": 3,
+          "title": "genScopedSlot",
+          "slug": "genscopedslot"
+        },
+        {
+          "level": 2,
+          "title": "genInlineTemplate-处理内联模板",
+          "slug": "geninlinetemplate-处理内联模板"
+        },
+        {
+          "level": 2,
+          "title": "genStatic-处理静态根节点",
+          "slug": "genstatic-处理静态根节点"
+        },
+        {
+          "level": 2,
+          "title": "genOnce-处理v-once",
+          "slug": "genonce-处理v-once"
+        },
+        {
+          "level": 2,
+          "title": "genFor-处理v-for",
+          "slug": "genfor-处理v-for"
+        },
+        {
+          "level": 2,
+          "title": "genIf-处理v-if",
+          "slug": "genif-处理v-if"
+        },
+        {
+          "level": 2,
+          "title": "genSlot-处理slot标签",
+          "slug": "genslot-处理slot标签"
+        },
+        {
+          "level": 2,
+          "title": "genComponent-处理动态组件",
+          "slug": "gencomponent-处理动态组件"
+        },
+        {
+          "level": 2,
+          "title": "generateValue,transformSpecialNewlines",
+          "slug": "generatevalue-transformspecialnewlines"
+        },
+        {
+          "level": 2,
+          "title": "生成的渲染函数字符",
+          "slug": "生成的渲染函数字符"
+        }
+      ]
+    },
+    {
+      "title": "编译器解析",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/compile-flow.html",
+      "relativePath": "vue-code-study/compile/compile-flow.md",
+      "key": "v-cd48bbd6",
+      "path": "/vue-code-study/compile/compile-flow.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "解析大致过程",
+          "slug": "解析大致过程"
+        },
+        {
+          "level": 2,
+          "title": "特殊情况的解析",
+          "slug": "特殊情况的解析"
+        },
+        {
+          "level": 3,
+          "title": "缺少结束标签",
+          "slug": "缺少结束标签"
+        },
+        {
+          "level": 3,
+          "title": "一元标签",
+          "slug": "一元标签"
+        },
+        {
+          "level": 3,
+          "title": "br和只有p结束标签",
+          "slug": "br和只有p结束标签"
+        },
+        {
+          "level": 3,
+          "title": "p标签内的Phrasing content模型",
+          "slug": "p标签内的phrasing-content模型"
+        },
+        {
+          "level": 3,
+          "title": "可以省略结束标签的标签",
+          "slug": "可以省略结束标签的标签"
+        }
+      ]
+    },
+    {
+      "title": "静态标记",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/mark-static.html",
+      "relativePath": "vue-code-study/compile/mark-static.md",
+      "key": "v-5a2fac8a",
+      "path": "/vue-code-study/compile/mark-static.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "optimize",
+          "slug": "optimize"
+        },
+        {
+          "level": 2,
+          "title": "genStaticKeysCached",
+          "slug": "genstatickeyscached"
+        },
+        {
+          "level": 2,
+          "title": "markStatic",
+          "slug": "markstatic"
+        },
+        {
+          "level": 2,
+          "title": "isStatic",
+          "slug": "isstatic"
+        },
+        {
+          "level": 2,
+          "title": "markStaticRoots",
+          "slug": "markstaticroots"
+        }
+      ]
+    },
+    {
+      "title": "v-model原理",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/model.html",
+      "relativePath": "vue-code-study/compile/model.md",
+      "key": "v-4dea45c5",
+      "path": "/vue-code-study/compile/model.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "model",
+          "slug": "model"
+        },
+        {
+          "level": 2,
+          "title": "genAssignmentCode",
+          "slug": "genassignmentcode"
+        },
+        {
+          "level": 3,
+          "title": "parseModel",
+          "slug": "parsemodel"
+        },
+        {
+          "level": 2,
+          "title": "genDefaultModel-其他类型的input标签或者textarea标签上的v-model",
+          "slug": "gendefaultmodel-其他类型的input标签或者textarea标签上的v-model"
+        },
+        {
+          "level": 2,
+          "title": "genComponentModel-组件上的v-model",
+          "slug": "gencomponentmodel-组件上的v-model"
+        },
+        {
+          "level": 2,
+          "title": "genSelect-select标签上的v-model",
+          "slug": "genselect-select标签上的v-model"
+        },
+        {
+          "level": 2,
+          "title": "genCheckboxModel-复选框上的v-model",
+          "slug": "gencheckboxmodel-复选框上的v-model"
+        },
+        {
+          "level": 2,
+          "title": "genRadioModel-单选框上的v-model",
+          "slug": "genradiomodel-单选框上的v-model"
+        }
+      ]
+    },
+    {
+      "title": "解析HTML模板",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/parse-html.html",
+      "relativePath": "vue-code-study/compile/parse-html.md",
+      "key": "v-39a62c35",
+      "path": "/vue-code-study/compile/parse-html.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "parseHTML中用到的正则",
+          "slug": "parsehtml中用到的正则"
+        },
+        {
+          "level": 3,
+          "title": "attribute",
+          "slug": "attribute"
+        },
+        {
+          "level": 3,
+          "title": "dynamicArgAttribute",
+          "slug": "dynamicargattribute"
+        },
+        {
+          "level": 3,
+          "title": "startTagOpen",
+          "slug": "starttagopen"
+        },
+        {
+          "level": 3,
+          "title": "startTagClose",
+          "slug": "starttagclose"
+        },
+        {
+          "level": 3,
+          "title": "endTag",
+          "slug": "endtag"
+        },
+        {
+          "level": 3,
+          "title": "doctype",
+          "slug": "doctype"
+        },
+        {
+          "level": 3,
+          "title": "comment",
+          "slug": "comment"
+        },
+        {
+          "level": 3,
+          "title": "conditionalComment",
+          "slug": "conditionalcomment"
+        },
+        {
+          "level": 3,
+          "title": "encodedAttr",
+          "slug": "encodedattr"
+        },
+        {
+          "level": 3,
+          "title": "encodedAttrWithNewLines",
+          "slug": "encodedattrwithnewlines"
+        },
+        {
+          "level": 2,
+          "title": "parseHTML用到的一些方法和变量",
+          "slug": "parsehtml用到的一些方法和变量"
+        },
+        {
+          "level": 2,
+          "title": "parseHTML",
+          "slug": "parsehtml"
+        },
+        {
+          "level": 3,
+          "title": "左尖括号索引为0时",
+          "slug": "左尖括号索引为0时"
+        },
+        {
+          "level": 3,
+          "title": "左尖括号索引大于等于0时",
+          "slug": "左尖括号索引大于等于0时"
+        },
+        {
+          "level": 3,
+          "title": "左尖括号索引没找到时",
+          "slug": "左尖括号索引没找到时"
+        },
+        {
+          "level": 3,
+          "title": "advance",
+          "slug": "advance"
+        },
+        {
+          "level": 3,
+          "title": "parseStartTag",
+          "slug": "parsestarttag"
+        },
+        {
+          "level": 3,
+          "title": "handleStartTag",
+          "slug": "handlestarttag"
+        },
+        {
+          "level": 3,
+          "title": "parseEndTag",
+          "slug": "parseendtag"
+        }
+      ]
     },
     {
       "title": "vue入口",
@@ -114,6 +545,436 @@ export const siteData = {
       ]
     },
     {
+      "title": "解析属性生成AST",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/parse.html",
+      "relativePath": "vue-code-study/compile/parse.md",
+      "key": "v-13d9fb31",
+      "path": "/vue-code-study/compile/parse.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "parse中用到的正则",
+          "slug": "parse中用到的正则"
+        },
+        {
+          "level": 3,
+          "title": "onRE",
+          "slug": "onre"
+        },
+        {
+          "level": 3,
+          "title": "dirRE",
+          "slug": "dirre"
+        },
+        {
+          "level": 3,
+          "title": "forAliasRE",
+          "slug": "foraliasre"
+        },
+        {
+          "level": 3,
+          "title": "forIteratorRE",
+          "slug": "foriteratorre"
+        },
+        {
+          "level": 3,
+          "title": "stripParensRE",
+          "slug": "stripparensre"
+        },
+        {
+          "level": 3,
+          "title": "dynamicArgRE",
+          "slug": "dynamicargre"
+        },
+        {
+          "level": 3,
+          "title": "argRE",
+          "slug": "argre"
+        },
+        {
+          "level": 3,
+          "title": "bindRE",
+          "slug": "bindre"
+        },
+        {
+          "level": 3,
+          "title": "propBindRE",
+          "slug": "propbindre"
+        },
+        {
+          "level": 3,
+          "title": "modifierRE",
+          "slug": "modifierre"
+        },
+        {
+          "level": 3,
+          "title": "slotRE",
+          "slug": "slotre"
+        },
+        {
+          "level": 3,
+          "title": "lineBreakRE",
+          "slug": "linebreakre"
+        },
+        {
+          "level": 3,
+          "title": "whitespaceRE",
+          "slug": "whitespacere"
+        },
+        {
+          "level": 3,
+          "title": "invalidAttributeRE",
+          "slug": "invalidattributere"
+        },
+        {
+          "level": 2,
+          "title": "parse",
+          "slug": "parse"
+        },
+        {
+          "level": 3,
+          "title": "start",
+          "slug": "start"
+        },
+        {
+          "level": 3,
+          "title": "end",
+          "slug": "end"
+        },
+        {
+          "level": 3,
+          "title": "chars",
+          "slug": "chars"
+        },
+        {
+          "level": 3,
+          "title": "comment",
+          "slug": "comment"
+        },
+        {
+          "level": 3,
+          "title": "closeElement",
+          "slug": "closeelement"
+        },
+        {
+          "level": 2,
+          "title": "处理时调用的众多函数",
+          "slug": "处理时调用的众多函数"
+        },
+        {
+          "level": 3,
+          "title": "createASTElement",
+          "slug": "createastelement"
+        },
+        {
+          "level": 3,
+          "title": "warnOnce",
+          "slug": "warnonce"
+        },
+        {
+          "level": 3,
+          "title": "trimEndingWhitespace",
+          "slug": "trimendingwhitespace"
+        },
+        {
+          "level": 3,
+          "title": "checkRootConstraints",
+          "slug": "checkrootconstraints"
+        },
+        {
+          "level": 3,
+          "title": "guardIESVGBug",
+          "slug": "guardiesvgbug"
+        },
+        {
+          "level": 3,
+          "title": "makeAttrsMap",
+          "slug": "makeattrsmap"
+        },
+        {
+          "level": 3,
+          "title": "isTextTag",
+          "slug": "istexttag"
+        },
+        {
+          "level": 3,
+          "title": "isForbiddenTag",
+          "slug": "isforbiddentag"
+        },
+        {
+          "level": 3,
+          "title": "checkForAliasModel",
+          "slug": "checkforaliasmodel"
+        },
+        {
+          "level": 3,
+          "title": "processPre-处理v-pre指令",
+          "slug": "processpre-处理v-pre指令"
+        },
+        {
+          "level": 3,
+          "title": "processRawAttrs-处理v-pre指令内的标签属性",
+          "slug": "processrawattrs-处理v-pre指令内的标签属性"
+        },
+        {
+          "level": 3,
+          "title": "processFor-处理v-for指令",
+          "slug": "processfor-处理v-for指令"
+        },
+        {
+          "level": 3,
+          "title": "parseFor-处理v-for指令",
+          "slug": "parsefor-处理v-for指令"
+        },
+        {
+          "level": 3,
+          "title": "processIf-处理v-if，v-else，v-else-if指令",
+          "slug": "processif-处理v-if-v-else-v-else-if指令"
+        },
+        {
+          "level": 3,
+          "title": "processIfConditions-处理v-else，v-else-if指令",
+          "slug": "processifconditions-处理v-else-v-else-if指令"
+        },
+        {
+          "level": 3,
+          "title": "findPrevElement-处理v-else，v-else-if指令",
+          "slug": "findprevelement-处理v-else-v-else-if指令"
+        },
+        {
+          "level": 3,
+          "title": "addIfCondition-处理v-if，v-else，v-else-if指令",
+          "slug": "addifcondition-处理v-if-v-else-v-else-if指令"
+        },
+        {
+          "level": 3,
+          "title": "processOnce-处理v-once指令",
+          "slug": "processonce-处理v-once指令"
+        },
+        {
+          "level": 3,
+          "title": "processElement",
+          "slug": "processelement"
+        },
+        {
+          "level": 3,
+          "title": "processKey-处理key属性",
+          "slug": "processkey-处理key属性"
+        },
+        {
+          "level": 3,
+          "title": "processRef-处理ref属性",
+          "slug": "processref-处理ref属性"
+        },
+        {
+          "level": 3,
+          "title": "processSlotContent-处理插槽相关属性",
+          "slug": "processslotcontent-处理插槽相关属性"
+        },
+        {
+          "level": 3,
+          "title": "processSlotOutlet-处理slot标签",
+          "slug": "processslotoutlet-处理slot标签"
+        },
+        {
+          "level": 3,
+          "title": "processComponent-处理组件（is属性和inline-template属性）",
+          "slug": "processcomponent-处理组件-is属性和inline-template属性"
+        },
+        {
+          "level": 3,
+          "title": "processAttrs-处理剩余属性",
+          "slug": "processattrs-处理剩余属性"
+        },
+        {
+          "level": 3,
+          "title": "parseModifiers-解析修饰符",
+          "slug": "parsemodifiers-解析修饰符"
+        },
+        {
+          "level": 3,
+          "title": "parseFilters-解析过滤器",
+          "slug": "parsefilters-解析过滤器"
+        },
+        {
+          "level": 3,
+          "title": "parseText-解析文本内容（插值表达式）",
+          "slug": "parsetext-解析文本内容-插值表达式"
+        },
+        {
+          "level": 3,
+          "title": "parseStyleText",
+          "slug": "parsestyletext"
+        },
+        {
+          "level": 2,
+          "title": "前置，中置，后置处理",
+          "slug": "前置-中置-后置处理"
+        },
+        {
+          "level": 3,
+          "title": "model文件",
+          "slug": "model文件"
+        },
+        {
+          "level": 3,
+          "title": "preTransformNode",
+          "slug": "pretransformnode"
+        },
+        {
+          "level": 3,
+          "title": "class文件",
+          "slug": "class文件"
+        },
+        {
+          "level": 3,
+          "title": "transformNode",
+          "slug": "transformnode"
+        },
+        {
+          "level": 3,
+          "title": "style文件",
+          "slug": "style文件"
+        },
+        {
+          "level": 3,
+          "title": "transformNode",
+          "slug": "transformnode-2"
+        },
+        {
+          "level": 2,
+          "title": "helper.js",
+          "slug": "helper-js"
+        },
+        {
+          "level": 3,
+          "title": "baseWarn",
+          "slug": "basewarn"
+        },
+        {
+          "level": 3,
+          "title": "pluckModuleFunction",
+          "slug": "pluckmodulefunction"
+        },
+        {
+          "level": 3,
+          "title": "addProp",
+          "slug": "addprop"
+        },
+        {
+          "level": 3,
+          "title": "addAttr",
+          "slug": "addattr"
+        },
+        {
+          "level": 3,
+          "title": "addRawAttr",
+          "slug": "addrawattr"
+        },
+        {
+          "level": 3,
+          "title": "addDirective",
+          "slug": "adddirective"
+        },
+        {
+          "level": 3,
+          "title": "addHandler",
+          "slug": "addhandler"
+        },
+        {
+          "level": 3,
+          "title": "getRawBindingAttr",
+          "slug": "getrawbindingattr"
+        },
+        {
+          "level": 3,
+          "title": "getBindingAttr",
+          "slug": "getbindingattr"
+        },
+        {
+          "level": 3,
+          "title": "getAndRemoveAttr",
+          "slug": "getandremoveattr"
+        },
+        {
+          "level": 3,
+          "title": "getAndRemoveAttrByRegex",
+          "slug": "getandremoveattrbyregex"
+        },
+        {
+          "level": 3,
+          "title": "rangeSetItem",
+          "slug": "rangesetitem"
+        }
+      ]
+    },
+    {
+      "title": "v-on事件绑定的原理",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/events.html",
+      "relativePath": "vue-code-study/compile/events.md",
+      "key": "v-fdd85e96",
+      "path": "/vue-code-study/compile/events.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "用到的正则",
+          "slug": "用到的正则"
+        },
+        {
+          "level": 3,
+          "title": "fnExpRE",
+          "slug": "fnexpre"
+        },
+        {
+          "level": 3,
+          "title": "fnInvokeRE",
+          "slug": "fninvokere"
+        },
+        {
+          "level": 3,
+          "title": "simplePathRE",
+          "slug": "simplepathre"
+        },
+        {
+          "level": 2,
+          "title": "genHandlers",
+          "slug": "genhandlers"
+        },
+        {
+          "level": 2,
+          "title": "genHandler",
+          "slug": "genhandler"
+        },
+        {
+          "level": 3,
+          "title": "没有修饰符时的处理",
+          "slug": "没有修饰符时的处理"
+        },
+        {
+          "level": 3,
+          "title": "有修饰符的处理",
+          "slug": "有修饰符的处理"
+        },
+        {
+          "level": 3,
+          "title": "modifierCode",
+          "slug": "modifiercode"
+        },
+        {
+          "level": 3,
+          "title": "genKeyFilter",
+          "slug": "genkeyfilter"
+        },
+        {
+          "level": 3,
+          "title": "genFilterCode",
+          "slug": "genfiltercode"
+        }
+      ]
+    },
+    {
       "title": "响应式入口",
       "frontmatter": {},
       "regularPath": "/vue-code-study/entry/state.html",
@@ -160,83 +1021,6 @@ export const siteData = {
           "level": 3,
           "title": "stateMixin",
           "slug": "statemixin"
-        }
-      ]
-    },
-    {
-      "frontmatter": {},
-      "regularPath": "/guide/",
-      "relativePath": "guide/readme.md",
-      "key": "v-6a8d73d3",
-      "path": "/guide/"
-    },
-    {
-      "title": "全局方法",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/global-api/global.html",
-      "relativePath": "vue-code-study/global-api/global.md",
-      "key": "v-099cd021",
-      "path": "/vue-code-study/global-api/global.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "入口",
-          "slug": "入口"
-        },
-        {
-          "level": 2,
-          "title": "initGlobalAPI",
-          "slug": "initglobalapi"
-        },
-        {
-          "level": 2,
-          "title": "Vue.set",
-          "slug": "vue-set"
-        },
-        {
-          "level": 2,
-          "title": "Vue.delete",
-          "slug": "vue-delete"
-        },
-        {
-          "level": 2,
-          "title": "Vue.nextTick",
-          "slug": "vue-nexttick"
-        },
-        {
-          "level": 2,
-          "title": "Vue.observable",
-          "slug": "vue-observable"
-        },
-        {
-          "level": 2,
-          "title": "Vue.use",
-          "slug": "vue-use"
-        },
-        {
-          "level": 2,
-          "title": "Vue.mixin",
-          "slug": "vue-mixin"
-        },
-        {
-          "level": 2,
-          "title": "Vue.extend",
-          "slug": "vue-extend"
-        },
-        {
-          "level": 2,
-          "title": "Vue.component",
-          "slug": "vue-component"
-        },
-        {
-          "level": 2,
-          "title": "Vue.directive",
-          "slug": "vue-directive"
-        },
-        {
-          "level": 2,
-          "title": "Vue.filter",
-          "slug": "vue-filter"
         }
       ]
     },
@@ -381,7 +1165,353 @@ export const siteData = {
       ]
     },
     {
-      "title": "util目录",
+      "title": "Home",
+      "frontmatter": {
+        "home": true,
+        "heroImage": "/images/logo.png",
+        "actionText": "快速上手 →",
+        "actionLink": "/guide/",
+        "features": [
+          {
+            "title": "简洁至上",
+            "details": "以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。"
+          },
+          {
+            "title": "Vue驱动",
+            "details": "享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。"
+          },
+          {
+            "title": "高性能",
+            "details": "VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。"
+          }
+        ],
+        "footer": "MIT Licensed | Copyright © 2018-present Evan You"
+      },
+      "regularPath": "/",
+      "relativePath": "README.md",
+      "key": "v-19aff440",
+      "path": "/"
+    },
+    {
+      "title": "全局方法",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/global-api/global.html",
+      "relativePath": "vue-code-study/global-api/global.md",
+      "key": "v-099cd021",
+      "path": "/vue-code-study/global-api/global.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "入口",
+          "slug": "入口"
+        },
+        {
+          "level": 2,
+          "title": "initGlobalAPI",
+          "slug": "initglobalapi"
+        },
+        {
+          "level": 2,
+          "title": "Vue.set",
+          "slug": "vue-set"
+        },
+        {
+          "level": 2,
+          "title": "Vue.delete",
+          "slug": "vue-delete"
+        },
+        {
+          "level": 2,
+          "title": "Vue.nextTick",
+          "slug": "vue-nexttick"
+        },
+        {
+          "level": 2,
+          "title": "Vue.observable",
+          "slug": "vue-observable"
+        },
+        {
+          "level": 2,
+          "title": "Vue.use",
+          "slug": "vue-use"
+        },
+        {
+          "level": 2,
+          "title": "Vue.mixin",
+          "slug": "vue-mixin"
+        },
+        {
+          "level": 2,
+          "title": "Vue.extend",
+          "slug": "vue-extend"
+        },
+        {
+          "level": 2,
+          "title": "Vue.component",
+          "slug": "vue-component"
+        },
+        {
+          "level": 2,
+          "title": "Vue.directive",
+          "slug": "vue-directive"
+        },
+        {
+          "level": 2,
+          "title": "Vue.filter",
+          "slug": "vue-filter"
+        }
+      ]
+    },
+    {
+      "title": "shared目录",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/util/shared.html",
+      "relativePath": "vue-code-study/util/shared.md",
+      "key": "v-a6b0d07e",
+      "path": "/vue-code-study/util/shared.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "常量",
+          "slug": "常量"
+        },
+        {
+          "level": 2,
+          "title": "emptyObject",
+          "slug": "emptyobject"
+        },
+        {
+          "level": 2,
+          "title": "isUndef",
+          "slug": "isundef"
+        },
+        {
+          "level": 2,
+          "title": "isDef",
+          "slug": "isdef"
+        },
+        {
+          "level": 2,
+          "title": "isTrue",
+          "slug": "istrue"
+        },
+        {
+          "level": 2,
+          "title": "isFalse",
+          "slug": "isfalse"
+        },
+        {
+          "level": 2,
+          "title": "isPrimitive",
+          "slug": "isprimitive"
+        },
+        {
+          "level": 2,
+          "title": "isObject",
+          "slug": "isobject"
+        },
+        {
+          "level": 2,
+          "title": "toRawType",
+          "slug": "torawtype"
+        },
+        {
+          "level": 2,
+          "title": "isPlainObject",
+          "slug": "isplainobject"
+        },
+        {
+          "level": 2,
+          "title": "isRegExp",
+          "slug": "isregexp"
+        },
+        {
+          "level": 2,
+          "title": "isValidArrayIndex",
+          "slug": "isvalidarrayindex"
+        },
+        {
+          "level": 2,
+          "title": "isPromise",
+          "slug": "ispromise"
+        },
+        {
+          "level": 2,
+          "title": "makeMap",
+          "slug": "makemap"
+        },
+        {
+          "level": 2,
+          "title": "isBuiltInTag",
+          "slug": "isbuiltintag"
+        },
+        {
+          "level": 2,
+          "title": "isReservedAttribute",
+          "slug": "isreservedattribute"
+        },
+        {
+          "level": 2,
+          "title": "remove",
+          "slug": "remove"
+        },
+        {
+          "level": 2,
+          "title": "hasOwn",
+          "slug": "hasown"
+        },
+        {
+          "level": 2,
+          "title": "cached",
+          "slug": "cached"
+        },
+        {
+          "level": 2,
+          "title": "camelize",
+          "slug": "camelize"
+        },
+        {
+          "level": 2,
+          "title": "capitalize",
+          "slug": "capitalize"
+        },
+        {
+          "level": 2,
+          "title": "hyphenate",
+          "slug": "hyphenate"
+        },
+        {
+          "level": 2,
+          "title": "bind",
+          "slug": "bind"
+        },
+        {
+          "level": 2,
+          "title": "toArray",
+          "slug": "toarray"
+        },
+        {
+          "level": 2,
+          "title": "extend",
+          "slug": "extend"
+        },
+        {
+          "level": 2,
+          "title": "noop",
+          "slug": "noop"
+        },
+        {
+          "level": 2,
+          "title": "no",
+          "slug": "no"
+        }
+      ]
+    },
+    {
+      "title": "web平台文件下的util目录",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/util/web-util.html",
+      "relativePath": "vue-code-study/util/web-util.md",
+      "key": "v-1be39c95",
+      "path": "/vue-code-study/util/web-util.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "aas",
+          "slug": "aas"
+        }
+      ]
+    },
+    {
+      "title": "实例方法",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/global-api/instance.html",
+      "relativePath": "vue-code-study/global-api/instance.md",
+      "key": "v-1a6ce57d",
+      "path": "/vue-code-study/global-api/instance.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "$data",
+          "slug": "data"
+        },
+        {
+          "level": 2,
+          "title": "$props",
+          "slug": "props"
+        },
+        {
+          "level": 2,
+          "title": "$set",
+          "slug": "set"
+        },
+        {
+          "level": 2,
+          "title": "$delete",
+          "slug": "delete"
+        },
+        {
+          "level": 2,
+          "title": "$watch",
+          "slug": "watch"
+        },
+        {
+          "level": 2,
+          "title": "eventsMixin",
+          "slug": "eventsmixin"
+        },
+        {
+          "level": 2,
+          "title": "$on",
+          "slug": "on"
+        },
+        {
+          "level": 2,
+          "title": "$once",
+          "slug": "once"
+        },
+        {
+          "level": 2,
+          "title": "$off",
+          "slug": "off"
+        },
+        {
+          "level": 2,
+          "title": "$emit",
+          "slug": "emit"
+        }
+      ]
+    },
+    {
+      "title": "问题",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/question/q1.html",
+      "relativePath": "vue-code-study/question/q1.md",
+      "key": "v-07bd5d13",
+      "path": "/vue-code-study/question/q1.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "为什么data，watch选项中，如果写的方法是箭头函数就访问不到实例的this了？",
+          "slug": "为什么data-watch选项中-如果写的方法是箭头函数就访问不到实例的this了"
+        },
+        {
+          "level": 2,
+          "title": "多次绑定同一事件时？",
+          "slug": "多次绑定同一事件时"
+        }
+      ]
+    },
+    {
+      "title": "performance",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/window-api/window.html",
+      "relativePath": "vue-code-study/window-api/window.md",
+      "key": "v-093fc73e",
+      "path": "/vue-code-study/window-api/window.html"
+    },
+    {
+      "title": "core文件下的util目录",
       "frontmatter": {},
       "regularPath": "/vue-code-study/util/util.html",
       "relativePath": "vue-code-study/util/util.md",
@@ -459,149 +1589,6 @@ export const siteData = {
           "slug": "getinvalidtypemessage"
         }
       ]
-    },
-    {
-      "title": "performance",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/window-api/window.html",
-      "relativePath": "vue-code-study/window-api/window.md",
-      "key": "v-093fc73e",
-      "path": "/vue-code-study/window-api/window.html"
-    },
-    {
-      "title": "shared目录",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/util/shared.html",
-      "relativePath": "vue-code-study/util/shared.md",
-      "key": "v-a6b0d07e",
-      "path": "/vue-code-study/util/shared.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "常量",
-          "slug": "常量"
-        },
-        {
-          "level": 2,
-          "title": "isUndef",
-          "slug": "isundef"
-        },
-        {
-          "level": 2,
-          "title": "isDef",
-          "slug": "isdef"
-        },
-        {
-          "level": 2,
-          "title": "isTrue",
-          "slug": "istrue"
-        },
-        {
-          "level": 2,
-          "title": "isFalse",
-          "slug": "isfalse"
-        },
-        {
-          "level": 2,
-          "title": "isPrimitive",
-          "slug": "isprimitive"
-        },
-        {
-          "level": 2,
-          "title": "isObject",
-          "slug": "isobject"
-        },
-        {
-          "level": 2,
-          "title": "toRawType",
-          "slug": "torawtype"
-        },
-        {
-          "level": 2,
-          "title": "isPlainObject",
-          "slug": "isplainobject"
-        },
-        {
-          "level": 2,
-          "title": "isRegExp",
-          "slug": "isregexp"
-        },
-        {
-          "level": 2,
-          "title": "isValidArrayIndex",
-          "slug": "isvalidarrayindex"
-        },
-        {
-          "level": 2,
-          "title": "isPromise",
-          "slug": "ispromise"
-        },
-        {
-          "level": 2,
-          "title": "makeMap",
-          "slug": "makemap"
-        },
-        {
-          "level": 2,
-          "title": "isBuiltInTag",
-          "slug": "isbuiltintag"
-        },
-        {
-          "level": 2,
-          "title": "isReservedAttribute",
-          "slug": "isreservedattribute"
-        },
-        {
-          "level": 2,
-          "title": "hasOwn",
-          "slug": "hasown"
-        },
-        {
-          "level": 2,
-          "title": "cached",
-          "slug": "cached"
-        },
-        {
-          "level": 2,
-          "title": "camelize",
-          "slug": "camelize"
-        },
-        {
-          "level": 2,
-          "title": "capitalize",
-          "slug": "capitalize"
-        },
-        {
-          "level": 2,
-          "title": "hyphenate",
-          "slug": "hyphenate"
-        },
-        {
-          "level": 2,
-          "title": "bind",
-          "slug": "bind"
-        },
-        {
-          "level": 2,
-          "title": "toArray",
-          "slug": "toarray"
-        },
-        {
-          "level": 2,
-          "title": "extend",
-          "slug": "extend"
-        },
-        {
-          "level": 2,
-          "title": "noop",
-          "slug": "noop"
-        },
-        {
-          "level": 2,
-          "title": "no",
-          "slug": "no"
-        }
-      ]
     }
   ],
   "themeConfig": {
@@ -609,7 +1596,7 @@ export const siteData = {
       "/vue-code-study/": [
         {
           "title": "前言",
-          "collapsable": false,
+          "collapsable": true,
           "sidebarDepth": 1,
           "children": [
             ""
@@ -617,7 +1604,7 @@ export const siteData = {
         },
         {
           "title": "初始化过程",
-          "collapsable": false,
+          "collapsable": true,
           "children": [
             "entry/entry",
             "entry/state"
@@ -626,7 +1613,7 @@ export const siteData = {
         },
         {
           "title": "响应式原理",
-          "collapsable": false,
+          "collapsable": true,
           "children": [
             "observe/observe",
             "observe/queue"
@@ -634,27 +1621,55 @@ export const siteData = {
           "sidebarDepth": 2
         },
         {
-          "title": "全局方法",
-          "collapsable": false,
+          "title": "编译器",
+          "collapsable": true,
           "children": [
-            "global-api/global"
-          ]
+            "compile/compile-entry",
+            "compile/compile-flow",
+            "compile/parse-html",
+            "compile/parse",
+            "compile/mark-static",
+            "compile/ast",
+            "compile/generate",
+            "compile/model",
+            "compile/events"
+          ],
+          "sidebarDepth": 2
+        },
+        {
+          "title": "全局与实例方法/属性",
+          "collapsable": true,
+          "children": [
+            "global-api/global",
+            "global-api/instance"
+          ],
+          "sidebarDepth": 2
         },
         {
           "title": "工具函数",
-          "collapsable": false,
+          "collapsable": true,
           "children": [
             "util/util",
+            "util/web-util",
             "util/shared"
           ],
           "sidebarDepth": 2
         },
         {
           "title": "window接口",
-          "collapsable": false,
+          "collapsable": true,
           "children": [
             "window-api/window"
-          ]
+          ],
+          "sidebarDepth": 2
+        },
+        {
+          "title": "Q&A",
+          "collapsable": true,
+          "children": [
+            "question/q1"
+          ],
+          "sidebarDepth": 2
         }
       ]
     },

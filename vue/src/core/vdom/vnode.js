@@ -71,13 +71,15 @@ export default class VNode {
   }
 }
 
+// 创建空的VNode节点
 export const createEmptyVNode = (text: string = '') => {
   const node = new VNode()
   node.text = text
-  node.isComment = true
+  node.isComment = true //为注释节点
   return node
 }
 
+// 创建空的VNode
 export function createTextVNode (val: string | number) {
   return new VNode(undefined, undefined, undefined, String(val))
 }

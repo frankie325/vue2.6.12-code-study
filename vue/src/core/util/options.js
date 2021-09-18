@@ -525,27 +525,44 @@ export function mergeOptions(
  * This function is used because child instances need access
  * to assets defined in its ancestor chain.
  */
+/*
+  $options.components，$options.directives，$options.filters
+  判断传入的字符是否存在于指定选项中
+*/
 export function resolveAsset(
-  options: Object,
-  type: string,
-  id: string,
+  options: Object, //该组件所在的组件的选项
+  type: string,  // 为components或者directives或者filters
+  id: string, //该组件的名称
   warnMissing?: boolean
 ): any {
   /* istanbul ignore if */
   if (typeof id !== "string") {
+    // 如果不是字符，直接返回
     return;
   }
+  // 拿到对应选项
   const assets = options[type];
   // check local registration variations first
+
+  // hasOwn检查对象是否含有该属性，但不会再原型链上查找
+  // 先检查字符是否存在于选项中
   if (hasOwn(assets, id)) return assets[id];
+
+  // 将字符转为驼峰，继续查找
   const camelizedId = camelize(id);
   if (hasOwn(assets, camelizedId)) return assets[camelizedId];
+
+  // 将字符转为首字母大写，继续查找
   const PascalCaseId = capitalize(camelizedId);
   if (hasOwn(assets, PascalCaseId)) return assets[PascalCaseId];
   // fallback to prototype chain
+
+  // 要是还没找到，则在原型链上查找
   const res = assets[id] || assets[camelizedId] || assets[PascalCaseId];
   if (process.env.NODE_ENV !== "production" && warnMissing && !res) {
+    // 找不到，报错
     warn("Failed to resolve " + type.slice(0, -1) + ": " + id, options);
   }
+  // 返回找到的结果
   return res;
 }

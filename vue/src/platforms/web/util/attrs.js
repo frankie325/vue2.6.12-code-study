@@ -7,12 +7,20 @@ import { makeMap } from 'shared/util'
 export const isReservedAttr = makeMap('style,class')
 
 // attributes that should be using props for binding
+// 应该使用 props 进行绑定的属性
 const acceptValue = makeMap('input,textarea,option,select,progress')
+
+// 必须使用prop进行绑定的属性，当做原生DOM属性处理
 export const mustUseProp = (tag: string, type: ?string, attr: string): boolean => {
+  // 传入的属性如果符合一下条件，需使用props绑定
   return (
+    // attr是value、属于上面那些标签、type不是button
     (attr === 'value' && acceptValue(tag)) && type !== 'button' ||
+    // attr是selected、标签是option
     (attr === 'selected' && tag === 'option') ||
+    // attr是checked、标签是input
     (attr === 'checked' && tag === 'input') ||
+    // attr是muted、标签是video
     (attr === 'muted' && tag === 'video')
   )
 }

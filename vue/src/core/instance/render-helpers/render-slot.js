@@ -5,11 +5,12 @@ import { extend, warn, isObject } from 'core/util/index'
 /**
  * Runtime helper for rendering <slot>
  */
+// 渲染slot标签
 export function renderSlot (
-  name: string,
-  fallbackRender: ?((() => Array<VNode>) | Array<VNode>),
-  props: ?Object,
-  bindObject: ?Object
+  name: string, //slot标签的name属性
+  fallbackRender: ?((() => Array<VNode>) | Array<VNode>), //slot标签内的子标签的渲染函数
+  props: ?Object, //slot标签上的属性
+  bindObject: ?Object //slot标签上v-bind绑定的对象形式值
 ): ?Array<VNode> {
   const scopedSlotFn = this.$scopedSlots[name]
   let nodes
@@ -27,6 +28,7 @@ export function renderSlot (
       (fallbackRender &&
         (Array.isArray(fallbackRender) ? fallbackRender : fallbackRender()))
   } else {
+    // 
     nodes =
       this.$slots[name] ||
       (fallbackRender &&

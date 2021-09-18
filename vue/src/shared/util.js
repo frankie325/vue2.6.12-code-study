@@ -1,5 +1,6 @@
 /* @flow */
 
+// 被冻结的空对象
 export const emptyObject = Object.freeze({})
 
 // 为undefined或者null，返回true
@@ -94,6 +95,9 @@ export function isPromise (val: any): boolean {
  * Convert a value to a string that is actually rendered.
  */
 export function toString (val: any): string {
+  // 如果是undefined，null，则转为空字符
+  // 如果是数组或者对象，调用JSON.stringify转为字符
+  // 其他类型String转为字符
   return val == null
     ? ''
     : Array.isArray(val) || (isPlainObject(val) && val.toString === _toString)
@@ -105,8 +109,10 @@ export function toString (val: any): string {
  * Convert an input value to a number for persistence.
  * If the conversion fails, return original string.
  */
+// 调用parseFloat解析成数字
 export function toNumber (val: string): number | string {
   const n = parseFloat(val)
+  // 如果返回的是NaN，则使用原始值
   return isNaN(n) ? val : n
 }
 
@@ -299,13 +305,16 @@ export const no = (a?: any, b?: any, c?: any) => false
 /**
  * Return the same value.
  */
+// 解析特定平台的真实标签名称用到
 export const identity = (_: any) => _
 
 /**
  * Generate a string containing static keys from compiler modules.
  */
+// 生成一个字符串，modules内容来自编译器compiler下的modules文件，生成的字符串为"staticClass,staticStyle"
 export function genStaticKeys (modules: Array<ModuleOptions>): string {
   return modules.reduce((keys, m) => {
+    // 将数组对象中的staticKeys属性，为数组，拼接起来
     return keys.concat(m.staticKeys || [])
   }, []).join(',')
 }
@@ -364,6 +373,7 @@ export function looseIndexOf (arr: Array<mixed>, val: mixed): number {
 /**
  * Ensure a function is called only once.
  */
+// 确保传入的函数只能执行一次
 export function once (fn: Function): Function {
   let called = false
   return function () {

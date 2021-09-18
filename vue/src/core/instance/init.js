@@ -51,6 +51,7 @@ export function initMixin (Vue: Class<Component>) {
     }
     /* istanbul ignore else */
     if (process.env.NODE_ENV !== 'production') {
+      // 对vm做代理
       initProxy(vm)
     } else {
       vm._renderProxy = vm
@@ -92,12 +93,14 @@ export function initMixin (Vue: Class<Component>) {
   }
 }
 
+// 初始化组件的选项
 export function initInternalComponent (vm: Component, options: InternalComponentOptions) {
   // 创建一个空对象，原型指向构造函数的options
   const opts = vm.$options = Object.create(vm.constructor.options)
   // doing this because it's faster than dynamic enumeration.
   const parentVnode = options._parentVnode
   opts.parent = options.parent
+  // 拿到父节点
   opts._parentVnode = parentVnode
 
   const vnodeComponentOptions = parentVnode.componentOptions

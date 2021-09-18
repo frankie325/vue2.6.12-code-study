@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      template: `<div v-if="show" v-on:click="doSomething"   id='xxx'>文本1<文本2<文本3</div>`,
+      data() {
+        return {
+          show: true,
+          msg: "i am msg",
+        };
+      },
+    });
+  </script>
+</html>

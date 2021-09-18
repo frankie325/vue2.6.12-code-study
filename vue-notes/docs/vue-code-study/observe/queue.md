@@ -336,7 +336,7 @@ DOM节点更新与浏览器重新渲染是两码事
 ```
 
 * **nextTick为什么能拿到最新的DOM？**  
-Vue文档说了，在修改响应式数据后调用nextTick。如果nextTick在修改之前调用，callbacks数组为```[()=>{},flushSchedulerQueue]```，nextTick的回调先触发，DOM更新后触发。
+Vue文档说了，需要在修改响应式数据后调用nextTick。如果nextTick在修改之前调用，callbacks数组为```[()=>{},flushSchedulerQueue]```，nextTick的回调先触发，DOM更新后触发。
 ::: tip 
 示例
 :::

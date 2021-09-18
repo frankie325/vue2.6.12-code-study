@@ -32,6 +32,11 @@ export const LIFECYCLE_HOOKS = [
 ]
 
 ```
+## emptyObject
+```js
+// 被冻结的空对象
+export const emptyObject = Object.freeze({})
+```
 ## isUndef
 ```js
 // 为undefined或者null，返回true
@@ -148,23 +153,28 @@ export function isPromise (val: any): boolean {
 }
 ```
 ## makeMap  
-返回一个函数，用来检查组件或者属性是否是Vue内置的
+返回一个函数，用来检查传入的值是否符合某一特征
 ```js
 /**
-利用闭包特性，将slot 和 component这两个Vue内置标签,存入到缓存map中
-返回一个函数
-当执行isBuiltInTag(组件名)，如果传入的组件名为slot或者component，返回true
+创建一个对象，makeMap传入的字符串分隔后保存到该对象，这些字符串具有某一特征
+返回一个函数，当调用此函数时，判断传入的值是否存在于该对象
+比如isBuiltInTag= makeMap('slot,component', true)，创建的对象持有内置组件名称的字符串这一特征，
+则isBuiltInTag(组件名)可以判断组件名是不是内置组件名称
  */
 export function makeMap (
   str: string,
   expectsLowerCase?: boolean
 ): (key: string) => true | void {
+  // 创建一个空对象
   const map = Object.create(null)
+  // 分隔成数组
   const list: Array<string> = str.split(',')
   for (let i = 0; i < list.length; i++) {
+    // 以字符串作为键值保存在map对象中
     map[list[i]] = true
   }
-  return expectsLowerCase
+  // 返回一个函数，用来判断传入的值是否存在map对象中
+  return expectsLowerCase //expectsLowerCase为true，将传入的字符串转为小写
     ? val => map[val.toLowerCase()]
     : val => map[val]
 }
@@ -187,6 +197,23 @@ export const isBuiltInTag = makeMap('slot,component', true)
  */
 export const isReservedAttribute = makeMap('key,ref,slot,slot-scope,is')
 ```
+
+## remove
+```js
+/**
+ 移除数组里指定的元素
+ */
+export function remove (arr: Array<any>, item: any): Array<any> | void {
+  if (arr.length) {
+    // 拿到指定元素的索引
+    const index = arr.indexOf(item)
+    if (index > -1) {
+      // 使用splice删除元素
+      return arr.splice(index, 1)
+    }
+  }
+}
+```
 ## hasOwn   
 检查对象是否含有该属性
 ```js
@@ -202,9 +229,8 @@ export function hasOwn (obj: Object | Array<*>, key: string): boolean {
 缓存camelizeRE，capitalize，hyphenateRE方法使用过的值
 ```js
 /*
-  cached()函数执行，返回cachedFn函数,当下面的camelize(***)函数执行的时候，调用cachedFn(),
-  如果cache中没有缓存，才会执行fn，并将结果进行缓存
-  利用闭包特性，将结果缓存起来，节省函数的运行
+  cached可以缓存传入的函数fn执行后的值。cached执行后返回一个cachedFn，
+  执行cachedFn方法时，以传入的字符串作为key将fn的执行结果缓存到一个对象中
 */
 export function cached<F: Function> (fn: F): F {
    // 创建一个空对象

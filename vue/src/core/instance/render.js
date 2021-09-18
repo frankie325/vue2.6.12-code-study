@@ -28,9 +28,12 @@ export function initRender (vm: Component) {
   // so that we get proper render context inside it.
   // args order: tag, data, children, normalizationType, alwaysNormalize
   // internal version is used by render functions compiled from templates
+  // 添加_c渲染函数，执行_c的时候，调用createElement函数，作用是添加渲染上下文，即vm
+  // 模板编译，调用的是_c渲染函数
   vm._c = (a, b, c, d) => createElement(vm, a, b, c, d, false)
   // normalization is always applied for the public version, used in
   // user-written render functions.
+  // 用户使用render函数是，调用的是$createElement渲染函数
   vm.$createElement = (a, b, c, d) => createElement(vm, a, b, c, d, true)
 
   // $attrs & $listeners are exposed for easier HOC creation.
@@ -51,6 +54,7 @@ export function initRender (vm: Component) {
   }
 }
 
+// 当前正在渲染的vue实例
 export let currentRenderingInstance: Component | null = null
 
 // for testing only
@@ -60,6 +64,7 @@ export function setCurrentRenderingInstance (vm: Component) {
 
 export function renderMixin (Vue: Class<Component>) {
   // install runtime convenience helpers
+  // 安装渲染函数中用到的工具方法
   installRenderHelpers(Vue.prototype)
 
   Vue.prototype.$nextTick = function (fn: Function) {
@@ -88,6 +93,7 @@ export function renderMixin (Vue: Class<Component>) {
       // separately from one another. Nested component's render fns are called
       // when parent component is patched.
       currentRenderingInstance = vm
+      // 执行render函数，生成vnode
       vnode = render.call(vm._renderProxy, vm.$createElement)
     } catch (e) {
       handleError(e, vm, `render`)

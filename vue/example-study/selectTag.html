@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">
+      <select name="select" id="select" multiple>
+        <option value="value1">Value 1</option>
+        <option value="value2" selected>Value 2</option>
+        <option value="value3">Value 3</option>
+        <option value="value3">Value 3</option>
+        <option value="value3">Value 3</option>
+        <option value="value3">Value 3</option>
+        <option value="value3">Value 3</option>
+      </select>
+    </div>
+  </body>
+  <script>
+    window.onload = () => {
+      let select = document.getElementById("select");
+      select.onchange = function (e) {
+        // console.log(e);
+        // console.log(e.target.value);
+        console.log(e.target.selectedOptions);
+      };
+    };
+    console.dir(select);
+    new Vue({
+      el: "#app",
+      data() {
+        return {};
+      },
+      methods: {},
+    });
+  </script>
+</html>

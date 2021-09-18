@@ -21,16 +21,19 @@ export function FunctionalRenderContext (
   data: VNodeData,
   props: Object,
   children: ?Array<VNode>,
-  parent: Component,
+  parent: Component, //父组件实例
   Ctor: Class<Component>
 ) {
-  const options = Ctor.options
+  const options = Ctor.options //该组件的配置选项
   // ensure the createElement function in functional components
   // gets a unique context - this is necessary for correct named slot check
   let contextVm
   if (hasOwn(parent, '_uid')) {
+    // 如果父组件存在_uid，说明是一个vue实例
+    // 创建一个对象，原型指向该父组件
     contextVm = Object.create(parent)
     // $flow-disable-line
+    // _original属性也指向父组件
     contextVm._original = parent
   } else {
     // the context vm passed in is a functional context as well.
@@ -95,17 +98,18 @@ export function createFunctionalComponent (
   Ctor: Class<Component>,
   propsData: ?Object,
   data: VNodeData,
-  contextVm: Component,
+  contextVm: Component, //当前组件的上下文，即父组件的实例
   children: ?Array<VNode>
 ): VNode | Array<VNode> | void {
-  const options = Ctor.options
+  const options = Ctor.options//组件的配置选项
   const props = {}
-  const propOptions = options.props
-  if (isDef(propOptions)) {
+  const propOptions = options.props //组件的props选项
+  if (isDef(propOptions)) { // 如果定义了props选项
     for (const key in propOptions) {
+      // 校验props选项的值，并添加到props对象中
       props[key] = validateProp(key, propOptions, propsData || emptyObject)
     }
-  } else {
+  } else { //如果没有定义props选项，那么组件上的属性都将作为prop
     if (isDef(data.attrs)) mergeProps(props, data.attrs)
     if (isDef(data.props)) mergeProps(props, data.props)
   }
@@ -148,8 +152,10 @@ function cloneAndMarkFunctionalResult (vnode, data, contextVm, options, renderCo
   return clone
 }
 
+// 将属性都拷贝到props对象中
 function mergeProps (to, from) {
   for (const key in from) {
+    // key转为驼峰
     to[camelize(key)] = from[key]
   }
 }

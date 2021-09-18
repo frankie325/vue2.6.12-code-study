@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">
+      <recursive-comp :list="obj">
+        <template v-slot:li="{liN}">
+          <li>{{liN}}</li>
+        </template>
+      </recursive-comp>
+    </div>
+  </body>
+  <script>
+    Vue.component("recursive-comp", {
+      template: `<div>
+                    <slot name="li" :liN="list.name"></slot>
+                    <recursive-comp v-if="list.children" :list="list.children">
+                       <template v-slot:li="{liN}">
+                           <slot name="li" :liN="liN"></slot>
+                       </template>
+                    </recursive-comp>
+                </div>`,
+      props: ["list"],
+    });
+
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          obj: {
+            name: "li1",
+            children: {
+              name: "li2",
+              children: {
+                name: "li3",
+              },
+            },
+          },
+        };
+      },
+      methods: {},
+      mounted() {},
+    });
+  </script>
+</html>

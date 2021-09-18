@@ -8,6 +8,7 @@ export const namespaceMap = {
   math: 'http://www.w3.org/1998/Math/MathML'
 }
 
+// 判断是不是HTML标签
 export const isHTMLTag = makeMap(
   'html,body,base,head,link,meta,style,title,' +
   'address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,nav,section,' +
@@ -22,8 +23,7 @@ export const isHTMLTag = makeMap(
   'content,element,shadow,template,blockquote,iframe,tfoot'
 )
 
-// this map is intentionally selective, only covering SVG elements that may
-// contain child elements.
+// 判断是不是svg标签
 export const isSVG = makeMap(
   'svg,animate,circle,clippath,cursor,defs,desc,ellipse,filter,font-face,' +
   'foreignobject,g,glyph,image,line,marker,mask,missing-glyph,path,pattern,' +
@@ -31,19 +31,24 @@ export const isSVG = makeMap(
   true
 )
 
+// 判断是不是pre标签
 export const isPreTag = (tag: ?string): boolean => tag === 'pre'
 
+// 是否是保留的标签（包括HTML标签和SVG标签）
 export const isReservedTag = (tag: string): ?boolean => {
   return isHTMLTag(tag) || isSVG(tag)
 }
 
+// 获取标签的命名空间
 export function getTagNamespace (tag: string): ?string {
   if (isSVG(tag)) {
+    // 标签是svg标签，返回svg字符串
     return 'svg'
   }
   // basic support for MathML
   // note it doesn't support other MathML elements being component roots
   if (tag === 'math') {
+    // 标签是math标签，返回math字符串
     return 'math'
   }
 }
