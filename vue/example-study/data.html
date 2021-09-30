@@ -9,6 +9,7 @@
   <script src="../dist/vue.js"></script>
   <body>
     <div id="app">
+      <div v-bind="[ { style: { color:'red' } }, { class:'header header-wrap' }]">div</div>
       <p>{{msg}}</p>
       <p>{{$msg}}</p>
     </div>

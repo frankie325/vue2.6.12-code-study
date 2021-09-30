@@ -25,19 +25,23 @@ export const mustUseProp = (tag: string, type: ?string, attr: string): boolean =
   )
 }
 
+// 标签上的枚举属性
 export const isEnumeratedAttr = makeMap('contenteditable,draggable,spellcheck')
 
+//本来只有true和false，但vue允许contenteditable属性可以接收下面的值
 const isValidContentEditableValue = makeMap('events,caret,typing,plaintext-only')
 
+// 标签上的枚举属性，值只能为true和false其中一个
 export const convertEnumeratedValue = (key: string, value: any) => {
-  return isFalsyAttrValue(value) || value === 'false'
+  return isFalsyAttrValue(value) || value === 'false' //如果是假值，赋值为false
     ? 'false'
     // allow arbitrary string value for contenteditable
-    : key === 'contenteditable' && isValidContentEditableValue(value)
-      ? value
-      : 'true'
+    : key === 'contenteditable' && isValidContentEditableValue(value) //如果是contenteditable属性可以接收的值
+      ? value //那么则为该值
+      : 'true' //否则就是true
 }
 
+// 标签上使用布尔类型作为属性值的属性
 export const isBooleanAttr = makeMap(
   'allowfullscreen,async,autofocus,autoplay,checked,compact,controls,declare,' +
   'default,defaultchecked,defaultmuted,defaultselected,defer,disabled,' +
@@ -49,14 +53,17 @@ export const isBooleanAttr = makeMap(
 
 export const xlinkNS = 'http://www.w3.org/1999/xlink'
 
+// 判断属性是不是以xlink:开头的
 export const isXlink = (name: string): boolean => {
   return name.charAt(5) === ':' && name.slice(0, 5) === 'xlink'
 }
 
+// 拿到xlink:后面的字符，如xlink:href，xlink:type后的href，type
 export const getXlinkProp = (name: string): string => {
   return isXlink(name) ? name.slice(6, name.length) : ''
 }
 
+// 判断attr的值是不是null或者undefined或者false
 export const isFalsyAttrValue = (val: any): boolean => {
   return val == null || val === false
 }

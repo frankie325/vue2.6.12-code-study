@@ -42,6 +42,18 @@ export function bindDynamicKeys (baseObj: Object, values: Array<any>): Object {
 // helper to dynamically append modifier runtime markers to event names.
 // ensure only append when value is already string, otherwise it will be cast
 // to string and cause the type check to miss.
+/*
+  如果是动态绑定事件，且带有.capture、.once、.passive修饰符的
+  data.on:{ 
+    _p(eventName,!):function($event){...}
+  }
+  键会包一层_p()
+  prependModifier会根据对应的修饰符拼接不同的字符
+  capture => !eventName
+  once    => ~eventName
+  passive => &eventName
+*/
 export function prependModifier (value: any, symbol: string): any {
+  // 如果绑定的事件名为字符，返回!eventName
   return typeof value === 'string' ? symbol + value : value
 }

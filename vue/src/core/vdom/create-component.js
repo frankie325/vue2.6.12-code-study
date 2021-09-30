@@ -35,6 +35,7 @@ import {
 // inline hooks to be invoked on component VNodes during patch
 // patch 期间在组件 vnode 上调用内联钩子
 const componentVNodeHooks = {
+  // 创建组件时调用
   init (vnode: VNodeWithData, hydrating: boolean): ?boolean {
     if (
       vnode.componentInstance &&
@@ -42,20 +43,25 @@ const componentVNodeHooks = {
       vnode.data.keepAlive
     ) {
       // kept-alive components, treat as a patch
+      // 如果组件已经创建过了且没被销毁且被keep-alive 包裹
       const mountedNode: any = vnode // work around flow
+      // 调用prepatch钩子
       componentVNodeHooks.prepatch(mountedNode, mountedNode)
     } else {
+      // 进入else说明为组件第一次创建，创建组件实例
       const child = vnode.componentInstance = createComponentInstanceForVnode(
-        vnode,
-        activeInstance
+        vnode, //组件VNode
+        activeInstance  //为正在渲染的组件实例（即父组件实例），当创建该组件时，正在渲染的就为该组件了
       )
+      // 为组件进行挂载，一般都是空挂载
       child.$mount(hydrating ? vnode.elm : undefined, hydrating)
     }
   },
 
+  // 组件更新阶段调用prepatch
   prepatch (oldVnode: MountedComponentVNode, vnode: MountedComponentVNode) {
-    const options = vnode.componentOptions
-    const child = vnode.componentInstance = oldVnode.componentInstance
+    const options = vnode.componentOptions //新的组件选项{ Ctor, propsData, listeners, tag, children }
+    const child = vnode.componentInstance = oldVnode.componentInstance //旧的组件实例
     updateChildComponent(
       child,
       options.propsData, // updated props
@@ -65,12 +71,17 @@ const componentVNodeHooks = {
     )
   },
 
+  // 组件生成的标签插入到页面后执行
   insert (vnode: MountedComponentVNode) {
     const { context, componentInstance } = vnode
-    if (!componentInstance._isMounted) {
+    if (!componentInstance._isMounted) { //如果还没执行过mounted钩子
+      // 组件实例添加_isMounted属性，说明执行过mounted钩子了
       componentInstance._isMounted = true
+      // 执行组件的mounted钩子
       callHook(componentInstance, 'mounted')
     }
+
+    // 处理 keep-alive 组件的异常情况
     if (vnode.data.keepAlive) {
       if (context._isMounted) {
         // vue-router#1212
@@ -85,10 +96,12 @@ const componentVNodeHooks = {
     }
   },
 
+  // 组件销毁时调用
   destroy (vnode: MountedComponentVNode) {
-    const { componentInstance } = vnode
-    if (!componentInstance._isDestroyed) {
+    const { componentInstance } = vnode //拿到组件实例
+    if (!componentInstance._isDestroyed) { //如果还没被销毁
       if (!vnode.data.keepAlive) {
+        // 不在keep-alive组件内，则调用$destroy()直接销毁
         componentInstance.$destroy()
       } else {
         deactivateChildComponent(componentInstance, true /* direct */)
@@ -195,11 +208,11 @@ export function createComponent (
 
   // extract listeners, since these needs to be treated as
   // child component listeners instead of DOM listeners
-  // 获取事件监听器对象 data.on，因为这些监听器需要作为子组件监听器处理，而不是 DOM 监听器
+  // 获取事件监听器对象 data.on，组件上的自定义事件会在组件创建时会添加到vm._events中
   const listeners = data.on
   // replace with listeners with .native modifier
   // so it gets processed during parent component patch.
-  // 原生事件重新赋值给data.on，在patch期间会进行处理
+  // 原生事件重新赋值给data.on，在patch期间会进行处理，直接通过addEventListener添加到组件根标签上
   data.on = data.nativeOn
 
   if (isTrue(Ctor.options.abstract)) {
@@ -250,20 +263,24 @@ export function createComponent (
 export function createComponentInstanceForVnode (
   // we know it's MountedComponentVNode but flow doesn't
   vnode: any,
-  // activeInstance in lifecycle state
-  parent: any
+  // in lifecycle state
+  parent: any // 父组件实例
 ): Component {
   const options: InternalComponentOptions = {
-    _isComponent: true,
-    _parentVnode: vnode,
-    parent
+    _isComponent: true, //为组件的标识
+    _parentVnode: vnode, //当前组件标签的VNode，取名为parentVNode是因为，相对于组件内的节点来说，组件标签的VNode就是父级VNode
+    parent //该组件的父组件实例
   }
   // check inline-template render functions
+  // 如果是内联模板
   const inlineTemplate = vnode.data.inlineTemplate
   if (isDef(inlineTemplate)) {
+    // 添加render函数去渲染内联模板，就不会去编译组件的模板了
     options.render = inlineTemplate.render
     options.staticRenderFns = inlineTemplate.staticRenderFns
   }
+  
+  // 执行组件的构造函数
   return new vnode.componentOptions.Ctor(options)
 }
 

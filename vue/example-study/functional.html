@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">
+      <my-component :msg="'i am msg'" @click="clickComp"></my-component>
+    </div>
+  </body>
+  <script>
+    Vue.component("my-component", {
+      functional: true,
+      // Props 是可选的
+      props: ["msg"],
+      // 为了弥补缺少的实例
+      // 提供第二个参数作为上下文
+      render: function (h, context) {
+        // console.log(context);
+        // context.listeners.click();
+        return [
+          h(
+            "div",
+            {
+              on: {
+                click: () => {
+                  console.log(11);
+                },
+              },
+            },
+            context.props.msg
+          ),
+          undefined,
+        ];
+      },
+      methods: {},
+    });
+    new Vue({
+      el: "#app",
+
+      data() {
+        return {};
+      },
+      methods: {
+        clickComp() {
+          console.log("click comp");
+        },
+      },
+      // mounted() {},
+      render(h) {
+        return [h("div", "哈哈"), undefined];
+      },
+    });
+  </script>
+</html>

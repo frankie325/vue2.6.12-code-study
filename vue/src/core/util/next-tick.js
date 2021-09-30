@@ -5,7 +5,7 @@ import { noop } from 'shared/util'
 import { handleError } from './error'
 import { isIE, isIOS, isNative } from './env'
 
-export let isUsingMicroTask = false
+export let isUsingMicroTask = false //表示正在使用微任务
 
 const callbacks = []
 let pending = false

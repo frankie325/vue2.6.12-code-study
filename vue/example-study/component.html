@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+      <div id="app">
+        <div v-show="true" style="display:none" :class="['calss1',{class2:true}]" :style="[{color:'red',hh:'hh'}]" contenteditable="events" attr1="attr1">contenteditable</div>
+      <div v-custom:[str].modi="show">1</div>
+      <comp style="color:red"></comp>
+      <div>2</div>
+    </div>
+    <!-- <div id="comp"></div> -->
+  </body>
+  <script>
+    Vue.component("comp", {
+      template:
+        "<div v-if='show' style='color:blue' ref='comp1'><span>i am comp1</span><button @click='changeShow'>button</button></div><div v-else ref='comp2'><span>i am comp2</span><button @click='changeShow'>button</button></div>",
+      data() {
+        return {
+          show: true,
+        };
+      },
+      methods: {
+        changeShow() {
+          this.show = !this.show;
+        },
+      },
+      mounted() {
+        console.log("组件mounted");
+      },
+    });
+    new Vue({
+      el: "#app",
+      props: {},
+      data() {
+        return {
+          show: true,
+        };
+      },
+    });
+  </script>
+</html>

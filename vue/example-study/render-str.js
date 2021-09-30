@@ -1,10 +1,19 @@
-// 一个子节点时
-render = _c("tagName", data, _c(tag, data, children, normalizationType), 1);
+// 一个子节点时（非template和slot标签），且该子节点使用了v-for，children属性由_l执行生成，会返回一个VNode数组
+// 目的是为了跳过这一层的归一化，进行优化
+render = _c(
+  "tagName",
+  data,
+  _l(list, function (obj, key, index) {
+    // 因为包裹了一层函数，所以v-for内的子节点可以访问到循环的数据
+    return _c(tag, data, children, normalizationType);
+  }),
+  1
+);
 //多个子节点
 render = _c(
-  "tagName", 
+  "tagName",
   {
-    // 还需要运行时处理的指令，只有v-model
+    // 还需要运行时处理的指令，v-model，v-show，和自定义指令
     directives: [
       {
         name: "name",
@@ -14,6 +23,17 @@ render = _c(
         arg: "arg", //如果是动态属性，会在包一层双引号"'arg'"
         modifiers: JSON.stringify(modifiers),
       },
+      // 以v-custom:[arg].xxx.xxx = "method"为例
+      {
+        name: "custom", // 则name为custom
+        rawName: "v-custom:[arg].xxx.xxx", //属性key
+        value: JSON.stringify("method"), //属性值
+        arg: "arg", //指令绑定的参数
+        isDynamicArg: true, //动态属性
+        modifiers: JSON.stringify({
+          /*...*/
+        }), //修饰符
+      },
     ],
     key: "xxx", //key属性值
     ref: "xxx", //ref属性值
@@ -21,13 +41,13 @@ render = _c(
     pre: true, //说明标签上存在v-pre指令
     tag: "component", //是动态组件的话记录原始名称
     staticClass: "xxx", //普通属性class的值
-    class: "xxx", //使用bind指令绑定的class的值
+    class: "xxx", //使用bind指令绑定的class的值，可以是字符，对象，数组
     //普通属性style的值，经过了parseStyleText处理
     staticStyle: JSON.stringify({
       color: "red",
       background: "green",
     }),
-    style: "xxx", //使用bind指令绑定的style的值
+    style: "xxx", //使用bind指令绑定的style的值，可以是字符，对象，数组
     // 作为标签上的属性
     // _d()第一个参数为静态属性生成的字符串，第二个参数为动态属性生成的字符串，如果没有动态属性那么attrs : "{"attrName1":attrValue1,"attrName2":attrValue2,...}"
     attrs:
@@ -52,32 +72,32 @@ render = _c(
     */
     scopedSlots: _u(
       [
-        // 使用了v-if，会包一层三目运算符
-        showCenter
-          ? {
-              key: center,
-              fn: function ({ msg }) {
-                return showCenter
-                  ? _c("div", data, children, normalizationType)
-                  : undefined;
-              },
-            }
-          : null,
-        //   没使用v-if
         {
           key: center,
           fn: function ({ msg }) {
+            // 使用了v-if，会包一层三目运算符
             return showCenter
               ? _c("div", data, children, normalizationType)
               : undefined;
           },
-          proxy: true, //表示只使用了v-slot但是没有绑定作用域
         },
+        // 如果template具名插槽标签上使用了v-for
+        _l(list, function (obj, key, index) {
+          return {
+            key: center,
+            fn: function ({ msg }) {
+              return showCenter
+                ? _c("div", data, children, normalizationType)
+                : undefined;
+            },
+            proxy: true,
+          };
+        }),
         /*...*/
       ],
-      null, 
-      true
-    ),//或者 null,false,hash值
+      null,
+      true //是否需要强制更新
+    ), //或者 null,false,hash值
     // 组件上的v-model，以<compName v-model.trim.number="test['test1'][test2]">为例
     model: {
       value: "(test['test1'][test2])",
@@ -136,6 +156,8 @@ render = _c(
       : show2
       ? _c("h2", data, children, normalizationType)
       : _c("h3", data, children, normalizationType),
+    //只使用了v-if的话，如果show是假值，_e()会生成注释节点进行占位
+    show ? _c(tag, data, children, normalizationType) : _e(),
 
     /*
         slot标签

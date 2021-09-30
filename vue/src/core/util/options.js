@@ -530,7 +530,7 @@ export function mergeOptions(
   判断传入的字符是否存在于指定选项中
 */
 export function resolveAsset(
-  options: Object, //该组件所在的组件的选项
+  options: Object, //指定的选项
   type: string,  // 为components或者directives或者filters
   id: string, //该组件的名称
   warnMissing?: boolean

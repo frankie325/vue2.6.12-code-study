@@ -42,6 +42,18 @@ let AST = {
       end: 5, //属性结束索引
       dynamic: undefined, //没有动态绑定
     },
+    {
+      name: "xxx", //属性key
+      /*
+        v-bind指令内使用了过滤器，如果连续写了多个过滤器
+        第一个过滤器的值作为第二个过滤器的第一个参数传递
+        _f('filterMethod')(_f('filterMethod')(arg1,arg2))
+      */
+      value: "_f('filterMethod')(arg1,arg2)",
+      start: 1, //属性开始索引
+      end: 5, //属性结束索引
+      dynamic: undefined, //没有动态绑定
+    },
   ],
   // 绑定动态属性的
   dynamicAttrs: [
@@ -142,7 +154,7 @@ let AST = {
   slotTarget: "xxx", //标签上的v-slot绑定的具名插槽名称，没有为default
   slotTargetDynamic: true, //是否使用v-slot:[slot]动态绑定插槽名称
 
-  // scopedSlots中保存了该标签内所有具有插槽作用域的插槽内容节点
+  // scopedSlots中保存了该标签内所有具有插槽作用域的插槽内容节点的AST对象
   scopedSlots: {
     // key为组件标签上的指定插槽名
     slotName: {
@@ -153,7 +165,7 @@ let AST = {
       slotTarget: "xxx", //插槽名
       slotTargetDynamic: true, //是否动态插槽名
       slotScope: "xxx", //具名插槽作用域，没有传为"_empty_"
-      children: [], 
+      children: [],
     },
   },
   slotName: "xxx", //slot标签上的属性name
@@ -161,13 +173,13 @@ let AST = {
   inlineTemplate: true, //内联模板，组件标签内的子标签不会作为插槽内容，而是作为组件的template渲染，只能有一个根节点
   hasBindings: true, //为true说明标签上使用了v-的指令，包括简写形式
   staticClass: "xxx", //普通属性class的值
-  classBinding: "xxx", //使用bind指令绑定的class的值
+  classBinding: "xxx", //使用bind指令绑定的class的值，可以是字符，对象，数组
   //普通属性style的值，经过了parseStyleText处理，普通的style值（color: red; background: green;）变成了对象形式
   staticStyle: JSON.stringify({
     color: "red",
     background: "green",
   }),
-  styleBinding: "xxx", //使用bind指令绑定的style的值
+  styleBinding: "xxx", //使用bind指令绑定的style的值，可以是字符，对象，数组
   // 使用了.native绑定的事件，内容和下面的事件一样
   nativeEvents: {},
   // 绑定的事件
@@ -221,11 +233,22 @@ let AST = {
       dynamic: false,
       modifiers: {},
     },
+    // 绑定时使用了.sync修饰符，会添加事件，如<div :msg.sync="msg">
+    "update:msg": {
+      value: " msg = $event ",
+      dynamic: false,
+    },
+    // 如果是动态属性
+    "'update:'+ (${msg})": {
+      value: " msg = $event ",
+      dynamic: false,
+    },
   },
-  // v-text、v-html、v-show、v-cloak 、v-model以及用户自定义指令(以v-custom:[arg].xxx.xxx = "method"为例)
+  // v-text、v-html、v-show、v-cloak 、v-model以及用户自定义指令
   directives: [
+    // 以v-custom:[arg].xxx.xxx = "method"为例
     {
-      name: "text", //以v-text为例，则name为text
+      name: "custom", // 则name为custom
       rawName: "v-custom:[arg].xxx.xxx", //属性key
       value: "method", //属性值
       arg: "arg", //指令绑定的参数
@@ -234,7 +257,10 @@ let AST = {
     },
     /*
       特殊情况
-      v-bind="{id:'xxx',name:'xxx'}",v-on="{ mousedown: doThis, mouseup: doThat }"的对象使用方式
+      v-bind="{id:'xxx',name:'xxx'}",
+      v-bind="[ { style: { color:'red' } }, { class:'header header-wrap' }]"
+      v-on="{ mousedown: doThis, mouseup: doThat }"
+      对象和数组使用方式
       也会添加进来
     */
     {

@@ -14,26 +14,40 @@
         <!-- <template v-slot="header">
           <div>header</div>
         </template> -->
-        <template v-slot:center="{msg}">
+        <div>default</div>
+        <template v-slot>
+          <div>default1</div>
+        </template>
+        <template v-slot>
+          <div>default2</div>
+        </template>
+        <template v-slot:[center]="{msg}">
           <div>{{msg}}</div>
         </template>
         <!-- <div slot="qiantao">qiantao</div>
         <div slot="center">center</div> -->
       </comp>
+      <button @click="clickButton">button</button>
     </div>
     <div id="extend1"></div>
   </body>
   <script>
     Vue.component("comp", {
       template:
-        "<div><slot name='center' msg='center1'></slot><slot name='center' msg='center2'></slot><div>footer</div></div>",
+        "<div><slot></slot><slot name='center1' msg='center1'></slot><slot name='center2' msg='center2'></slot><div>footer</div></div>",
     });
     new Vue({
       el: "#app",
       data() {
-        return {};
+        return {
+          center: "center1",
+        };
       },
-      methods: {},
+      methods: {
+        clickButton() {
+          this.center = "center2";
+        },
+      },
       mounted() {},
     });
   </script>

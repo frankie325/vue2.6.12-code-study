@@ -20,8 +20,8 @@ import {
   simpleNormalizeChildren
 } from './helpers/index'
 
-const SIMPLE_NORMALIZE = 1  //简单标准化
-const ALWAYS_NORMALIZE = 2  //完全标准化
+const SIMPLE_NORMALIZE = 1  //简单归一化
+const ALWAYS_NORMALIZE = 2  //完全归一化
 
 // wrapper function for providing a more flexible interface
 // without getting yelled at by flow
@@ -42,7 +42,7 @@ export function createElement (
   if (isTrue(alwaysNormalize)) {
     // 最后一个参数为true的话，normalizationType赋值为2
     // 用户传入的render是经过render.call(vm._renderProxy, vm.$createElement)调用的
-    // $createElement传递的最后一个参数为true，所以用户传入的render是使用的完全标准化处理
+    // $createElement传递的最后一个参数为true，所以用户传入的render是使用的完全归一化处理
     normalizationType = ALWAYS_NORMALIZE
   }
   // 真正的渲染函数
@@ -101,12 +101,12 @@ export function _createElement (
     children.length = 0
   }
 
-  // 对子节点进行标准化处理
+  // 对子节点进行归一化处理
   if (normalizationType === ALWAYS_NORMALIZE) {
-    // 完全标准化
+    // 完全归一化
     children = normalizeChildren(children)
   } else if (normalizationType === SIMPLE_NORMALIZE) {
-    // 简单标准化
+    // 简单归一化
     children = simpleNormalizeChildren(children)
   }
   let vnode, ns
@@ -114,7 +114,7 @@ export function _createElement (
     // 标签名如果是字符串，有三种可能
     // 1.平台保留标签
     // 2.自定义组件
-    // 3.不知名标签
+    // 3.未知标签
     let Ctor
     // 获取命名空间
     ns = (context.$vnode && context.$vnode.ns) || config.getTagNamespace(tag)
@@ -142,7 +142,7 @@ export function _createElement (
       // 调用createComponent，创建组件的VNode
       vnode = createComponent(Ctor, data, context, children, tag)
     } else {
-    // 3.不知名的组件
+    // 3.未知标签
 
       // unknown or unlisted namespaced elements
       // check at runtime because it may get assigned a namespace when its

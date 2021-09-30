@@ -7,10 +7,11 @@ import type VNode from 'core/vdom/vnode'
  */
 /*
  在生成AST的阶段，具名插槽标签节点（使用了slotScope属性和v-slot指令）是不会添加到组件AST的children属性中
- 只使用了slot属性标签和普通标签才会推入到children中
+ 只使用了slot属性的标签和普通标签才会推入到children中
 */
 
 /*
+  将组件标签内的非具名插槽子节点，添加到组件实例的$slot中
   最终返回一个对象
   $slots = {
       default:[VNode,VNode...],
@@ -37,6 +38,7 @@ export function resolveSlots (
     }
     // named slots should only be respected if the vnode was rendered in the
     // same context.
+    // 组件的子节点所在父组件实例需要和组件所在的父组件实例一样
     if ((child.context === context || child.fnContext === context) &&
       data && data.slot != null
     ) {

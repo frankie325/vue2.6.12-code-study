@@ -275,10 +275,13 @@ export function extend (to: Object, _from: ?Object): Object {
 /**
  * Merge an Array of Objects into a single Object.
  */
+// 将数组对象里的对象提取出来转化成对象，深度只有一层
 export function toObject (arr: Array<any>): Object {
   const res = {}
+  // 遍历数组
   for (let i = 0; i < arr.length; i++) {
     if (arr[i]) {
+      // 将数组里的对象，展开添加到res中
       extend(res, arr[i])
     }
   }
@@ -323,37 +326,48 @@ export function genStaticKeys (modules: Array<ModuleOptions>): string {
  * Check if two values are loosely equal - that is,
  * if they are plain objects, do they have the same shape?
  */
+// 检查两个值是否大致相等，如果是对象的话继续判断他们内部的形式是否一样
 export function looseEqual (a: any, b: any): boolean {
-  if (a === b) return true
-  const isObjectA = isObject(a)
+  if (a === b) return true //如果等于直接返回true
+  const isObjectA = isObject(a)//是否是对象
   const isObjectB = isObject(b)
   if (isObjectA && isObjectB) {
+    // 如果是对象
     try {
       const isArrayA = Array.isArray(a)
       const isArrayB = Array.isArray(b)
       if (isArrayA && isArrayB) {
-        return a.length === b.length && a.every((e, i) => {
+        // 如果是数组
+        return a.length === b.length && a.every((e, i) => { 
+          // 长度相等的话，继续判断数组里的元素是否相等，递归调用
           return looseEqual(e, b[i])
         })
       } else if (a instanceof Date && b instanceof Date) {
+        // 如果是日期，获取毫秒数，判断是否相等
         return a.getTime() === b.getTime()
       } else if (!isArrayA && !isArrayB) {
+        // 如果不是数组，返回枚举自身属性的的数组
         const keysA = Object.keys(a)
         const keysB = Object.keys(b)
         return keysA.length === keysB.length && keysA.every(key => {
+          // 继续递归
           return looseEqual(a[key], b[key])
         })
       } else {
+        // 以上不满足则返回false
         /* istanbul ignore next */
         return false
       }
     } catch (e) {
       /* istanbul ignore next */
+      // 捕获到了错误也返回false
       return false
     }
   } else if (!isObjectA && !isObjectB) {
+    // 两个值都不是对象，转为字符继续判断
     return String(a) === String(b)
   } else {
+    // 否则返回false
     return false
   }
 }
@@ -363,10 +377,14 @@ export function looseEqual (a: any, b: any): boolean {
  * found in the array (if value is a plain object, the array must
  * contain an object of the same shape), or -1 if it is not present.
  */
+// 传递一个数组和一个值，返回该值在指定数组中的索引
 export function looseIndexOf (arr: Array<mixed>, val: mixed): number {
+  // 遍历该数组
   for (let i = 0; i < arr.length; i++) {
+    // 判断该值是否与数组内的元素相等，如果成立，返回索引
     if (looseEqual(arr[i], val)) return i
   }
+  // 否则，返回-1
   return -1
 }
 
