@@ -20,8 +20,10 @@ export function initRender (vm: Component) {
   vm._vnode = null // the root of the child tree
   vm._staticTrees = null // v-once cached trees
   const options = vm.$options
-  const parentVnode = vm.$vnode = options._parentVnode // the placeholder node in parent tree
-  const renderContext = parentVnode && parentVnode.context
+  const parentVnode = vm.$vnode = options._parentVnode // the placeholder node in parent tree  组件VNode
+  const renderContext = parentVnode && parentVnode.context //父组件实例
+
+  // $slots对象里是非具名插槽节点
   vm.$slots = resolveSlots(options._renderChildren, renderContext)
   vm.$scopedSlots = emptyObject
   // bind the createElement fn to this instance
@@ -38,13 +40,15 @@ export function initRender (vm: Component) {
 
   // $attrs & $listeners are exposed for easier HOC creation.
   // they need to be reactive so that HOCs using them are always updated
-  const parentData = parentVnode && parentVnode.data
+  const parentData = parentVnode && parentVnode.data //组件VNode的data属性
 
   /* istanbul ignore else */
   if (process.env.NODE_ENV !== 'production') {
+    // 定义$attrs，即组件VNode上的data.attrs，且不可修改，是只读的
     defineReactive(vm, '$attrs', parentData && parentData.attrs || emptyObject, () => {
       !isUpdatingChildComponent && warn(`$attrs is readonly.`, vm)
     }, true)
+    // 定义$listeners，即组件VNode上的data.on，且不可修改，是只读的
     defineReactive(vm, '$listeners', options._parentListeners || emptyObject, () => {
       !isUpdatingChildComponent && warn(`$listeners is readonly.`, vm)
     }, true)
@@ -54,10 +58,11 @@ export function initRender (vm: Component) {
   }
 }
 
-// 当前正在渲染的vue实例
+// 当前正在执行渲染函数的vue实例
 export let currentRenderingInstance: Component | null = null
 
 // for testing only
+// 设置当前正在执行渲染函数的实例
 export function setCurrentRenderingInstance (vm: Component) {
   currentRenderingInstance = vm
 }
@@ -75,7 +80,8 @@ export function renderMixin (Vue: Class<Component>) {
     const vm: Component = this
     const { render, _parentVnode } = vm.$options
 
-    if (_parentVnode) {
+    if (_parentVnode) { //如果选项中存在_parentVnode属性，说明正在执行组件的渲染过程，_parentVnode为组件标签VNode
+      // 将组件的作用域插槽进行处理
       vm.$scopedSlots = normalizeScopedSlots(
         _parentVnode.data.scopedSlots,
         vm.$slots,
@@ -85,14 +91,14 @@ export function renderMixin (Vue: Class<Component>) {
 
     // set parent vnode. this allows render functions to have access
     // to the data on the placeholder node.
-    vm.$vnode = _parentVnode
+    vm.$vnode = _parentVnode //$vnode设置为组件VNode
     // render self
     let vnode
     try {
       // There's no need to maintain a stack because all render fns are called
       // separately from one another. Nested component's render fns are called
       // when parent component is patched.
-      currentRenderingInstance = vm
+      currentRenderingInstance = vm  //设置当前正在执行渲染函数的实例
       // 执行render函数，生成vnode
       vnode = render.call(vm._renderProxy, vm.$createElement)
     } catch (e) {
@@ -111,14 +117,16 @@ export function renderMixin (Vue: Class<Component>) {
         vnode = vm._vnode
       }
     } finally {
-      currentRenderingInstance = null
+      currentRenderingInstance = null 
     }
     // if the returned array contains only a single node, allow it
     if (Array.isArray(vnode) && vnode.length === 1) {
+      // 如果返回的VNode是数组且只有一个元素，允许它通过，把这个元素当成根节点
       vnode = vnode[0]
     }
     // return empty vnode in case the render function errored out
     if (!(vnode instanceof VNode)) {
+      // 否则，报错，因为返回了多个根节点VNode
       if (process.env.NODE_ENV !== 'production' && Array.isArray(vnode)) {
         warn(
           'Multiple root nodes returned from render function. Render function ' +
@@ -126,10 +134,13 @@ export function renderMixin (Vue: Class<Component>) {
           vm
         )
       }
+      // 创建一个空的注释VNode
       vnode = createEmptyVNode()
     }
     // set parent
-    vnode.parent = _parentVnode
+    vnode.parent = _parentVnode //给组件生成的VNode设置parent属性，为组件标签的VNode（注意只给根VNode设置了该属性）
+
+    // 返回渲染出来的VNode
     return vnode
   }
 }

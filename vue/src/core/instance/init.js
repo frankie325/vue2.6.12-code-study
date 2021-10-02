@@ -95,21 +95,21 @@ export function initMixin (Vue: Class<Component>) {
 
 // 初始化组件的选项
 export function initInternalComponent (vm: Component, options: InternalComponentOptions) {
-  // 创建一个空对象，原型指向构造函数的options
+  // 创建vm.$options，原型指向组件构造函数的options
   const opts = vm.$options = Object.create(vm.constructor.options)
   // doing this because it's faster than dynamic enumeration.
-  const parentVnode = options._parentVnode
-  opts.parent = options.parent
-  // 拿到父节点
-  opts._parentVnode = parentVnode
+  const parentVnode = options._parentVnode // 拿到该组件标签的VNode
+  opts.parent = options.parent //该组件的父组件实例
+  opts._parentVnode = parentVnode //添加_parentVnode属性
 
-  const vnodeComponentOptions = parentVnode.componentOptions
-  opts.propsData = vnodeComponentOptions.propsData
-  opts._parentListeners = vnodeComponentOptions.listeners
-  opts._renderChildren = vnodeComponentOptions.children
-  opts._componentTag = vnodeComponentOptions.tag
+  const vnodeComponentOptions = parentVnode.componentOptions //拿到该组件的组件选项
+  opts.propsData = vnodeComponentOptions.propsData //父组件传递的props数据
+  opts._parentListeners = vnodeComponentOptions.listeners //该组件上绑定的事件
+  opts._renderChildren = vnodeComponentOptions.children //包裹在该组件标签内的VNode子节点
+  opts._componentTag = vnodeComponentOptions.tag //该组件的标签名
 
   if (options.render) {
+    // 如果存在render函数，添加到$options中
     opts.render = options.render
     opts.staticRenderFns = options.staticRenderFns
   }

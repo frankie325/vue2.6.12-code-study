@@ -9,25 +9,17 @@ export const siteData = {
   "pages": [
     {
       "frontmatter": {},
-      "regularPath": "/vue-code-study/",
-      "relativePath": "vue-code-study/README.md",
-      "key": "v-e67ddbba",
-      "path": "/vue-code-study/"
-    },
-    {
-      "frontmatter": {},
       "regularPath": "/guide/",
       "relativePath": "guide/readme.md",
       "key": "v-6a8d73d3",
       "path": "/guide/"
     },
     {
-      "title": "生成的AST对象",
       "frontmatter": {},
-      "regularPath": "/vue-code-study/compile/ast.html",
-      "relativePath": "vue-code-study/compile/ast.md",
-      "key": "v-4b89b893",
-      "path": "/vue-code-study/compile/ast.html"
+      "regularPath": "/vue-code-study/",
+      "relativePath": "vue-code-study/README.md",
+      "key": "v-e67ddbba",
+      "path": "/vue-code-study/"
     },
     {
       "title": "编译器入口",
@@ -58,6 +50,59 @@ export const siteData = {
           "slug": "basecompile"
         }
       ]
+    },
+    {
+      "title": "编译器解析",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/compile-flow.html",
+      "relativePath": "vue-code-study/compile/compile-flow.md",
+      "key": "v-cd48bbd6",
+      "path": "/vue-code-study/compile/compile-flow.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "解析大致过程",
+          "slug": "解析大致过程"
+        },
+        {
+          "level": 2,
+          "title": "特殊情况的解析",
+          "slug": "特殊情况的解析"
+        },
+        {
+          "level": 3,
+          "title": "缺少结束标签",
+          "slug": "缺少结束标签"
+        },
+        {
+          "level": 3,
+          "title": "一元标签",
+          "slug": "一元标签"
+        },
+        {
+          "level": 3,
+          "title": "br和只有p结束标签",
+          "slug": "br和只有p结束标签"
+        },
+        {
+          "level": 3,
+          "title": "p标签内的Phrasing content模型",
+          "slug": "p标签内的phrasing-content模型"
+        },
+        {
+          "level": 3,
+          "title": "可以省略结束标签的标签",
+          "slug": "可以省略结束标签的标签"
+        }
+      ]
+    },
+    {
+      "title": "生成的AST对象",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/ast.html",
+      "relativePath": "vue-code-study/compile/ast.md",
+      "key": "v-4b89b893",
+      "path": "/vue-code-study/compile/ast.html"
     },
     {
       "title": "生成渲染函数字符代码",
@@ -235,82 +280,67 @@ export const siteData = {
       ]
     },
     {
-      "title": "编译器解析",
+      "title": "v-on事件绑定的原理",
       "frontmatter": {},
-      "regularPath": "/vue-code-study/compile/compile-flow.html",
-      "relativePath": "vue-code-study/compile/compile-flow.md",
-      "key": "v-cd48bbd6",
-      "path": "/vue-code-study/compile/compile-flow.html",
+      "regularPath": "/vue-code-study/compile/events.html",
+      "relativePath": "vue-code-study/compile/events.md",
+      "key": "v-fdd85e96",
+      "path": "/vue-code-study/compile/events.html",
       "headers": [
         {
           "level": 2,
-          "title": "解析大致过程",
-          "slug": "解析大致过程"
-        },
-        {
-          "level": 2,
-          "title": "特殊情况的解析",
-          "slug": "特殊情况的解析"
+          "title": "用到的正则",
+          "slug": "用到的正则"
         },
         {
           "level": 3,
-          "title": "缺少结束标签",
-          "slug": "缺少结束标签"
+          "title": "fnExpRE",
+          "slug": "fnexpre"
         },
         {
           "level": 3,
-          "title": "一元标签",
-          "slug": "一元标签"
+          "title": "fnInvokeRE",
+          "slug": "fninvokere"
         },
         {
           "level": 3,
-          "title": "br和只有p结束标签",
-          "slug": "br和只有p结束标签"
+          "title": "simplePathRE",
+          "slug": "simplepathre"
+        },
+        {
+          "level": 2,
+          "title": "genHandlers",
+          "slug": "genhandlers"
+        },
+        {
+          "level": 2,
+          "title": "genHandler",
+          "slug": "genhandler"
         },
         {
           "level": 3,
-          "title": "p标签内的Phrasing content模型",
-          "slug": "p标签内的phrasing-content模型"
+          "title": "没有修饰符时的处理",
+          "slug": "没有修饰符时的处理"
         },
         {
           "level": 3,
-          "title": "可以省略结束标签的标签",
-          "slug": "可以省略结束标签的标签"
-        }
-      ]
-    },
-    {
-      "title": "静态标记",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/compile/mark-static.html",
-      "relativePath": "vue-code-study/compile/mark-static.md",
-      "key": "v-5a2fac8a",
-      "path": "/vue-code-study/compile/mark-static.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "optimize",
-          "slug": "optimize"
+          "title": "有修饰符的处理",
+          "slug": "有修饰符的处理"
         },
         {
-          "level": 2,
-          "title": "genStaticKeysCached",
-          "slug": "genstatickeyscached"
+          "level": 3,
+          "title": "modifierCode",
+          "slug": "modifiercode"
         },
         {
-          "level": 2,
-          "title": "markStatic",
-          "slug": "markstatic"
+          "level": 3,
+          "title": "genKeyFilter",
+          "slug": "genkeyfilter"
         },
         {
-          "level": 2,
-          "title": "isStatic",
-          "slug": "isstatic"
-        },
-        {
-          "level": 2,
-          "title": "markStaticRoots",
-          "slug": "markstaticroots"
+          "level": 3,
+          "title": "genFilterCode",
+          "slug": "genfiltercode"
         }
       ]
     },
@@ -475,72 +505,37 @@ export const siteData = {
       ]
     },
     {
-      "title": "vue入口",
+      "title": "静态标记",
       "frontmatter": {},
-      "regularPath": "/vue-code-study/entry/entry.html",
-      "relativePath": "vue-code-study/entry/entry.md",
-      "key": "v-13d7ff16",
-      "path": "/vue-code-study/entry/entry.html",
+      "regularPath": "/vue-code-study/compile/mark-static.html",
+      "relativePath": "vue-code-study/compile/mark-static.md",
+      "key": "v-5a2fac8a",
+      "path": "/vue-code-study/compile/mark-static.html",
       "headers": [
         {
           "level": 2,
-          "title": "入口文件",
-          "slug": "入口文件"
+          "title": "optimize",
+          "slug": "optimize"
         },
         {
           "level": 2,
-          "title": "initMixin",
-          "slug": "initmixin"
-        },
-        {
-          "level": 3,
-          "title": "resolveConstructorOptions",
-          "slug": "resolveconstructoroptions"
+          "title": "genStaticKeysCached",
+          "slug": "genstatickeyscached"
         },
         {
           "level": 2,
-          "title": "mergeOptions",
-          "slug": "mergeoptions"
-        },
-        {
-          "level": 3,
-          "title": "默认合并策略",
-          "slug": "默认合并策略"
-        },
-        {
-          "level": 3,
-          "title": "el，propsData合并策略",
-          "slug": "el-propsdata合并策略"
-        },
-        {
-          "level": 3,
-          "title": "data，provide合并策略",
-          "slug": "data-provide合并策略"
-        },
-        {
-          "level": 3,
-          "title": "生命周期合并策略",
-          "slug": "生命周期合并策略"
-        },
-        {
-          "level": 3,
-          "title": "props，methods，inject，computed合并策略",
-          "slug": "props-methods-inject-computed合并策略"
-        },
-        {
-          "level": 3,
-          "title": "directives，filters，components合并策略",
-          "slug": "directives-filters-components合并策略"
-        },
-        {
-          "level": 3,
-          "title": "watch合并策略",
-          "slug": "watch合并策略"
+          "title": "markStatic",
+          "slug": "markstatic"
         },
         {
           "level": 2,
-          "title": "initProvide，initInjections",
-          "slug": "initprovide-initinjections"
+          "title": "isStatic",
+          "slug": "isstatic"
+        },
+        {
+          "level": 2,
+          "title": "markStaticRoots",
+          "slug": "markstaticroots"
         }
       ]
     },
@@ -910,67 +905,72 @@ export const siteData = {
       ]
     },
     {
-      "title": "v-on事件绑定的原理",
+      "title": "vue入口",
       "frontmatter": {},
-      "regularPath": "/vue-code-study/compile/events.html",
-      "relativePath": "vue-code-study/compile/events.md",
-      "key": "v-fdd85e96",
-      "path": "/vue-code-study/compile/events.html",
+      "regularPath": "/vue-code-study/entry/entry.html",
+      "relativePath": "vue-code-study/entry/entry.md",
+      "key": "v-13d7ff16",
+      "path": "/vue-code-study/entry/entry.html",
       "headers": [
         {
           "level": 2,
-          "title": "用到的正则",
-          "slug": "用到的正则"
-        },
-        {
-          "level": 3,
-          "title": "fnExpRE",
-          "slug": "fnexpre"
-        },
-        {
-          "level": 3,
-          "title": "fnInvokeRE",
-          "slug": "fninvokere"
-        },
-        {
-          "level": 3,
-          "title": "simplePathRE",
-          "slug": "simplepathre"
+          "title": "入口文件",
+          "slug": "入口文件"
         },
         {
           "level": 2,
-          "title": "genHandlers",
-          "slug": "genhandlers"
+          "title": "initMixin",
+          "slug": "initmixin"
+        },
+        {
+          "level": 3,
+          "title": "resolveConstructorOptions",
+          "slug": "resolveconstructoroptions"
         },
         {
           "level": 2,
-          "title": "genHandler",
-          "slug": "genhandler"
+          "title": "mergeOptions",
+          "slug": "mergeoptions"
         },
         {
           "level": 3,
-          "title": "没有修饰符时的处理",
-          "slug": "没有修饰符时的处理"
+          "title": "默认合并策略",
+          "slug": "默认合并策略"
         },
         {
           "level": 3,
-          "title": "有修饰符的处理",
-          "slug": "有修饰符的处理"
+          "title": "el，propsData合并策略",
+          "slug": "el-propsdata合并策略"
         },
         {
           "level": 3,
-          "title": "modifierCode",
-          "slug": "modifiercode"
+          "title": "data，provide合并策略",
+          "slug": "data-provide合并策略"
         },
         {
           "level": 3,
-          "title": "genKeyFilter",
-          "slug": "genkeyfilter"
+          "title": "生命周期合并策略",
+          "slug": "生命周期合并策略"
         },
         {
           "level": 3,
-          "title": "genFilterCode",
-          "slug": "genfiltercode"
+          "title": "props，methods，inject，computed合并策略",
+          "slug": "props-methods-inject-computed合并策略"
+        },
+        {
+          "level": 3,
+          "title": "directives，filters，components合并策略",
+          "slug": "directives-filters-components合并策略"
+        },
+        {
+          "level": 3,
+          "title": "watch合并策略",
+          "slug": "watch合并策略"
+        },
+        {
+          "level": 2,
+          "title": "initProvide，initInjections",
+          "slug": "initprovide-initinjections"
         }
       ]
     },
@@ -1021,6 +1021,66 @@ export const siteData = {
           "level": 3,
           "title": "stateMixin",
           "slug": "statemixin"
+        }
+      ]
+    },
+    {
+      "title": "实例方法",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/global-api/instance.html",
+      "relativePath": "vue-code-study/global-api/instance.md",
+      "key": "v-1a6ce57d",
+      "path": "/vue-code-study/global-api/instance.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "$data",
+          "slug": "data"
+        },
+        {
+          "level": 2,
+          "title": "$props",
+          "slug": "props"
+        },
+        {
+          "level": 2,
+          "title": "$set",
+          "slug": "set"
+        },
+        {
+          "level": 2,
+          "title": "$delete",
+          "slug": "delete"
+        },
+        {
+          "level": 2,
+          "title": "$watch",
+          "slug": "watch"
+        },
+        {
+          "level": 2,
+          "title": "eventsMixin",
+          "slug": "eventsmixin"
+        },
+        {
+          "level": 2,
+          "title": "$on",
+          "slug": "on"
+        },
+        {
+          "level": 2,
+          "title": "$once",
+          "slug": "once"
+        },
+        {
+          "level": 2,
+          "title": "$off",
+          "slug": "off"
+        },
+        {
+          "level": 2,
+          "title": "$emit",
+          "slug": "emit"
         }
       ]
     },
@@ -1161,104 +1221,6 @@ export const siteData = {
           "level": 2,
           "title": "Q&A",
           "slug": "q-a"
-        }
-      ]
-    },
-    {
-      "title": "Home",
-      "frontmatter": {
-        "home": true,
-        "heroImage": "/images/logo.png",
-        "actionText": "快速上手 →",
-        "actionLink": "/guide/",
-        "features": [
-          {
-            "title": "简洁至上",
-            "details": "以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。"
-          },
-          {
-            "title": "Vue驱动",
-            "details": "享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。"
-          },
-          {
-            "title": "高性能",
-            "details": "VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。"
-          }
-        ],
-        "footer": "MIT Licensed | Copyright © 2018-present Evan You"
-      },
-      "regularPath": "/",
-      "relativePath": "README.md",
-      "key": "v-19aff440",
-      "path": "/"
-    },
-    {
-      "title": "全局方法",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/global-api/global.html",
-      "relativePath": "vue-code-study/global-api/global.md",
-      "key": "v-099cd021",
-      "path": "/vue-code-study/global-api/global.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "入口",
-          "slug": "入口"
-        },
-        {
-          "level": 2,
-          "title": "initGlobalAPI",
-          "slug": "initglobalapi"
-        },
-        {
-          "level": 2,
-          "title": "Vue.set",
-          "slug": "vue-set"
-        },
-        {
-          "level": 2,
-          "title": "Vue.delete",
-          "slug": "vue-delete"
-        },
-        {
-          "level": 2,
-          "title": "Vue.nextTick",
-          "slug": "vue-nexttick"
-        },
-        {
-          "level": 2,
-          "title": "Vue.observable",
-          "slug": "vue-observable"
-        },
-        {
-          "level": 2,
-          "title": "Vue.use",
-          "slug": "vue-use"
-        },
-        {
-          "level": 2,
-          "title": "Vue.mixin",
-          "slug": "vue-mixin"
-        },
-        {
-          "level": 2,
-          "title": "Vue.extend",
-          "slug": "vue-extend"
-        },
-        {
-          "level": 2,
-          "title": "Vue.component",
-          "slug": "vue-component"
-        },
-        {
-          "level": 2,
-          "title": "Vue.directive",
-          "slug": "vue-directive"
-        },
-        {
-          "level": 2,
-          "title": "Vue.filter",
-          "slug": "vue-filter"
         }
       ]
     },
@@ -1408,6 +1370,76 @@ export const siteData = {
       ]
     },
     {
+      "title": "全局方法",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/global-api/global.html",
+      "relativePath": "vue-code-study/global-api/global.md",
+      "key": "v-099cd021",
+      "path": "/vue-code-study/global-api/global.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "入口",
+          "slug": "入口"
+        },
+        {
+          "level": 2,
+          "title": "initGlobalAPI",
+          "slug": "initglobalapi"
+        },
+        {
+          "level": 2,
+          "title": "Vue.set",
+          "slug": "vue-set"
+        },
+        {
+          "level": 2,
+          "title": "Vue.delete",
+          "slug": "vue-delete"
+        },
+        {
+          "level": 2,
+          "title": "Vue.nextTick",
+          "slug": "vue-nexttick"
+        },
+        {
+          "level": 2,
+          "title": "Vue.observable",
+          "slug": "vue-observable"
+        },
+        {
+          "level": 2,
+          "title": "Vue.use",
+          "slug": "vue-use"
+        },
+        {
+          "level": 2,
+          "title": "Vue.mixin",
+          "slug": "vue-mixin"
+        },
+        {
+          "level": 2,
+          "title": "Vue.extend",
+          "slug": "vue-extend"
+        },
+        {
+          "level": 2,
+          "title": "Vue.component",
+          "slug": "vue-component"
+        },
+        {
+          "level": 2,
+          "title": "Vue.directive",
+          "slug": "vue-directive"
+        },
+        {
+          "level": 2,
+          "title": "Vue.filter",
+          "slug": "vue-filter"
+        }
+      ]
+    },
+    {
       "title": "web平台文件下的util目录",
       "frontmatter": {},
       "regularPath": "/vue-code-study/util/web-util.html",
@@ -1423,92 +1455,32 @@ export const siteData = {
       ]
     },
     {
-      "title": "实例方法",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/global-api/instance.html",
-      "relativePath": "vue-code-study/global-api/instance.md",
-      "key": "v-1a6ce57d",
-      "path": "/vue-code-study/global-api/instance.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "$data",
-          "slug": "data"
-        },
-        {
-          "level": 2,
-          "title": "$props",
-          "slug": "props"
-        },
-        {
-          "level": 2,
-          "title": "$set",
-          "slug": "set"
-        },
-        {
-          "level": 2,
-          "title": "$delete",
-          "slug": "delete"
-        },
-        {
-          "level": 2,
-          "title": "$watch",
-          "slug": "watch"
-        },
-        {
-          "level": 2,
-          "title": "eventsMixin",
-          "slug": "eventsmixin"
-        },
-        {
-          "level": 2,
-          "title": "$on",
-          "slug": "on"
-        },
-        {
-          "level": 2,
-          "title": "$once",
-          "slug": "once"
-        },
-        {
-          "level": 2,
-          "title": "$off",
-          "slug": "off"
-        },
-        {
-          "level": 2,
-          "title": "$emit",
-          "slug": "emit"
-        }
-      ]
-    },
-    {
-      "title": "问题",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/question/q1.html",
-      "relativePath": "vue-code-study/question/q1.md",
-      "key": "v-07bd5d13",
-      "path": "/vue-code-study/question/q1.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "为什么data，watch选项中，如果写的方法是箭头函数就访问不到实例的this了？",
-          "slug": "为什么data-watch选项中-如果写的方法是箭头函数就访问不到实例的this了"
-        },
-        {
-          "level": 2,
-          "title": "多次绑定同一事件时？",
-          "slug": "多次绑定同一事件时"
-        }
-      ]
-    },
-    {
-      "title": "performance",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/window-api/window.html",
-      "relativePath": "vue-code-study/window-api/window.md",
-      "key": "v-093fc73e",
-      "path": "/vue-code-study/window-api/window.html"
+      "title": "Home",
+      "frontmatter": {
+        "home": true,
+        "heroImage": "/images/logo.png",
+        "actionText": "快速上手 →",
+        "actionLink": "/guide/",
+        "features": [
+          {
+            "title": "简洁至上",
+            "details": "以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。"
+          },
+          {
+            "title": "Vue驱动",
+            "details": "享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。"
+          },
+          {
+            "title": "高性能",
+            "details": "VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。"
+          }
+        ],
+        "footer": "MIT Licensed | Copyright © 2018-present Evan You"
+      },
+      "regularPath": "/",
+      "relativePath": "README.md",
+      "key": "v-19aff440",
+      "path": "/"
     },
     {
       "title": "core文件下的util目录",
@@ -1589,6 +1561,34 @@ export const siteData = {
           "slug": "getinvalidtypemessage"
         }
       ]
+    },
+    {
+      "title": "问题",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/question/q1.html",
+      "relativePath": "vue-code-study/question/q1.md",
+      "key": "v-07bd5d13",
+      "path": "/vue-code-study/question/q1.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "为什么data，watch选项中，如果写的方法是箭头函数就访问不到实例的this了？",
+          "slug": "为什么data-watch选项中-如果写的方法是箭头函数就访问不到实例的this了"
+        },
+        {
+          "level": 2,
+          "title": "多次绑定同一事件时？",
+          "slug": "多次绑定同一事件时"
+        }
+      ]
+    },
+    {
+      "title": "performance",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/window-api/window.html",
+      "relativePath": "vue-code-study/window-api/window.md",
+      "key": "v-093fc73e",
+      "path": "/vue-code-study/window-api/window.html"
     }
   ],
   "themeConfig": {

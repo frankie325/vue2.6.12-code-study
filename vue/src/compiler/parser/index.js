@@ -1295,8 +1295,7 @@ function processAttrs(el) {
 
 
       if (bindRE.test(name)) {
-        // 处理v-bind指令，比如v-bind:[str]
-
+        // 处理v-bind指令，比如v-bind:[str]，但不包括v-bind="{}"、v-bind="[]"的形式
         // 剔除掉v-bind指令，只剩下[str]
         name = name.replace(bindRE, "");
         // 拿到解析过的属性值
@@ -1332,19 +1331,21 @@ function processAttrs(el) {
             name = camelize(name);
           }
           if (modifiers.sync) {
-            // 如果存在sync修饰符
-            syncGen = genAssignmentCode(value, `$event`);
+            // 如果存在.sync修饰符
+            syncGen = genAssignmentCode(value, `$event`);// 拿到赋值语句
             if (!isDynamic) {
+              // 如果不是动态属性
+              // 添加update:xxx事件
               addHandler(
                 el,
-                `update:${camelize(name)}`,
+                `update:${camelize(name)}`, //转为驼峰
                 syncGen,
                 null,
                 false,
                 warn,
                 list[i]
               );
-              if (hyphenate(name) !== camelize(name)) {
+              if (hyphenate(name) !== camelize(name)) { //连字符形式如果不和驼峰相等，再添加一个连字符形式的
                 addHandler(
                   el,
                   `update:${hyphenate(name)}`,
@@ -1357,6 +1358,7 @@ function processAttrs(el) {
               }
             } else {
               // handler w/ dynamic event name
+              // 如果是动态绑定
               addHandler(
                 el,
                 `"update:"+(${name})`,
@@ -1401,8 +1403,7 @@ function processAttrs(el) {
         }
 
       } else if (onRE.test(name)) {
-        // 处理v-on指令，比如v-on:[event]
-
+        // 处理v-on指令，比如v-on:[event]，但不包括 v-on="{}"的形式
         // 剔除v-on:字符
         name = name.replace(onRE, "");
         // 是否动态属性
@@ -1414,7 +1415,11 @@ function processAttrs(el) {
         // 往AST对象添加上事件的描述信息
         addHandler(el, name, value, modifiers, false, warn, list[i], isDynamic);
       } else {
-        // 处理v-text、v-html、v-show、v-cloak 、v-model以及用户自定义指令
+        /*
+          处理v-text、v-html、v-show、v-cloak 、v-model、
+          v-bind="{}"（绑定一个全是 attribute 的对象）、v-bind="[]"、v-on="{}"以及用户自定义指令
+        */
+
         // 以自定义指令为例，v-custom:[arg].xxx.xxx = "method"
         // normal directives
         // 修饰符在前面已经剔除了 name只剩custom:[arg]

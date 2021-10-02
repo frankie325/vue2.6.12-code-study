@@ -15,7 +15,7 @@ export function initEvents (vm: Component) {
   // 用于判断该实例是否存在HookEvent事件
   vm._hasHookEvent = false
   // init parent attached events
-  const listeners = vm.$options._parentListeners
+  const listeners = vm.$options._parentListeners //组件上绑定的自定义事件
   if (listeners) {
     updateComponentListeners(vm, listeners)
   }
@@ -23,30 +23,36 @@ export function initEvents (vm: Component) {
 
 let target: any
 
+// 添加事件，调用$on，添加到_events中
 function add (event, fn) {
   target.$on(event, fn)
 }
 
+// 移除事件，调用$off，从_events中移除
 function remove (event, fn) {
   target.$off(event, fn)
 }
 
+// 创建执行一次的事件
 function createOnceHandler (event, fn) {
   const _target = target
   return function onceHandler () {
-    const res = fn.apply(null, arguments)
+    const res = fn.apply(null, arguments) //执行该事件
     if (res !== null) {
+      // 执行完后调用$off从_events移除
       _target.$off(event, onceHandler)
     }
   }
 }
 
+// 创建组件上的自定义事件
 export function updateComponentListeners (
   vm: Component,
   listeners: Object,
   oldListeners: ?Object
 ) {
   target = vm
+  // 调用updateListeners，添加事件到标签上
   updateListeners(listeners, oldListeners || {}, add, remove, createOnceHandler, vm)
   target = undefined
 }

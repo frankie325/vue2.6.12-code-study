@@ -201,8 +201,8 @@ export function nextTick (cb?: Function, ctx?: Object) {
 3. ```await this.$nextTick();```
 
 ## timerFunc
-
 ```js
+export let isUsingMicroTask = false //表示正在使用微任务
 // timerFunc的作用，就是将flushCallbacks函数放入浏览器的异步任务队列中
 let timerFunc
 /* istanbul ignore next, $flow-disable-line */

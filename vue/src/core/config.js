@@ -101,6 +101,7 @@ export default ({
    * Check if a tag is an unknown element.
    * Platform-dependent.
    */
+  // 检查是不是未知的标签
   isUnknownElement: no,
 
   /**

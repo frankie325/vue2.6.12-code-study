@@ -3,6 +3,7 @@
 import { inBrowser } from 'core/util/env'
 import { makeMap } from 'shared/util'
 
+// svg标签上的命名空间
 export const namespaceMap = {
   svg: 'http://www.w3.org/2000/svg',
   math: 'http://www.w3.org/1998/Math/MathML'
@@ -39,7 +40,7 @@ export const isReservedTag = (tag: string): ?boolean => {
   return isHTMLTag(tag) || isSVG(tag)
 }
 
-// 获取标签的命名空间
+// 获取标签的命名空间，最后会从namespaceMap中找到对应的
 export function getTagNamespace (tag: string): ?string {
   if (isSVG(tag)) {
     // 标签是svg标签，返回svg字符串
@@ -79,4 +80,5 @@ export function isUnknownElement (tag: string): boolean {
   }
 }
 
+// 判断是否为输入型的input标签
 export const isTextInputType = makeMap('text,number,password,search,email,tel,url')

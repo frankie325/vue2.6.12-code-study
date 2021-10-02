@@ -23,6 +23,7 @@ export const isFF = UA && UA.match(/firefox\/(\d+)/)
 // 火狐浏览器有Object.prototype.watch方法
 export const nativeWatch = ({}).watch
 
+// 添加事件是否支持passive选项
 export let supportsPassive = false
 if (inBrowser) {
   try {

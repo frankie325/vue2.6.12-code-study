@@ -39,27 +39,27 @@ export default class VNode {
     componentOptions?: VNodeComponentOptions,
     asyncFactory?: Function
   ) {
-    this.tag = tag
-    this.data = data
-    this.children = children
-    this.text = text
-    this.elm = elm
+    this.tag = tag  //标签名
+    this.data = data //VNode的属性
+    this.children = children //子VNode
+    this.text = text //文本内容
+    this.elm = elm // 标签VNode节点创建的DOM元素，以及组件VNode创建的实例的$el指向的DOM元素
     this.ns = undefined
-    this.context = context
-    this.fnContext = undefined
+    this.context = context //为VNode节点所在的组件实例
+    this.fnContext = undefined //函数式组件的父组件实例
     this.fnOptions = undefined
-    this.fnScopeId = undefined
-    this.key = data && data.key
-    this.componentOptions = componentOptions
-    this.componentInstance = undefined
-    this.parent = undefined
+    this.fnScopeId = undefined //函数时组件生成的VNode，会添加的css作用域属性
+    this.key = data && data.key //标签上的key属性
+    this.componentOptions = componentOptions //组件VNode才有的选项{ Ctor, propsData, listeners, tag, children }
+    this.componentInstance = undefined //组件VNode，创建组件成功后的组件实例
+    this.parent = undefined //只有组件内的根节点标签VNode才有parent属性，为组件标签的VNode
     this.raw = false
     this.isStatic = false
     this.isRootInsert = true
     this.isComment = false
-    this.isCloned = false
-    this.isOnce = false
-    this.asyncFactory = asyncFactory
+    this.isCloned = false //是克隆出来的VNode
+    this.isOnce = false //使用了v-once的标签VNode
+    this.asyncFactory = asyncFactory //异步组件的构造函数
     this.asyncMeta = undefined
     this.isAsyncPlaceholder = false
   }
@@ -71,7 +71,7 @@ export default class VNode {
   }
 }
 
-// 创建空的VNode节点
+// 创建注释VNode
 export const createEmptyVNode = (text: string = '') => {
   const node = new VNode()
   node.text = text
@@ -79,7 +79,7 @@ export const createEmptyVNode = (text: string = '') => {
   return node
 }
 
-// 创建空的VNode
+// 创建文本VNode
 export function createTextVNode (val: string | number) {
   return new VNode(undefined, undefined, undefined, String(val))
 }
@@ -88,6 +88,7 @@ export function createTextVNode (val: string | number) {
 // used for static nodes and slot nodes because they may be reused across
 // multiple renders, cloning them avoids errors when DOM manipulations rely
 // on their elm reference.
+// 由于静态节点和槽节点可以在多个渲染中重用，所以克隆它们可以避免DOM操作依赖于它们的elm引用时出现错误
 export function cloneVNode (vnode: VNode): VNode {
   const cloned = new VNode(
     vnode.tag,
@@ -95,6 +96,7 @@ export function cloneVNode (vnode: VNode): VNode {
     // #7975
     // clone children array to avoid mutating original in case of cloning
     // a child.
+    // 克隆子数组以避免在克隆的情况下改变原始数组
     vnode.children && vnode.children.slice(),
     vnode.text,
     vnode.elm,

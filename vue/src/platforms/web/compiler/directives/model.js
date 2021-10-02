@@ -9,7 +9,7 @@ let warn
 // in some cases, the event used has to be determined at runtime
 // so we used some reserved tokens during compile.
 // 在某些情况下，使用的事件必须在运行时确定，因此我们在编译期间使用了一些保留的标记
-export const RANGE_TOKEN = '__r'
+export const RANGE_TOKEN = '__r' //类型为range的事件名称，运行时处理事件时会用到
 export const CHECKBOX_RADIO_TOKEN = '__c'  //这个没用到
 
 export default function model (

@@ -12,14 +12,16 @@ import { currentFlushTimestamp } from 'core/observer/scheduler'
 // user-attached handlers.
 function normalizeEvents (on) {
   /* istanbul ignore if */
-  if (isDef(on[RANGE_TOKEN])) {
-    // IE input[type=range] only supports `change` event
-    const event = isIE ? 'change' : 'input'
-    on[event] = [].concat(on[RANGE_TOKEN], on[event] || [])
-    delete on[RANGE_TOKEN]
+  if (isDef(on[RANGE_TOKEN])) { //处理类型为range的input标签事件
+    // IE input[type=range] only supports `change` event 
+    const event = isIE ? 'change' : 'input'//对于range类型，ie只支持change事件
+    on[event] = [].concat(on[RANGE_TOKEN], on[event] || []) //将原本存在的change进行合并
+    delete on[RANGE_TOKEN] //删掉RANGE_TOKEN
   }
   // This was originally intended to fix #4521 but no longer necessary
   // after 2.5. Keeping it for backwards compat with generated code from < 2.4
+  // 这最初是为了修复 #4521 但不再需要
+  // 2.5 之后， 保持它向后兼容 < 2.4 生成的代码
   /* istanbul ignore if */
   if (isDef(on[CHECKBOX_RADIO_TOKEN])) {
     on.change = [].concat(on[CHECKBOX_RADIO_TOKEN], on.change || [])
@@ -29,11 +31,14 @@ function normalizeEvents (on) {
 
 let target: any
 
+// 创建执行一次的事件
 function createOnceHandler (event, handler, capture) {
   const _target = target // save current target element in closure
+  // 包裹一层函数
   return function onceHandler () {
     const res = handler.apply(null, arguments)
     if (res !== null) {
+      // 执行完后就移除该事件
       remove(event, onceHandler, capture, _target)
     }
   }
@@ -59,6 +64,7 @@ function add (
   if (useMicrotaskFix) {
     const attachedTimestamp = currentFlushTimestamp
     const original = handler
+    // 将事件包装一层，处理一些bug
     handler = original._wrapper = function (e) {
       if (
         // no bubbling, should always fire.
@@ -83,12 +89,13 @@ function add (
   target.addEventListener(
     name,
     handler,
-    supportsPassive
+    supportsPassive //如果支持passive选项，才会加入passive
       ? { capture, passive }
       : capture
   )
 }
 
+// 从DOM中移除指定事件
 function remove (
   name: string,
   handler: Function,
@@ -98,18 +105,21 @@ function remove (
   (_target || target).removeEventListener(
     name,
     handler._wrapper || handler,
-    capture
+    capture //表示是否为捕获事件
   )
 }
 
 function updateDOMListeners (oldVnode: VNodeWithData, vnode: VNodeWithData) {
   if (isUndef(oldVnode.data.on) && isUndef(vnode.data.on)) {
+    // 都不存在data.on，直接返回
     return
   }
-  const on = vnode.data.on || {}
-  const oldOn = oldVnode.data.on || {}
-  target = vnode.elm
+  const on = vnode.data.on || {} //新的事件数据
+  const oldOn = oldVnode.data.on || {}//旧的事件数据
+  target = vnode.elm //目标DOM元素
+  // 处理input标签range类型的事件
   normalizeEvents(on)
+  // 更新事件
   updateListeners(on, oldOn, add, remove, createOnceHandler, vnode.context)
   target = undefined
 }
