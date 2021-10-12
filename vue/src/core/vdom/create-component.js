@@ -43,7 +43,7 @@ const componentVNodeHooks = {
       vnode.data.keepAlive
     ) {
       // kept-alive components, treat as a patch
-      // 如果组件已经创建过了且没被销毁且被keep-alive 包裹
+      // 如果组件已经创建过了且没被销毁且被keep-alive包裹
       const mountedNode: any = vnode // work around flow
       // 调用prepatch钩子
       componentVNodeHooks.prepatch(mountedNode, mountedNode)
@@ -62,6 +62,7 @@ const componentVNodeHooks = {
   prepatch (oldVnode: MountedComponentVNode, vnode: MountedComponentVNode) {
     const options = vnode.componentOptions //新的组件选项{ Ctor, propsData, listeners, tag, children }
     const child = vnode.componentInstance = oldVnode.componentInstance //旧的组件实例
+    // 调用updateChildComponent更新组件实例上的一堆属性
     updateChildComponent(
       child,
       options.propsData, // updated props
@@ -242,7 +243,7 @@ export function createComponent (
   const name = Ctor.options.name || tag //配置选项如果定义了name属性，则使用这个name
   // 创建组件的VNode
   const vnode = new VNode(
-    `vue-component-${Ctor.cid}${name ? `-${name}` : ''}`,
+    `vue-component-${Ctor.cid}${name ? `-${name}` : ''}`,//tag名称，vue-component-tagName
     data, undefined, undefined, undefined, context,
     { Ctor, propsData, listeners, tag, children }, //组件才会有的选项
     asyncFactory
