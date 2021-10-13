@@ -62,11 +62,16 @@ function sameInputType (a, b) {
   return typeA === typeB || isTextInputType(typeA) && isTextInputType(typeB)
 }
 
+/*
+  创建一个新的对象，值为旧开始和旧结束之间节点的索引，以属性key为键
+  没有属性key的节点，不会创建到该对象中
+*/
 function createKeyToOldIdx (children, beginIdx, endIdx) {
   let i, key
   const map = {}
   for (i = beginIdx; i <= endIdx; ++i) {
     key = children[i].key
+    // 定义了key属性，才会添加进去
     if (isDef(key)) map[key] = i
   }
   return map
@@ -404,6 +409,7 @@ export function createPatchFunction (backend) {
     }
   }
 
+  // 遍历节点VNode数组，创建标签插入到文档中
   function addVnodes (parentElm, refElm, vnodes, startIdx, endIdx, insertedVnodeQueue) {
     for (; startIdx <= endIdx; ++startIdx) {
       createElm(vnodes[startIdx], insertedVnodeQueue, parentElm, refElm, false, vnodes, startIdx)
@@ -464,11 +470,11 @@ export function createPatchFunction (backend) {
         // 将组件内部的VNode，传入，进行递归调用
         removeAndInvokeRemoveHook(i, rm)
       }
-      for (i = 0; i < cbs.remove.length; ++i) {//调用各个模块的remove，好像没有
+      for (i = 0; i < cbs.remove.length; ++i) {//调用各个transition的remove
         cbs.remove[i](vnode, rm)
       }
       if (isDef(i = vnode.data.hook) && isDef(i = i.remove)) {
-        //调用组件的remove钩子，好像没有
+        //调用transition组件的remove钩子
         i(vnode, rm)
       } else {
         // 执行返回的removeNode
@@ -479,6 +485,26 @@ export function createPatchFunction (backend) {
     }
   }
 
+
+  /*
+      diff算法
+      
+      都是在操作旧节点数组，对比新节点数组去移动旧节点数组
+      假设四种情况
+      旧开始和新开始是同一个节点，不移动
+      旧开始和新结束是同一个节点，旧开始移动到旧结束的位置
+      旧结束和新开始是同一个节点，旧结束移动到旧开始的位置
+      旧结束和新结束是同一个节点，不移动
+
+      上面四种都没命中
+      找到新开始节点，在旧节点中是相同节点的索引位置
+      如果找不到，那么说明是个新创建的节点，添加到旧开始的前面
+      如果找到了，那么将该旧节点移动到旧开始前面，并且该旧节点的位置设置为undefined
+
+      当循环结束了
+      如果是旧开始大于旧结束了，说明旧节点已经遍历完了，那么新节点剩下的部分，就是需要新增的
+      如果是新开始大于新结束了，说明新节点已经遍历完了，那么旧节点剩下的部分，就是需要删除的
+  */
   function updateChildren (parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly) {
     let oldStartIdx = 0                     //老VNode数组的开始索引
     let newStartIdx = 0                     //新VNode数组的开始索引
@@ -500,9 +526,11 @@ export function createPatchFunction (backend) {
     }
 
     while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
-      if (isUndef(oldStartVnode)) {
+      if (isUndef(oldStartVnode)) { //如果该旧开始节点为undefined
+        // 说明该旧节点被移动了，旧开始指针向后移动
         oldStartVnode = oldCh[++oldStartIdx] // Vnode has been moved left
-      } else if (isUndef(oldEndVnode)) {
+      } else if (isUndef(oldEndVnode)) {//如果该旧结束节点为undefined
+        // 说明该旧节点被移动了，旧结束指针向前移动
         oldEndVnode = oldCh[--oldEndIdx]
       } else if (sameVnode(oldStartVnode, newStartVnode)) { //旧开始和新开始是同一个节点
         // 调用patchVnode，更新标签
@@ -524,35 +552,47 @@ export function createPatchFunction (backend) {
       } else if (sameVnode(oldEndVnode, newStartVnode)) { //旧结束和新开始是同一个节点
         // 调用patchVnode，更新标签
         patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)
-        // 将旧开始对应的标签移动到旧开始的位置
+        // 将旧结束对应的标签移动到旧开始的位置
         canMove && nodeOps.insertBefore(parentElm, oldEndVnode.elm, oldStartVnode.elm)
         oldEndVnode = oldCh[--oldEndIdx]  //旧结束指针向前移动
         newStartVnode = newCh[++newStartIdx] //新开始指针向后移动
-      } else {
+      } else { //上面四种假设都没有命中
+
+        // 创建一个旧开始和旧结束之间节点的索引对象
         if (isUndef(oldKeyToIdx)) oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx)
-        idxInOld = isDef(newStartVnode.key)
-          ? oldKeyToIdx[newStartVnode.key]
-          : findIdxInOld(newStartVnode, oldCh, oldStartIdx, oldEndIdx)
-        if (isUndef(idxInOld)) { // New element
+        idxInOld = isDef(newStartVnode.key)  //如果新开始节点定义了key属性
+          ? oldKeyToIdx[newStartVnode.key] //直接用key属性，拿到相同节点的索引
+          : findIdxInOld(newStartVnode, oldCh, oldStartIdx, oldEndIdx) //没有key属性，就通过findIdxInOld找到相同节点的索引
+        if (isUndef(idxInOld)) { // New element  如果没找到，说明是个新创建的节点
+          // 创建该新标签，添加到旧开始前面
           createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, false, newCh, newStartIdx)
-        } else {
-          vnodeToMove = oldCh[idxInOld]
+        } else { //说明找到了
+          vnodeToMove = oldCh[idxInOld] //拿到该相同的节点
           if (sameVnode(vnodeToMove, newStartVnode)) {
+            // 调用patchVnode，更新标签
             patchVnode(vnodeToMove, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)
-            oldCh[idxInOld] = undefined
+            oldCh[idxInOld] = undefined //该位置的旧节点设置为undefined
+            // 将该位置的旧节点移动到旧开始前面
             canMove && nodeOps.insertBefore(parentElm, vnodeToMove.elm, oldStartVnode.elm)
           } else {
             // same key but different element. treat as new element
+            // key属性相同但不是同一个节点，那么视为新节点，创建该新标签，添加到旧开始前面
             createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, false, newCh, newStartIdx)
           }
         }
+
+        // 新开始指针向后移动
         newStartVnode = newCh[++newStartIdx]
       }
     }
-    if (oldStartIdx > oldEndIdx) {
+
+    if (oldStartIdx > oldEndIdx) { //如果是旧开始大于旧结束了，说明旧节点已经遍历完了，那么新节点剩下的部分，就是需要新增的
+      // 插入到该节点前面，为新结束的下一个节点
       refElm = isUndef(newCh[newEndIdx + 1]) ? null : newCh[newEndIdx + 1].elm
+      // 调用addVnodes，遍历剩下的新节点，创建标签进行插入
       addVnodes(parentElm, refElm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue)
-    } else if (newStartIdx > newEndIdx) {
+    } else if (newStartIdx > newEndIdx) { //如果是新开始大于新结束了，说明新节点已经遍历完了，那么旧节点剩下的部分，就是需要删除的
+      // 移除剩余的旧节点
       removeVnodes(oldCh, oldStartIdx, oldEndIdx)
     }
   }
@@ -579,6 +619,7 @@ export function createPatchFunction (backend) {
     }
   }
 
+  // 从旧开始和旧结束中的节点中，找到相同的节点，返回它的索引
   function findIdxInOld (node, oldCh, start, end) {
     for (let i = start; i < end; i++) {
       const c = oldCh[i]
