@@ -15,12 +15,13 @@
    ...
    $key: "xxx"//根据插槽内容生成的唯一的hash值，插槽内容变化了，hash值也会跟着变化
  }
+ 在组件创建的时候会根据该选项生成$scopedSlots
 */ 
 export function resolveScopedSlots (
   fns: ScopedSlotsData, // see flow/vnode
   res?: Object,
   // the following are added in 2.6
-  hasDynamicKeys?: boolean,
+  hasDynamicKeys?: boolean, //为true表示是否需要强制更新
   contentHashKey?: number
 ): { [key: string]: Function, $stable: boolean } {
   res = res || { $stable: !hasDynamicKeys } 

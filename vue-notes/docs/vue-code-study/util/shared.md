@@ -152,6 +152,28 @@ export function isPromise (val: any): boolean {
   )
 }
 ```
+## toString
+```js
+export function toString (val: any): string {
+  // 如果是undefined，null，则转为空字符
+  // 如果是数组或者对象，调用JSON.stringify转为字符
+  // 其他类型用String强制转为字符
+  return val == null
+    ? ''
+    : Array.isArray(val) || (isPlainObject(val) && val.toString === _toString)
+      ? JSON.stringify(val, null, 2)
+      : String(val)
+}
+```
+## toNumber
+```js
+// 调用parseFloat解析成数字
+export function toNumber (val: string): number | string {
+  const n = parseFloat(val)
+  // 如果返回的是NaN，则使用原始值
+  return isNaN(n) ? val : n
+}
+```
 ## makeMap  
 返回一个函数，用来检查传入的值是否符合某一特征
 ```js
@@ -345,6 +367,21 @@ export function extend (to: Object, _from: ?Object): Object {
   return to
 }
 ```
+## toObject
+```js
+// 将数组对象里的对象提取出来转化成对象，深度只有一层
+export function toObject (arr: Array<any>): Object {
+  const res = {}
+  // 遍历数组
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i]) {
+      // 将数组里的对象，展开添加到res中
+      extend(res, arr[i])
+    }
+  }
+  return res
+}
+```
 ## noop   
 noop为一个空函数，为一些函数提供默认值，避免传入undefined之类的导致报错
 ```js
@@ -357,4 +394,94 @@ no函数执行返回false
  no函数总是返回false
  */
 export const no = (a?: any, b?: any, c?: any) => false
+```
+## identity
+```js
+// 解析特定平台的真实标签名称用到
+export const identity = (_: any) => _
+```
+## genStaticKeys
+```js
+// 生成一个字符串，modules内容来自编译器compiler下的modules文件，生成的字符串为"staticClass,staticStyle"
+export function genStaticKeys (modules: Array<ModuleOptions>): string {
+  return modules.reduce((keys, m) => {
+    // 将数组对象中的staticKeys属性，为数组，拼接起来
+    return keys.concat(m.staticKeys || [])
+  }, []).join(',')
+}
+```
+## looseEqual
+```js
+// 检查两个值是否大致相等，如果是对象的话继续判断他们内部的形式是否一样
+export function looseEqual (a: any, b: any): boolean {
+  if (a === b) return true //如果等于直接返回true
+  const isObjectA = isObject(a)//是否是对象
+  const isObjectB = isObject(b)
+  if (isObjectA && isObjectB) {
+    // 如果是对象
+    try {
+      const isArrayA = Array.isArray(a)
+      const isArrayB = Array.isArray(b)
+      if (isArrayA && isArrayB) {
+        // 如果是数组
+        return a.length === b.length && a.every((e, i) => { 
+          // 长度相等的话，继续判断数组里的元素是否相等，递归调用
+          return looseEqual(e, b[i])
+        })
+      } else if (a instanceof Date && b instanceof Date) {
+        // 如果是日期，获取毫秒数，判断是否相等
+        return a.getTime() === b.getTime()
+      } else if (!isArrayA && !isArrayB) {
+        // 如果不是数组，返回枚举自身属性的的数组
+        const keysA = Object.keys(a)
+        const keysB = Object.keys(b)
+        return keysA.length === keysB.length && keysA.every(key => {
+          // 继续递归
+          return looseEqual(a[key], b[key])
+        })
+      } else {
+        // 以上不满足则返回false
+        /* istanbul ignore next */
+        return false
+      }
+    } catch (e) {
+      /* istanbul ignore next */
+      // 捕获到了错误也返回false
+      return false
+    }
+  } else if (!isObjectA && !isObjectB) {
+    // 两个值都不是对象，转为字符继续判断
+    return String(a) === String(b)
+  } else {
+    // 否则返回false
+    return false
+  }
+}
+```
+## looseIndexOf
+```js
+// 传递一个数组和一个值，返回该值在指定数组中的索引
+export function looseIndexOf (arr: Array<mixed>, val: mixed): number {
+  // 遍历该数组
+  for (let i = 0; i < arr.length; i++) {
+    // 判断该值是否与数组内的元素相等，如果成立，返回索引
+    if (looseEqual(arr[i], val)) return i
+  }
+  // 否则，返回-1
+  return -1
+}
+```
+## once
+```js
+// 确保传入的函数只能执行一次
+export function once (fn: Function): Function {
+  let called = false
+  return function () {
+    if (!called) {
+      called = true
+      fn.apply(this, arguments)
+    }
+  }
+}
+
 ```

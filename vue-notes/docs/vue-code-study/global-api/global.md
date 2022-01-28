@@ -337,9 +337,12 @@ export function initExtend (Vue: GlobalAPI) {
 
     // create asset registers, so extended classes
     // can have their private assets too.
+    // 将全局的资源Vue.components，Vue.filters，Vue.directives，添加到子类构造函数上
+    // 这样所有子组件都可以访问全局注册的资源选项
     ASSET_TYPES.forEach(function (type) {
       Sub[type] = Super[type]
     })
+    
     // name存在的话，则将自己注册到自己的 components 选项中
     // 递归组件的原理
     if (name) {

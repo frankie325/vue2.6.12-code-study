@@ -387,7 +387,7 @@ export function popTarget () {
 
 ## Watcher类
 三个地方创建了Watcher
-1. 计算Watcher（computedWatcher）：处理computed选项时创建的watcher实例
+1. 计算Watcher（computedWatcher）：处理computed选项时创建的watcher实例  
 ```js
  var computedWatcherOptions = { lazy: true };
  new Watcher(
@@ -400,9 +400,14 @@ export function popTarget () {
 **执行流程**  
 <div style="overflow:auto">
 <img style="min-width:1000px;" src="./images/CWatcher.png" />
-</div>
+</div>  
 
-1. 监听Watcher：处理watch选项时，$watch方法创建的watcher实例
+**处理computed选项时** 
+- 创建计算Watcher，先不执行传入的get方法。
+- 当访问计算属性时，执行get方法获取value值，第一次访问value会进行缓存，重复访问会拿到缓存的值
+- 同时依赖的变量会收集该计算Watcher 
+- 当依赖变量更新时，触发计算Watcher的update方法，更新获取最新的值，重复上述过程
+2. 监听Watcher：处理watch选项时，$watch方法创建的watcher实例
 ```js
     options.user = true;
     new Watcher(vm, expOrFn, cb, options);
@@ -410,6 +415,10 @@ export function popTarget () {
 **执行流程**  
 
 ![执行流程](./images/WWatcher.png)
+**处理watch选项时** 
+- 创建监听Watcher，执行get方法，获取value值，同时依赖的变量会收集该监听Watcher
+- 当监听的变量更新时，调用监听Watcher的update方法，更新获取最新的值，之前的值就是旧的了
+- 再调用传入的回调
 
 3. 渲染Watcher：mountComponent方法中，每个组件执行$mount时，创建了一个渲染watcher实例
 ```js
@@ -780,7 +789,8 @@ cleanupDeps的作用是什么？
 
 ```
 depend可以确保计算Watcher的依赖变量可以收集渲染Watcher，如上面所示，还有一种情况就是$watch监听的key值是计算属性时，可以让依赖变量收集监听Watcher，示例  
-**监听的是计算属性，计算属性没有做响应式处理，那这个监听Watcher是如何被收集的？**  
+  
+**监听的是计算属性，计算属性没有做响应式处理，那计算属性依赖的变量如何收集这个监听Watcher的？**  
 当处理watch选项时，因为是监听的计算属性，监听Watcher的get方法中会访问计算属性,计算Watcher的get执行，此时targetStack中为[监听Watcher,计算Watcher]，get执行完，将计算Watcher从targetStack推出，然后执行depend，依赖变量收集监听Watcher，所以依赖变量更新时，会通知监听Watcher更新。:point_right: [计算Watcher流程](./observe.html#watcher类)
 ```html
 <!DOCTYPE html>

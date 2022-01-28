@@ -65,6 +65,7 @@ let AST = {
   parent, //当前标签的父标签
   //该标签的子节点
   children: [],
+  // 组件上使用了native修饰符的事件
   nativeEvents: {},
   // 绑定的事件
   events: {

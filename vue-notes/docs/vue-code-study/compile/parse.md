@@ -2442,9 +2442,6 @@ export function addDirective (
 ```
 ### addHandler
 ```js
-<div></div>
-```
-```js
 // 根据修饰符前置处理事件名称
 // 以@[event].capture和@click.capture为例  也就是说@click.capture与@!click是一样的
 function prependModifierMarker (symbol: string, name: string, dynamic?: boolean): string {

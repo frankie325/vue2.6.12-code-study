@@ -96,6 +96,7 @@ export function initMixin (Vue: Class<Component>) {
 // 初始化组件的选项
 export function initInternalComponent (vm: Component, options: InternalComponentOptions) {
   // 创建vm.$options，原型指向组件构造函数的options
+  // 这样子组件实例的$options就可以访问子类构造函数上的资源选项了
   const opts = vm.$options = Object.create(vm.constructor.options)
   // doing this because it's faster than dynamic enumeration.
   const parentVnode = options._parentVnode // 拿到该组件标签的VNode

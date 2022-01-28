@@ -10,6 +10,7 @@
 1. :point_right:[initMixin](./entry.md#initmixin)方法
 2. :point_right:[stateMixin](./state.md#statemixin)方法
 3. :point_right:[eventsMixin](../global-api/instance.md#eventsmixin)方法
+4. :point_right:[lifecycleMixin](../global-api/instance.md#eventsmixin)方法
 ```js
 import { initMixin } from './init'
 import { stateMixin } from './state'
@@ -46,7 +47,7 @@ export default Vue
 - _init方法初始化了实例的$options,子组件使用initInternalComponent，根组件使用[mergeOptions](./entry.md#mergeoptions)方法
 - 初始化组件实例关系属性，比如 $parent、$children、$root、$refs等
 - 初始化自定义事件
-- 解析组件的插槽信息，得到 vm.$slot，处理渲染函数，得到 vm.$createElement 方法，即 h 函数
+- [initRender](../render/render.html#initrender)方法解析组件的插槽信息，得到 vm.$slot，处理渲染函数，得到 vm.$createElement 方法，即 h 函数
 - 调用 beforeCreate 钩子函数
 - 初始化组件的 [provide，inject](./entry.md#initprovide-initinjections) 配置项
 - 数据响应式，处理 props、methods、data、computed、watch

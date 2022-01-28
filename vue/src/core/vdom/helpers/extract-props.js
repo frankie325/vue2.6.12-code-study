@@ -32,7 +32,7 @@ export function extractPropsFromVNodeData (
     return
   }
   const res = {}
-  const { attrs, props } = data //该组件绑定的属性，属性值为父组件对应的数据
+  const { attrs, props } = data //该组件上绑定的属性，属性值为父组件对应的数据，或者由渲染函数props选项传进的数据
   if (isDef(attrs) || isDef(props)) { //如果存在data.attrs和data.props，说明组件上是绑定了属性的
     // 遍历props选项
     for (const key in propOptions) {
@@ -74,6 +74,7 @@ function checkProp (
       res[key] = hash[key]
       if (!preserve) {
         // preserve为false，则从attrs中删除
+        // 所以如果组件上的属性作为props传递到了子组件，就不会再渲染到根标签了
         delete hash[key]
       }
       return true

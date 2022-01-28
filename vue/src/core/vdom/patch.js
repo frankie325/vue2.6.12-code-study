@@ -268,6 +268,7 @@ export function createPatchFunction (backend) {
           // 如果组件被keep-alive 包裹，激活组件
           reactivateComponent(vnode, insertedVnodeQueue, parentElm, refElm)
         }
+        // 只有组件VNode返回了true
         return true
       }
     }
@@ -644,6 +645,7 @@ export function createPatchFunction (backend) {
     removeOnly
   ) {
     // 新VNode和旧VNode相等，直接返回
+    // 静态标记的节点会进行缓存，所以新Vnode和旧VNode会相等
     if (oldVnode === vnode) {
       return
     }
@@ -669,6 +671,8 @@ export function createPatchFunction (backend) {
     // note we only do this if the vnode is cloned -
     // if the new node is not cloned it means the render functions have been
     // reset by the hot-reload-api and we need to do a proper re-render.
+
+    // v-for循环内的v-once标签会跳过更新
     if (isTrue(vnode.isStatic) && //为静态节点
       isTrue(oldVnode.isStatic) && //为静态节点
       vnode.key === oldVnode.key && //key相等
@@ -681,7 +685,7 @@ export function createPatchFunction (backend) {
 
     let i
     const data = vnode.data
-    // 执行组件的prepatch钩子，调用updateChildComponent更新组件实例中的一堆属性
+    // 如果是组件的VNode，执行组件的prepatch钩子，调用updateChildComponent更新组件实例中的一堆属性
     if (isDef(data) && isDef(i = data.hook) && isDef(i = i.prepatch)) {
       i(oldVnode, vnode)
     }

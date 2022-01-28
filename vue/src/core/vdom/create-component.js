@@ -117,7 +117,7 @@ const hooksToMerge = Object.keys(componentVNodeHooks)
 
 /*
   组件的注册形式有三种
-  1.使用Vue.component全局定义的组件，经过调用转化成子类构造函数添加到options.components中
+  1.使用Vue.component全局定义的组件，经过Vue.extend调用生成子类构造函数，已经合并到this.$options.components中
   2.直接在选项中定义的局部组件
   options:{
      components:{

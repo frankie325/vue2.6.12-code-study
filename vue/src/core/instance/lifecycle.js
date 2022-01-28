@@ -154,6 +154,7 @@ export function lifecycleMixin (Vue: Class<Component>) {
     // 移除所有自定义事件
     vm.$off()
     // remove __vue__ reference
+    // __vue__属性置为null，__vue__为对应的vue实例
     if (vm.$el) {
       vm.$el.__vue__ = null
     }

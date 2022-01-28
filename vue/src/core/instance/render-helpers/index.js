@@ -13,7 +13,7 @@ import { resolveScopedSlots } from './resolve-scoped-slots'
 import { bindDynamicKeys, prependModifier } from './bind-dynamic-keys'
 
 export function installRenderHelpers (target: any) {
-  // 对v-once节点进行标记
+  // 对v-for内的v-once节点进行标记
   target._o = markOnce
   // 转化成number
   target._n = toNumber
@@ -39,7 +39,7 @@ export function installRenderHelpers (target: any) {
   target._v = createTextVNode
   // 创建空注释VNode
   target._e = createEmptyVNode
-
+  // 处理组件VNode上的ScopedSlots属性
   target._u = resolveScopedSlots
   // 当绑定的事件是对象形式时，将渲染函数的第二个参数data进行一下处理
   target._g = bindObjectListeners

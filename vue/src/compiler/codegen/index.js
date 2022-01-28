@@ -715,7 +715,7 @@ export function genChildren (
       el.tag !== 'template' &&
       el.tag !== 'slot'
     ) {
-      // 获取规范化类型
+      // 获取归一化类型
       const normalizationType = checkSkip
         ? state.maybeComponent(el) ? `,1` : `,0`
         : ``
@@ -724,13 +724,13 @@ export function genChildren (
       return `${(altGenElement || genElement)(el, state)}${normalizationType}`
     }
 
-    // 获取该节点规范化类型
+    // 获取该节点归一化类型
     const normalizationType = checkSkip
       ? getNormalizationType(children, state.maybeComponent)
       : 0
     // 根据节点类型调用不同的gen方法
     const gen = altGenNode || genNode
-    // 返回一个数组字符拼接最后该节点的规范化类型，数组内为所有子节点的渲染函数
+    // 返回一个数组字符拼接最后该节点的归一化类型，数组内为所有子节点的渲染函数
     // "[_c(tag,data,children,normalizationType),...,...],1"
     return `[${children.map(c => gen(c, state)).join(',')}]${
       normalizationType ? `,${normalizationType}` : ''
@@ -743,14 +743,14 @@ export function genChildren (
 // 1: simple normalization needed (possible 1-level deep nested array)
 // 2: full normalization needed
 /*
-确定子数组所需的规范化
-0：不需要标准化
-1：需要简单的归一化（可能是 1 级深度嵌套数组）
-2：需要完全标准化
+确定子数组所需的归一化
+0：不需要归一化
+1：需要简单的归一化（ 1 级深度嵌套数组）
+2：需要完全归一化
 */
 
 /*
-  1.子节点中只要有一个需要完全标准化的节点，则返回2
+  1.子节点中只要有一个需要完全归一化的节点，则返回2
   2.当第一个条件不满足时，再判断子节点中是否有组件，有则返回1
   3.上面都不满足则返回0
 */
@@ -767,8 +767,8 @@ function getNormalizationType (
       continue
     }
     /*
-      如果该节点是需要完全标准化的节点
-      或者该节点的ifConditions中block指向的节点中只要有一个是需要完全标准化的节点
+      如果该节点是需要完全归一化的节点
+      或者该节点的ifConditions中block指向的节点中只要有一个是需要完全归一化的节点
       则返回2，跳出循环
     */
     if (needsNormalization(el) ||
@@ -789,7 +789,7 @@ function getNormalizationType (
   return res
 }
 /*
-  需要完全标准化的节点下列条件
+  需要完全归一化的节点下列条件
   1.存在v-for
   2.或者是template标签
   3.或者是slot标签

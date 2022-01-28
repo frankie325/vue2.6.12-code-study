@@ -24,7 +24,7 @@ export function initRender (vm: Component) {
   const renderContext = parentVnode && parentVnode.context //父组件实例
 
   // $slots对象里是非具名插槽节点
-  vm.$slots = resolveSlots(options._renderChildren, renderContext)
+  vm.$slots = resolveSlots(options._renderChildren, renderContext)//_renderChildren为包裹在该组件标签内的VNode子节点
   vm.$scopedSlots = emptyObject
   // bind the createElement fn to this instance
   // so that we get proper render context inside it.
@@ -35,7 +35,7 @@ export function initRender (vm: Component) {
   vm._c = (a, b, c, d) => createElement(vm, a, b, c, d, false)
   // normalization is always applied for the public version, used in
   // user-written render functions.
-  // 用户使用render函数是，调用的是$createElement渲染函数
+  // 用户使用render函数时，调用的是$createElement渲染函数
   vm.$createElement = (a, b, c, d) => createElement(vm, a, b, c, d, true)
 
   // $attrs & $listeners are exposed for easier HOC creation.
@@ -71,7 +71,7 @@ export function renderMixin (Vue: Class<Component>) {
   // install runtime convenience helpers
   // 安装渲染函数中用到的工具方法
   installRenderHelpers(Vue.prototype)
-
+  //定义 $nextTick方法，也就是Vue.nextTick
   Vue.prototype.$nextTick = function (fn: Function) {
     return nextTick(fn, this)
   }

@@ -527,7 +527,10 @@ export function mergeOptions(
  */
 /*
   $options.components，$options.directives，$options.filters
-  判断传入的字符是否存在于指定选项中
+  是如何找到全局的选项？
+  每个子组件在初始化的时候
+  this.$options.__proto__指向了子类构造函数
+  而子类构造函数在创建的时候
 */
 export function resolveAsset(
   options: Object, //指定的选项
@@ -558,6 +561,9 @@ export function resolveAsset(
   // fallback to prototype chain
 
   // 要是还没找到，则在原型链上查找
+  /*
+
+  */
   const res = assets[id] || assets[camelizedId] || assets[PascalCaseId];
   if (process.env.NODE_ENV !== "production" && warnMissing && !res) {
     // 找不到，报错
