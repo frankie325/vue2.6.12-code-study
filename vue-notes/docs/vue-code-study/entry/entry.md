@@ -135,6 +135,31 @@ export function initMixin (Vue: Class<Component>) {
   }
 }
 ```
+### initInternalComponent
+```js
+// 初始化组件的选项
+export function initInternalComponent (vm: Component, options: InternalComponentOptions) {
+  // 创建vm.$options，原型指向组件构造函数的options
+  // 这样子组件实例的$options就可以访问子类构造函数上的资源选项了
+  const opts = vm.$options = Object.create(vm.constructor.options)
+  // doing this because it's faster than dynamic enumeration.
+  const parentVnode = options._parentVnode // 拿到该组件标签的VNode
+  opts.parent = options.parent //该组件的父组件实例
+  opts._parentVnode = parentVnode //添加_parentVnode属性
+
+  const vnodeComponentOptions = parentVnode.componentOptions //拿到该组件的组件选项
+  opts.propsData = vnodeComponentOptions.propsData //父组件传递的props数据
+  opts._parentListeners = vnodeComponentOptions.listeners //该组件上绑定的事件
+  opts._renderChildren = vnodeComponentOptions.children //包裹在该组件标签内的VNode子节点
+  opts._componentTag = vnodeComponentOptions.tag //该组件的标签名
+
+  if (options.render) {
+    // 如果存在render函数，添加到$options中
+    opts.render = options.render
+    opts.staticRenderFns = options.staticRenderFns
+  }
+}
+```
 ### resolveConstructorOptions
 有两种情况会执行到该方法
 1. new Vue()

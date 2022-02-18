@@ -91,7 +91,7 @@ export function initGlobalAPI (Vue: GlobalAPI) {
 }
 ```
 ## Vue.set  
-为数组或对象添加新的属性时，设置成响应式的
+为数组或对象添加新的属性时，设置成响应式的，<font color="red">**没有绑定过观察者实例的属性，使用$set不会进行响应式处理，只起简单的赋值作用**</font>
 :::tip 文件目录
 /src/core/observer/index.js
 :::

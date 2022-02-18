@@ -142,6 +142,48 @@ export function invokeWithErrorHandling (
 }
 
 ```
+## lang.js
+
+### def
+```js
+/**
+改写Object.defineProperty方法，指定相应的key能不能进行遍历
+ */
+export function def (obj: Object, key: string, val: any, enumerable?: boolean) {
+  Object.defineProperty(obj, key, {
+    value: val,
+    enumerable: !!enumerable,
+    writable: true,
+    configurable: true
+  })
+}
+```
+### parsePath
+```js
+/**
+ * Parse simple path.
+  解析watch监听的key值，形如"a.b.c"
+ */
+const bailRE = new RegExp(`[^${unicodeRegExp.source}.$_\\d]`)
+export function parsePath (path: string): any {
+  if (bailRE.test(path)) {
+    return
+  }
+  // 分割成数组
+  const segments = path.split('.')
+  // 返回一个方法，watcher中this.getter等于该方法
+  // 执行this.getter，obj为传入的vm实例
+  return function (obj) {
+    for (let i = 0; i < segments.length; i++) {
+      if (!obj) return //不存在则返回
+      // 循环完之后得到在vm实例中的值
+      obj = obj[segments[i]]
+    }
+    // 返回该值
+    return obj
+  }
+}
+```
 
 ## options.js
 
