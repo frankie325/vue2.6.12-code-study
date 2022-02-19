@@ -8,55 +8,61 @@ export const siteData = {
   "headTags": [],
   "pages": [
     {
+      "title": "Home",
+      "frontmatter": {
+        "home": true,
+        "heroImage": "/images/logo.png",
+        "actionText": "快速上手 →",
+        "actionLink": "/guide/",
+        "features": [
+          {
+            "title": "简洁至上",
+            "details": "以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。"
+          },
+          {
+            "title": "Vue驱动",
+            "details": "享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。"
+          },
+          {
+            "title": "高性能",
+            "details": "VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。"
+          }
+        ],
+        "footer": "MIT Licensed | Copyright © 2018-present Evan You"
+      },
+      "regularPath": "/",
+      "relativePath": "README.md",
+      "key": "v-4af0e625",
+      "path": "/"
+    },
+    {
       "frontmatter": {},
       "regularPath": "/guide/",
       "relativePath": "guide/readme.md",
-      "key": "v-6a8d73d3",
+      "key": "v-7021b638",
       "path": "/guide/"
     },
     {
       "frontmatter": {},
       "regularPath": "/vue-code-study/",
       "relativePath": "vue-code-study/README.md",
-      "key": "v-e67ddbba",
+      "key": "v-327d3570",
       "path": "/vue-code-study/"
     },
     {
-      "title": "编译器入口",
+      "title": "生成的AST对象",
       "frontmatter": {},
-      "regularPath": "/vue-code-study/compile/compile-entry.html",
-      "relativePath": "vue-code-study/compile/compile-entry.md",
-      "key": "v-62ff1727",
-      "path": "/vue-code-study/compile/compile-entry.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "$mount",
-          "slug": "mount"
-        },
-        {
-          "level": 3,
-          "title": "compileToFunctions",
-          "slug": "compiletofunctions"
-        },
-        {
-          "level": 3,
-          "title": "compile",
-          "slug": "compile"
-        },
-        {
-          "level": 3,
-          "title": "baseCompile",
-          "slug": "basecompile"
-        }
-      ]
+      "regularPath": "/vue-code-study/compile/ast.html",
+      "relativePath": "vue-code-study/compile/ast.md",
+      "key": "v-034182e4",
+      "path": "/vue-code-study/compile/ast.html"
     },
     {
       "title": "编译器解析",
       "frontmatter": {},
       "regularPath": "/vue-code-study/compile/compile-flow.html",
       "relativePath": "vue-code-study/compile/compile-flow.md",
-      "key": "v-cd48bbd6",
+      "key": "v-4bc7bf50",
       "path": "/vue-code-study/compile/compile-flow.html",
       "headers": [
         {
@@ -97,19 +103,76 @@ export const siteData = {
       ]
     },
     {
-      "title": "生成的AST对象",
+      "title": "编译器入口",
       "frontmatter": {},
-      "regularPath": "/vue-code-study/compile/ast.html",
-      "relativePath": "vue-code-study/compile/ast.md",
-      "key": "v-4b89b893",
-      "path": "/vue-code-study/compile/ast.html"
+      "regularPath": "/vue-code-study/compile/compile-entry.html",
+      "relativePath": "vue-code-study/compile/compile-entry.md",
+      "key": "v-2ad8d1a2",
+      "path": "/vue-code-study/compile/compile-entry.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "$mount",
+          "slug": "mount"
+        },
+        {
+          "level": 3,
+          "title": "compileToFunctions",
+          "slug": "compiletofunctions"
+        },
+        {
+          "level": 3,
+          "title": "compile",
+          "slug": "compile"
+        },
+        {
+          "level": 3,
+          "title": "baseCompile",
+          "slug": "basecompile"
+        }
+      ]
+    },
+    {
+      "title": "静态标记",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/mark-static.html",
+      "relativePath": "vue-code-study/compile/mark-static.md",
+      "key": "v-dabf4c94",
+      "path": "/vue-code-study/compile/mark-static.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "optimize",
+          "slug": "optimize"
+        },
+        {
+          "level": 2,
+          "title": "genStaticKeysCached",
+          "slug": "genstatickeyscached"
+        },
+        {
+          "level": 2,
+          "title": "markStatic",
+          "slug": "markstatic"
+        },
+        {
+          "level": 2,
+          "title": "isStatic",
+          "slug": "isstatic"
+        },
+        {
+          "level": 2,
+          "title": "markStaticRoots",
+          "slug": "markstaticroots"
+        }
+      ]
     },
     {
       "title": "生成渲染函数字符代码",
       "frontmatter": {},
       "regularPath": "/vue-code-study/compile/generate.html",
       "relativePath": "vue-code-study/compile/generate.md",
-      "key": "v-19ad6db5",
+      "key": "v-59481420",
       "path": "/vue-code-study/compile/generate.html",
       "headers": [
         {
@@ -280,11 +343,61 @@ export const siteData = {
       ]
     },
     {
+      "title": "v-model原理",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/model.html",
+      "relativePath": "vue-code-study/compile/model.md",
+      "key": "v-23735380",
+      "path": "/vue-code-study/compile/model.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "model",
+          "slug": "model"
+        },
+        {
+          "level": 2,
+          "title": "genAssignmentCode",
+          "slug": "genassignmentcode"
+        },
+        {
+          "level": 3,
+          "title": "parseModel",
+          "slug": "parsemodel"
+        },
+        {
+          "level": 2,
+          "title": "genDefaultModel-其他类型的input标签或者textarea标签上的v-model",
+          "slug": "gendefaultmodel-其他类型的input标签或者textarea标签上的v-model"
+        },
+        {
+          "level": 2,
+          "title": "genComponentModel-组件上的v-model",
+          "slug": "gencomponentmodel-组件上的v-model"
+        },
+        {
+          "level": 2,
+          "title": "genSelect-select标签上的v-model",
+          "slug": "genselect-select标签上的v-model"
+        },
+        {
+          "level": 2,
+          "title": "genCheckboxModel-复选框上的v-model",
+          "slug": "gencheckboxmodel-复选框上的v-model"
+        },
+        {
+          "level": 2,
+          "title": "genRadioModel-单选框上的v-model",
+          "slug": "genradiomodel-单选框上的v-model"
+        }
+      ]
+    },
+    {
       "title": "v-on事件绑定的原理",
       "frontmatter": {},
       "regularPath": "/vue-code-study/compile/events.html",
       "relativePath": "vue-code-study/compile/events.md",
-      "key": "v-fdd85e96",
+      "key": "v-7aadae70",
       "path": "/vue-code-study/compile/events.html",
       "headers": [
         {
@@ -345,206 +458,11 @@ export const siteData = {
       ]
     },
     {
-      "title": "v-model原理",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/compile/model.html",
-      "relativePath": "vue-code-study/compile/model.md",
-      "key": "v-4dea45c5",
-      "path": "/vue-code-study/compile/model.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "model",
-          "slug": "model"
-        },
-        {
-          "level": 2,
-          "title": "genAssignmentCode",
-          "slug": "genassignmentcode"
-        },
-        {
-          "level": 3,
-          "title": "parseModel",
-          "slug": "parsemodel"
-        },
-        {
-          "level": 2,
-          "title": "genDefaultModel-其他类型的input标签或者textarea标签上的v-model",
-          "slug": "gendefaultmodel-其他类型的input标签或者textarea标签上的v-model"
-        },
-        {
-          "level": 2,
-          "title": "genComponentModel-组件上的v-model",
-          "slug": "gencomponentmodel-组件上的v-model"
-        },
-        {
-          "level": 2,
-          "title": "genSelect-select标签上的v-model",
-          "slug": "genselect-select标签上的v-model"
-        },
-        {
-          "level": 2,
-          "title": "genCheckboxModel-复选框上的v-model",
-          "slug": "gencheckboxmodel-复选框上的v-model"
-        },
-        {
-          "level": 2,
-          "title": "genRadioModel-单选框上的v-model",
-          "slug": "genradiomodel-单选框上的v-model"
-        }
-      ]
-    },
-    {
-      "title": "解析HTML模板",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/compile/parse-html.html",
-      "relativePath": "vue-code-study/compile/parse-html.md",
-      "key": "v-39a62c35",
-      "path": "/vue-code-study/compile/parse-html.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "parseHTML中用到的正则",
-          "slug": "parsehtml中用到的正则"
-        },
-        {
-          "level": 3,
-          "title": "attribute",
-          "slug": "attribute"
-        },
-        {
-          "level": 3,
-          "title": "dynamicArgAttribute",
-          "slug": "dynamicargattribute"
-        },
-        {
-          "level": 3,
-          "title": "startTagOpen",
-          "slug": "starttagopen"
-        },
-        {
-          "level": 3,
-          "title": "startTagClose",
-          "slug": "starttagclose"
-        },
-        {
-          "level": 3,
-          "title": "endTag",
-          "slug": "endtag"
-        },
-        {
-          "level": 3,
-          "title": "doctype",
-          "slug": "doctype"
-        },
-        {
-          "level": 3,
-          "title": "comment",
-          "slug": "comment"
-        },
-        {
-          "level": 3,
-          "title": "conditionalComment",
-          "slug": "conditionalcomment"
-        },
-        {
-          "level": 3,
-          "title": "encodedAttr",
-          "slug": "encodedattr"
-        },
-        {
-          "level": 3,
-          "title": "encodedAttrWithNewLines",
-          "slug": "encodedattrwithnewlines"
-        },
-        {
-          "level": 2,
-          "title": "parseHTML用到的一些方法和变量",
-          "slug": "parsehtml用到的一些方法和变量"
-        },
-        {
-          "level": 2,
-          "title": "parseHTML",
-          "slug": "parsehtml"
-        },
-        {
-          "level": 3,
-          "title": "左尖括号索引为0时",
-          "slug": "左尖括号索引为0时"
-        },
-        {
-          "level": 3,
-          "title": "左尖括号索引大于等于0时",
-          "slug": "左尖括号索引大于等于0时"
-        },
-        {
-          "level": 3,
-          "title": "左尖括号索引没找到时",
-          "slug": "左尖括号索引没找到时"
-        },
-        {
-          "level": 3,
-          "title": "advance",
-          "slug": "advance"
-        },
-        {
-          "level": 3,
-          "title": "parseStartTag",
-          "slug": "parsestarttag"
-        },
-        {
-          "level": 3,
-          "title": "handleStartTag",
-          "slug": "handlestarttag"
-        },
-        {
-          "level": 3,
-          "title": "parseEndTag",
-          "slug": "parseendtag"
-        }
-      ]
-    },
-    {
-      "title": "静态标记",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/compile/mark-static.html",
-      "relativePath": "vue-code-study/compile/mark-static.md",
-      "key": "v-5a2fac8a",
-      "path": "/vue-code-study/compile/mark-static.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "optimize",
-          "slug": "optimize"
-        },
-        {
-          "level": 2,
-          "title": "genStaticKeysCached",
-          "slug": "genstatickeyscached"
-        },
-        {
-          "level": 2,
-          "title": "markStatic",
-          "slug": "markstatic"
-        },
-        {
-          "level": 2,
-          "title": "isStatic",
-          "slug": "isstatic"
-        },
-        {
-          "level": 2,
-          "title": "markStaticRoots",
-          "slug": "markstaticroots"
-        }
-      ]
-    },
-    {
       "title": "解析属性生成AST",
       "frontmatter": {},
       "regularPath": "/vue-code-study/compile/parse.html",
       "relativePath": "vue-code-study/compile/parse.md",
-      "key": "v-13d9fb31",
+      "key": "v-9793e8a8",
       "path": "/vue-code-study/compile/parse.html",
       "headers": [
         {
@@ -905,72 +823,112 @@ export const siteData = {
       ]
     },
     {
-      "title": "vue入口",
+      "title": "解析HTML模板",
       "frontmatter": {},
-      "regularPath": "/vue-code-study/entry/entry.html",
-      "relativePath": "vue-code-study/entry/entry.md",
-      "key": "v-13d7ff16",
-      "path": "/vue-code-study/entry/entry.html",
+      "regularPath": "/vue-code-study/compile/parse-html.html",
+      "relativePath": "vue-code-study/compile/parse-html.md",
+      "key": "v-27dfc220",
+      "path": "/vue-code-study/compile/parse-html.html",
       "headers": [
         {
           "level": 2,
-          "title": "入口文件",
-          "slug": "入口文件"
+          "title": "parseHTML中用到的正则",
+          "slug": "parsehtml中用到的正则"
+        },
+        {
+          "level": 3,
+          "title": "attribute",
+          "slug": "attribute"
+        },
+        {
+          "level": 3,
+          "title": "dynamicArgAttribute",
+          "slug": "dynamicargattribute"
+        },
+        {
+          "level": 3,
+          "title": "startTagOpen",
+          "slug": "starttagopen"
+        },
+        {
+          "level": 3,
+          "title": "startTagClose",
+          "slug": "starttagclose"
+        },
+        {
+          "level": 3,
+          "title": "endTag",
+          "slug": "endtag"
+        },
+        {
+          "level": 3,
+          "title": "doctype",
+          "slug": "doctype"
+        },
+        {
+          "level": 3,
+          "title": "comment",
+          "slug": "comment"
+        },
+        {
+          "level": 3,
+          "title": "conditionalComment",
+          "slug": "conditionalcomment"
+        },
+        {
+          "level": 3,
+          "title": "encodedAttr",
+          "slug": "encodedattr"
+        },
+        {
+          "level": 3,
+          "title": "encodedAttrWithNewLines",
+          "slug": "encodedattrwithnewlines"
         },
         {
           "level": 2,
-          "title": "initMixin",
-          "slug": "initmixin"
-        },
-        {
-          "level": 3,
-          "title": "resolveConstructorOptions",
-          "slug": "resolveconstructoroptions"
+          "title": "parseHTML用到的一些方法和变量",
+          "slug": "parsehtml用到的一些方法和变量"
         },
         {
           "level": 2,
-          "title": "mergeOptions",
-          "slug": "mergeoptions"
+          "title": "parseHTML",
+          "slug": "parsehtml"
         },
         {
           "level": 3,
-          "title": "默认合并策略",
-          "slug": "默认合并策略"
+          "title": "左尖括号索引为0时",
+          "slug": "左尖括号索引为0时"
         },
         {
           "level": 3,
-          "title": "el，propsData合并策略",
-          "slug": "el-propsdata合并策略"
+          "title": "左尖括号索引大于等于0时",
+          "slug": "左尖括号索引大于等于0时"
         },
         {
           "level": 3,
-          "title": "data，provide合并策略",
-          "slug": "data-provide合并策略"
+          "title": "左尖括号索引没找到时",
+          "slug": "左尖括号索引没找到时"
         },
         {
           "level": 3,
-          "title": "生命周期合并策略",
-          "slug": "生命周期合并策略"
+          "title": "advance",
+          "slug": "advance"
         },
         {
           "level": 3,
-          "title": "props，methods，inject，computed合并策略",
-          "slug": "props-methods-inject-computed合并策略"
+          "title": "parseStartTag",
+          "slug": "parsestarttag"
         },
         {
           "level": 3,
-          "title": "directives，filters，components合并策略",
-          "slug": "directives-filters-components合并策略"
+          "title": "handleStartTag",
+          "slug": "handlestarttag"
         },
         {
           "level": 3,
-          "title": "watch合并策略",
-          "slug": "watch合并策略"
-        },
-        {
-          "level": 2,
-          "title": "initProvide，initInjections",
-          "slug": "initprovide-initinjections"
+          "title": "parseEndTag",
+          "slug": "parseendtag"
         }
       ]
     },
@@ -979,7 +937,7 @@ export const siteData = {
       "frontmatter": {},
       "regularPath": "/vue-code-study/entry/state.html",
       "relativePath": "vue-code-study/entry/state.md",
-      "key": "v-9ee2d192",
+      "key": "v-63641d32",
       "path": "/vue-code-study/entry/state.html",
       "headers": [
         {
@@ -1025,11 +983,81 @@ export const siteData = {
       ]
     },
     {
+      "title": "全局方法",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/global-api/global.html",
+      "relativePath": "vue-code-study/global-api/global.md",
+      "key": "v-11ca359c",
+      "path": "/vue-code-study/global-api/global.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "入口",
+          "slug": "入口"
+        },
+        {
+          "level": 2,
+          "title": "initGlobalAPI",
+          "slug": "initglobalapi"
+        },
+        {
+          "level": 2,
+          "title": "Vue.set",
+          "slug": "vue-set"
+        },
+        {
+          "level": 2,
+          "title": "Vue.delete",
+          "slug": "vue-delete"
+        },
+        {
+          "level": 2,
+          "title": "Vue.nextTick",
+          "slug": "vue-nexttick"
+        },
+        {
+          "level": 2,
+          "title": "Vue.observable",
+          "slug": "vue-observable"
+        },
+        {
+          "level": 2,
+          "title": "Vue.use",
+          "slug": "vue-use"
+        },
+        {
+          "level": 2,
+          "title": "Vue.mixin",
+          "slug": "vue-mixin"
+        },
+        {
+          "level": 2,
+          "title": "Vue.extend",
+          "slug": "vue-extend"
+        },
+        {
+          "level": 2,
+          "title": "Vue.component",
+          "slug": "vue-component"
+        },
+        {
+          "level": 2,
+          "title": "Vue.directive",
+          "slug": "vue-directive"
+        },
+        {
+          "level": 2,
+          "title": "Vue.filter",
+          "slug": "vue-filter"
+        }
+      ]
+    },
+    {
       "title": "实例方法",
       "frontmatter": {},
       "regularPath": "/vue-code-study/global-api/instance.html",
       "relativePath": "vue-code-study/global-api/instance.md",
-      "key": "v-1a6ce57d",
+      "key": "v-4bb5d510",
       "path": "/vue-code-study/global-api/instance.html",
       "headers": [
         {
@@ -1089,7 +1117,7 @@ export const siteData = {
       "frontmatter": {},
       "regularPath": "/vue-code-study/observe/observe.html",
       "relativePath": "vue-code-study/observe/observe.md",
-      "key": "v-57cd00e6",
+      "key": "v-629a4af0",
       "path": "/vue-code-study/observe/observe.html",
       "headers": [
         {
@@ -1180,47 +1208,42 @@ export const siteData = {
       ]
     },
     {
-      "title": "异步队列",
+      "title": "问题",
       "frontmatter": {},
-      "regularPath": "/vue-code-study/observe/queue.html",
-      "relativePath": "vue-code-study/observe/queue.md",
-      "key": "v-2160ea3a",
-      "path": "/vue-code-study/observe/queue.html",
+      "regularPath": "/vue-code-study/question/q1.html",
+      "relativePath": "vue-code-study/question/q1.md",
+      "key": "v-8ada39e4",
+      "path": "/vue-code-study/question/q1.html",
       "headers": [
         {
           "level": 2,
-          "title": "resetSchedulerState",
-          "slug": "resetschedulerstate"
+          "title": "为什么data，watch选项中，如果写的方法是箭头函数就访问不到实例的this了？",
+          "slug": "为什么data-watch选项中-如果写的方法是箭头函数就访问不到实例的this了"
         },
         {
           "level": 2,
-          "title": "flushSchedulerQueue",
-          "slug": "flushschedulerqueue"
+          "title": "多次绑定同一事件时？",
+          "slug": "多次绑定同一事件时"
         },
         {
           "level": 2,
-          "title": "queueWatcher",
-          "slug": "queuewatcher"
-        },
+          "title": "v-cloak原理",
+          "slug": "v-cloak原理"
+        }
+      ]
+    },
+    {
+      "title": "web平台文件下的util目录",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/util/web-util.html",
+      "relativePath": "vue-code-study/util/web-util.md",
+      "key": "v-8780a5e0",
+      "path": "/vue-code-study/util/web-util.html",
+      "headers": [
         {
           "level": 2,
-          "title": "nextTick",
-          "slug": "nexttick"
-        },
-        {
-          "level": 2,
-          "title": "timerFunc",
-          "slug": "timerfunc"
-        },
-        {
-          "level": 2,
-          "title": "flushCallbacks",
-          "slug": "flushcallbacks"
-        },
-        {
-          "level": 2,
-          "title": "Q&A",
-          "slug": "q-a"
+          "title": "aas",
+          "slug": "aas"
         }
       ]
     },
@@ -1229,7 +1252,7 @@ export const siteData = {
       "frontmatter": {},
       "regularPath": "/vue-code-study/util/shared.html",
       "relativePath": "vue-code-study/util/shared.md",
-      "key": "v-a6b0d07e",
+      "key": "v-5f7d1dbc",
       "path": "/vue-code-study/util/shared.html",
       "headers": [
         {
@@ -1370,124 +1393,11 @@ export const siteData = {
       ]
     },
     {
-      "title": "全局方法",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/global-api/global.html",
-      "relativePath": "vue-code-study/global-api/global.md",
-      "key": "v-099cd021",
-      "path": "/vue-code-study/global-api/global.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "入口",
-          "slug": "入口"
-        },
-        {
-          "level": 2,
-          "title": "initGlobalAPI",
-          "slug": "initglobalapi"
-        },
-        {
-          "level": 2,
-          "title": "Vue.set",
-          "slug": "vue-set"
-        },
-        {
-          "level": 2,
-          "title": "Vue.delete",
-          "slug": "vue-delete"
-        },
-        {
-          "level": 2,
-          "title": "Vue.nextTick",
-          "slug": "vue-nexttick"
-        },
-        {
-          "level": 2,
-          "title": "Vue.observable",
-          "slug": "vue-observable"
-        },
-        {
-          "level": 2,
-          "title": "Vue.use",
-          "slug": "vue-use"
-        },
-        {
-          "level": 2,
-          "title": "Vue.mixin",
-          "slug": "vue-mixin"
-        },
-        {
-          "level": 2,
-          "title": "Vue.extend",
-          "slug": "vue-extend"
-        },
-        {
-          "level": 2,
-          "title": "Vue.component",
-          "slug": "vue-component"
-        },
-        {
-          "level": 2,
-          "title": "Vue.directive",
-          "slug": "vue-directive"
-        },
-        {
-          "level": 2,
-          "title": "Vue.filter",
-          "slug": "vue-filter"
-        }
-      ]
-    },
-    {
-      "title": "web平台文件下的util目录",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/util/web-util.html",
-      "relativePath": "vue-code-study/util/web-util.md",
-      "key": "v-1be39c95",
-      "path": "/vue-code-study/util/web-util.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "aas",
-          "slug": "aas"
-        }
-      ]
-    },
-    {
-      "title": "Home",
-      "frontmatter": {
-        "home": true,
-        "heroImage": "/images/logo.png",
-        "actionText": "快速上手 →",
-        "actionLink": "/guide/",
-        "features": [
-          {
-            "title": "简洁至上",
-            "details": "以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。"
-          },
-          {
-            "title": "Vue驱动",
-            "details": "享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。"
-          },
-          {
-            "title": "高性能",
-            "details": "VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。"
-          }
-        ],
-        "footer": "MIT Licensed | Copyright © 2018-present Evan You"
-      },
-      "regularPath": "/",
-      "relativePath": "README.md",
-      "key": "v-19aff440",
-      "path": "/"
-    },
-    {
       "title": "core文件下的util目录",
       "frontmatter": {},
       "regularPath": "/vue-code-study/util/util.html",
       "relativePath": "vue-code-study/util/util.md",
-      "key": "v-be32e7f2",
+      "key": "v-3c4c4782",
       "path": "/vue-code-study/util/util.html",
       "headers": [
         {
@@ -1563,22 +1473,117 @@ export const siteData = {
       ]
     },
     {
-      "title": "问题",
+      "title": "vue入口",
       "frontmatter": {},
-      "regularPath": "/vue-code-study/question/q1.html",
-      "relativePath": "vue-code-study/question/q1.md",
-      "key": "v-07bd5d13",
-      "path": "/vue-code-study/question/q1.html",
+      "regularPath": "/vue-code-study/entry/entry.html",
+      "relativePath": "vue-code-study/entry/entry.md",
+      "key": "v-ae2cf320",
+      "path": "/vue-code-study/entry/entry.html",
       "headers": [
         {
           "level": 2,
-          "title": "为什么data，watch选项中，如果写的方法是箭头函数就访问不到实例的this了？",
-          "slug": "为什么data-watch选项中-如果写的方法是箭头函数就访问不到实例的this了"
+          "title": "入口文件",
+          "slug": "入口文件"
         },
         {
           "level": 2,
-          "title": "多次绑定同一事件时？",
-          "slug": "多次绑定同一事件时"
+          "title": "initMixin",
+          "slug": "initmixin"
+        },
+        {
+          "level": 3,
+          "title": "resolveConstructorOptions",
+          "slug": "resolveconstructoroptions"
+        },
+        {
+          "level": 2,
+          "title": "mergeOptions",
+          "slug": "mergeoptions"
+        },
+        {
+          "level": 3,
+          "title": "默认合并策略",
+          "slug": "默认合并策略"
+        },
+        {
+          "level": 3,
+          "title": "el，propsData合并策略",
+          "slug": "el-propsdata合并策略"
+        },
+        {
+          "level": 3,
+          "title": "data，provide合并策略",
+          "slug": "data-provide合并策略"
+        },
+        {
+          "level": 3,
+          "title": "生命周期合并策略",
+          "slug": "生命周期合并策略"
+        },
+        {
+          "level": 3,
+          "title": "props，methods，inject，computed合并策略",
+          "slug": "props-methods-inject-computed合并策略"
+        },
+        {
+          "level": 3,
+          "title": "directives，filters，components合并策略",
+          "slug": "directives-filters-components合并策略"
+        },
+        {
+          "level": 3,
+          "title": "watch合并策略",
+          "slug": "watch合并策略"
+        },
+        {
+          "level": 2,
+          "title": "initProvide，initInjections",
+          "slug": "initprovide-initinjections"
+        }
+      ]
+    },
+    {
+      "title": "异步队列",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/observe/queue.html",
+      "relativePath": "vue-code-study/observe/queue.md",
+      "key": "v-e0a8c944",
+      "path": "/vue-code-study/observe/queue.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "resetSchedulerState",
+          "slug": "resetschedulerstate"
+        },
+        {
+          "level": 2,
+          "title": "flushSchedulerQueue",
+          "slug": "flushschedulerqueue"
+        },
+        {
+          "level": 2,
+          "title": "queueWatcher",
+          "slug": "queuewatcher"
+        },
+        {
+          "level": 2,
+          "title": "nextTick",
+          "slug": "nexttick"
+        },
+        {
+          "level": 2,
+          "title": "timerFunc",
+          "slug": "timerfunc"
+        },
+        {
+          "level": 2,
+          "title": "flushCallbacks",
+          "slug": "flushcallbacks"
+        },
+        {
+          "level": 2,
+          "title": "Q&A",
+          "slug": "q-a"
         }
       ]
     },
@@ -1587,7 +1592,7 @@ export const siteData = {
       "frontmatter": {},
       "regularPath": "/vue-code-study/window-api/window.html",
       "relativePath": "vue-code-study/window-api/window.md",
-      "key": "v-093fc73e",
+      "key": "v-038d81dc",
       "path": "/vue-code-study/window-api/window.html"
     }
   ],
