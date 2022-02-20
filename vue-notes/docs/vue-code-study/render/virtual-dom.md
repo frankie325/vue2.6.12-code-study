@@ -1,5 +1,8 @@
-/* @flow */
+# 虚拟DOM
 
+## VNode的创建
+虚拟DOM其实就是一个对象，用来存储构建标签的信息。一个html标签就是一个虚拟DOM，html模板经过编译器生成AST对象，AST对象 => 渲染函数字符函数树，执行渲染函数 => VNode树结构
+```js
 export default class VNode {
   tag: string | void;
   data: VNodeData | void;
@@ -70,7 +73,10 @@ export default class VNode {
     return this.componentInstance
   }
 }
+```
 
+## createEmptyVNode
+```js
 // 创建注释VNode
 export const createEmptyVNode = (text: string = '') => {
   const node = new VNode()
@@ -79,15 +85,17 @@ export const createEmptyVNode = (text: string = '') => {
   return node
 }
 
+```
+## createTextVNode
+```js
 // 创建文本VNode
 export function createTextVNode (val: string | number) {
   return new VNode(undefined, undefined, undefined, String(val))
 }
+```
 
-// optimized shallow clone
-// used for static nodes and slot nodes because they may be reused across
-// multiple renders, cloning them avoids errors when DOM manipulations rely
-// on their elm reference.
+## cloneVNode
+```js
 // 由于静态节点和槽节点可以在多个渲染中重用，所以克隆它们可以避免DOM操作依赖于它们的elm引用时出现错误
 export function cloneVNode (vnode: VNode): VNode {
   const cloned = new VNode(
@@ -115,3 +123,4 @@ export function cloneVNode (vnode: VNode): VNode {
   cloned.isCloned = true
   return cloned
 }
+```

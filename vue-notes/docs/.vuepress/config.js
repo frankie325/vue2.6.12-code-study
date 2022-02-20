@@ -52,6 +52,12 @@ module.exports = {
                     sidebarDepth: 2,
                 },
                 {
+                    title: "渲染函数",
+                    collapsable: true,
+                    children: ["render/render", "render/create-element", "render/create-component", "render/virtual-dom"],
+                    sidebarDepth: 2,
+                },
+                {
                     title: "全局与实例方法/属性",
                     collapsable: true,
                     children: ["global-api/global", "global-api/instance"],

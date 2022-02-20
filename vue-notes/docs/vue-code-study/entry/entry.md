@@ -10,6 +10,7 @@
 1. :point_right:[initMixin](./entry.md#initmixin)方法
 2. :point_right:[stateMixin](./state.md#statemixin)方法
 3. :point_right:[eventsMixin](../global-api/instance.md#eventsmixin)方法
+4. :point_right:[lifecycleMixin](../global-api/instance.md#eventsmixin)方法
 ```js
 import { initMixin } from './init'
 import { stateMixin } from './state'
@@ -46,7 +47,7 @@ export default Vue
 - _init方法初始化了实例的$options,子组件使用initInternalComponent，根组件使用[mergeOptions](./entry.md#mergeoptions)方法
 - 初始化组件实例关系属性，比如 $parent、$children、$root、$refs等
 - 初始化自定义事件
-- 解析组件的插槽信息，得到 vm.$slot，处理渲染函数，得到 vm.$createElement 方法，即 h 函数
+- [initRender](../render/render.html#initrender)方法解析组件的插槽信息，得到 vm.$slot，处理渲染函数，得到 vm.$createElement 方法，即 h 函数
 - 调用 beforeCreate 钩子函数
 - 初始化组件的 [provide，inject](./entry.md#initprovide-initinjections) 配置项
 - 数据响应式，处理 props、methods、data、computed、watch
@@ -131,6 +132,31 @@ export function initMixin (Vue: Class<Component>) {
     if (vm.$options.el) {
       vm.$mount(vm.$options.el)
     }
+  }
+}
+```
+### initInternalComponent
+```js
+// 初始化组件的选项
+export function initInternalComponent (vm: Component, options: InternalComponentOptions) {
+  // 创建vm.$options，原型指向组件构造函数的options
+  // 这样子组件实例的$options就可以访问子类构造函数上的资源选项了
+  const opts = vm.$options = Object.create(vm.constructor.options)
+  // doing this because it's faster than dynamic enumeration.
+  const parentVnode = options._parentVnode // 拿到该组件标签的VNode
+  opts.parent = options.parent //该组件的父组件实例
+  opts._parentVnode = parentVnode //添加_parentVnode属性
+
+  const vnodeComponentOptions = parentVnode.componentOptions //拿到该组件的组件选项
+  opts.propsData = vnodeComponentOptions.propsData //父组件传递的props数据
+  opts._parentListeners = vnodeComponentOptions.listeners //该组件上绑定的事件
+  opts._renderChildren = vnodeComponentOptions.children //包裹在该组件标签内的VNode子节点
+  opts._componentTag = vnodeComponentOptions.tag //该组件的标签名
+
+  if (options.render) {
+    // 如果存在render函数，添加到$options中
+    opts.render = options.render
+    opts.staticRenderFns = options.staticRenderFns
   }
 }
 ```

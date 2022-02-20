@@ -73,6 +73,7 @@ function flushSchedulerQueue () {
   currentFlushTimestamp = getNow() //获取当前队列执行的时间戳
   flushing = true  //将flushing置为true，表示队列正在执行
   let watcher, id
+  // debugger
   /*
   将队列排序（升序），保证
      1、组件的更新顺序为从父级到子级，因为父组件总是在子组件之前被创建
@@ -81,7 +82,6 @@ function flushSchedulerQueue () {
     排序以后在刷新队列期间新进来的 watcher 也会按顺序放入队列的合适位置
   */
   queue.sort((a, b) => a.id - b.id)
-
   // 遍历watcher队列，直接使用了 queue.length，动态计算队列的长度，因为在执行的时候，可能会有新的watcher推入队列
   for (index = 0; index < queue.length; index++) {
     watcher = queue[index]
@@ -190,7 +190,7 @@ export function queueWatcher (watcher: Watcher) {
     }
 
     if (!waiting) {
-      // waiting为false,说明队列执行完毕
+      // waiting为true,说明flushSchedulerQueue在等待执行，异步执行完flushSchedulerQueue，waiting才会重置为false
       waiting = true
       if (process.env.NODE_ENV !== 'production' && !config.async) {
         // 如果config.async为false，则同步执行

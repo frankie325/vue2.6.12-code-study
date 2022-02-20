@@ -9,23 +9,25 @@
   <script src="../dist/vue.js"></script>
   <body>
     <div id="app">
-      <comp></comp>
+      <comp :obj="obj">
+        <div>11</div>
+      </comp>
       <button @click="changeProp">按钮</button>
+      <div>{{obj}}</div>
     </div>
   </body>
   <script>
     Vue.component("comp", {
-      data() {
-        return {
-          show: true,
-        };
+      props: {
+        obj: Object,
       },
       render(h) {
         console.log("子组件重新渲染");
+        return h("div", {}, JSON.stringify(this.obj));
       },
-      updated() {
-        console.log("子组件更新");
-      },
+      // updated() {
+      //   console.log("子组件更新");
+      // },
     });
     new Vue({
       el: "#app",
@@ -39,10 +41,11 @@
       },
       methods: {
         changeProp() {
-          this.obj = {
-            name: "new kfg",
-          };
+          this.obj.name = "new kfg";
         },
+      },
+      mounted() {
+        console.log(this);
       },
     });
   </script>

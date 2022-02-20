@@ -5,6 +5,9 @@
 ## $set
 ## $delete
 ## $watch  
+:::warning 注意：
+只有经过了响应式处理的属性才能使用$watch进行监听，watch配置同理。因为只有经过响应式处理了，才会有对应的Dep去收集监听Watcher，进行更新。
+:::
 以上实例属性都在:point_right: [stateMixin](../entry/state.md#statemixin)中定义
 
 ## eventsMixin
@@ -167,3 +170,7 @@ export function eventsMixin (Vue: Class<Component>) {
   }
 }
 ```
+
+## $forceUpdate
+
+

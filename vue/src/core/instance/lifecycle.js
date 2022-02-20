@@ -67,6 +67,7 @@ export function initLifecycle (vm: Component) {
 
 export function lifecycleMixin (Vue: Class<Component>) {
   Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
+    console.log(this,"_update")
     // 当前正在patch阶段的实例
     const vm: Component = this
     const prevEl = vm.$el //拿到实例更新前挂载的DOM元素，空挂载为undefined
@@ -154,6 +155,7 @@ export function lifecycleMixin (Vue: Class<Component>) {
     // 移除所有自定义事件
     vm.$off()
     // remove __vue__ reference
+    // __vue__属性置为null，__vue__为对应的vue实例
     if (vm.$el) {
       vm.$el.__vue__ = null
     }
@@ -259,6 +261,8 @@ export function updateChildComponent (
   parentVnode: MountedComponentVNode, //新的组件VNode
   renderChildren: ?Array<VNode> //新组件标签内的子VNode
 ) {
+  // debugger
+  // console.log(Math.random())
   if (process.env.NODE_ENV !== 'production') {
     isUpdatingChildComponent = true
   }

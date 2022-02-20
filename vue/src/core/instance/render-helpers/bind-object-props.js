@@ -18,6 +18,7 @@ import {
   当绑定的是对象和数组形式时，将渲染函数的第二个参数data进行一下处理
   v-bind="{id:'xxx',name:'xxx'}", 
   v-bind="[ { style: { color:'red' } }, { class:'header header-wrap' }]"
+  如果对象内的属性与标签上绑定的属性重复了，不会进行覆盖，标签上绑定的属性优先级更高
 */
 export function bindObjectProps (
   data: any,

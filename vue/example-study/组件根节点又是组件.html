@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">
+        <comp1></comp1>
+    </div>
+  </body>
+  <script>
+    Vue.component("comp1", {
+      template: "<comp2></comp2>",
+    });
+    Vue.component("comp2", {
+      template: "<div>i am com2</div>",
+    });
+    new Vue({
+      el: "#app",
+
+      data() {
+        return {};
+      },
+      methods: {},
+      mounted() {},
+    });
+  </script>
+</html>

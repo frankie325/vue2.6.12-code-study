@@ -20,7 +20,7 @@ export function renderStatic (
     return tree
   }
   // otherwise, render a fresh tree.
-  // 否则，就渲染最新的VNode
+  // 否则，就渲染最新的VNode，并进行缓存
   // 从staticRenderFns中取出对应的节点执行，得到VNode
   tree = cached[index] = this.$options.staticRenderFns[index].call(
     this._renderProxy,

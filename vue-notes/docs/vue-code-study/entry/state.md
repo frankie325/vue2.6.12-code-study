@@ -373,7 +373,6 @@ function createComputedGetter(key) {
       2.watcher.evaluate()执行完后又调用了popTarget()，将computedWatcher从targetStack队列中剔除，此时Dep.target为组件的渲染watcher
       执行下面的watcher.depend()，会遍历computedWatcher在上一步收集到的所有依赖变量的dep实例，将渲染watcher添加到dep实例
       所以当依赖变量更新时，页面也会进行更新。
-      妙哇，妙哇。yyx，yyds
       */
       if (Dep.target) {
         // 这个

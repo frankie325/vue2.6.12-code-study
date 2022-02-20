@@ -130,7 +130,7 @@ export function genElement (el: ASTElement, state: CodegenState): string {
 }
 ```
 ## genChildren
-genChildren处理子节点元素，形成一个树形结构的渲染函数```"_c(tag, data, [_c(),_c(),...], normalizationType)"```
+genChildren处理子节点元素，形成一个树形结构的渲染函数```"_c(tag, data, [_c(),_c(),...], normalizationType)"```，子节点可以是嵌套的数组形式，需要进行:point_right:[归一化处理](../render/create-element.html#归一化处理)
 ```js
 export function genChildren (
   el: ASTElement,
@@ -155,7 +155,7 @@ export function genChildren (
       el.tag !== 'template' &&
       el.tag !== 'slot'
     ) {
-      // 获取规范化类型
+      // 获取归一化类型
       const normalizationType = checkSkip
         ? state.maybeComponent(el) ? `,1` : `,0`
         : ``
@@ -164,13 +164,13 @@ export function genChildren (
       return `${(altGenElement || genElement)(el, state)}${normalizationType}`
     }
 
-    // 获取该节点规范化类型
+    // 获取该节点归一化类型
     const normalizationType = checkSkip
       ? getNormalizationType(children, state.maybeComponent)
       : 0
     // 根据节点类型调用不同的gen方法
     const gen = altGenNode || genNode
-    // 返回一个数组字符拼接最后该节点的规范化类型，数组内为所有子节点的渲染函数
+    // 返回一个数组字符拼接最后该节点的归一化类型，数组内为所有子节点的渲染函数
     // "[_c(tag,data,children,normalizationType),...,...],1"
     return `[${children.map(c => gen(c, state)).join(',')}]${
       normalizationType ? `,${normalizationType}` : ''
@@ -181,14 +181,14 @@ export function genChildren (
 ### getNormalizationType
 ```js
 /*
-确定子数组所需的规范化
-0：不需要标准化
+确定子数组所需的归一化
+0：不需要归一化
 1：需要简单的归一化（可能是 1 级深度嵌套数组）
-2：需要完全标准化
+2：需要完全归一化
 */
 
 /*
-  1.子节点中只要有一个需要完全标准化的节点，则返回2
+  1.子节点中只要有一个需要完全归一化的节点，则返回2
   2.当第一个条件不满足时，再判断子节点中是否有组件，有则返回1
   3.上面都不满足则返回0
 */
@@ -205,8 +205,8 @@ function getNormalizationType (
       continue
     }
     /*
-      如果该节点是需要完全标准化的节点
-      或者该节点的ifConditions中block指向的节点中只要有一个是需要完全标准化的节点
+      如果该节点是需要完全归一化的节点
+      或者该节点的ifConditions中block指向的节点中只要有一个是需要完全归一化的节点
       则返回2，跳出循环
     */
     if (needsNormalization(el) ||
@@ -230,7 +230,7 @@ function getNormalizationType (
 ### needsNormalization
 ```js
 /*
-  需要完全标准化的节点下列条件
+  需要完全归一化的节点下列条件
   1.存在v-for
   2.或者是template标签
   3.或者是slot标签
@@ -774,7 +774,7 @@ function genProps (props: Array<ASTAttr>): string {
 }
 ```
 ## genHandlers-处理v-on事件绑定 
-事件绑定时，可以有多种写法，还有各种修饰符的应用，是怎么处理的？:point_right: [v-model原理](./events.html)
+事件绑定时，可以有多种写法，还有各种修饰符的应用，是怎么处理的？:point_right: [v-on原理](./events.html)
 :::tip 文件目录
 /src/compiler/codegen/events.js
 :::
@@ -1326,7 +1326,10 @@ render = _c(
     // 作为DOM属性，值同上
     domProps:
       '_d({attrName1,attrValue1,attrName2,attrValue2,...},["attrName1":attrValue1,"attrName2":attrValue2,...,])',
-    // vue中事件，第一个参数为静态绑定生成的的字符串，第二个参数为动态绑定事件生成的字符串，如果没有动态绑定事件 on : "{'click':function($event){...},...}"
+    /*
+    vue中事件，第一个参数为静态绑定生成的的字符串，第二个参数为动态绑定事件生成的字符串，如果没有动态绑定事件 on : "{'click':function($event){...},'keydown':[function($event){...}, function($event){...}],...,}"
+    如果事件有多个函数，则为数组
+    */ 
     on: "_d({'click':function($event){...},...},[eventName1, function($event){...},...])",
     // 使用.native修饰符绑定的事件，同上
     nativeOn:
@@ -1447,7 +1450,7 @@ render = _c(
     // 注释节点
     _e("注释文本内容"),
   ],
-  1 //规范化类型
+  1 //归一化类型
 );
 
 // 如果存在动态属性，使用_b()包裹生成的data字符

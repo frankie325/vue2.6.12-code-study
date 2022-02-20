@@ -97,7 +97,7 @@ export function isPromise (val: any): boolean {
 export function toString (val: any): string {
   // 如果是undefined，null，则转为空字符
   // 如果是数组或者对象，调用JSON.stringify转为字符
-  // 其他类型String转为字符
+  // 其他类型用String强制转为字符
   return val == null
     ? ''
     : Array.isArray(val) || (isPlainObject(val) && val.toString === _toString)

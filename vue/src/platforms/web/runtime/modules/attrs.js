@@ -77,7 +77,7 @@ function setAttr (el: Element, key: string, value: any, isInPre: any) {
     // set attribute for blank value
     // e.g. <option disabled>Select one</option>
     // 比如表单disabled属性 因为在html标签中不是通过true和false去控制该属性的（操作DOM就是通过true和false）
-    if (isFalsyAttrValue(value)) {// 如果是假值
+    if (isFalsyAttrValue(value)) {// 如果是假值，不会往html标签上添加该属性
       // 则直接从标签上移除该属性
       el.removeAttribute(key)
     } else {
