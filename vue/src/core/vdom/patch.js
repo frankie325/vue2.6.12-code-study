@@ -273,7 +273,6 @@ export function createPatchFunction (backend) {
       }
     }
   }
-
   // 执行各个模块的的 create 钩子
   function initComponent (vnode, insertedVnodeQueue) {
     if (isDef(vnode.data.pendingInsert)) {

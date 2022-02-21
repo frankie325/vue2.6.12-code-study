@@ -50,7 +50,7 @@ function normalizeStyleData (data: VNodeData): ?Object {
 // normalize possible array / string values into Object
 /*
 处理使用v-bind指令绑定的style属性
-<div :style=" 'font-size:16px'  }"></div> 可以是字符
+<div :style=" 'font-size:16px' "></div> 可以是字符
 <div :style="{ fontSize: '16px' }"></div> 可以是对象
 <div :style="[ { fontSize: '16px' }, {color:'red' } ]"></div> 可以是数组，但每个元素里只能是对象
 将以上形式全部转为对象

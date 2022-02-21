@@ -32,7 +32,7 @@ export function extractPropsFromVNodeData (
     return
   }
   const res = {}
-  const { attrs, props } = data //该组件上绑定的属性，属性值为父组件对应的数据，或者由渲染函数props选项传进的数据
+  const { attrs, props } = data //attrs为组件上绑定的属性，由编译器解析得到，props为渲染函数传递的
   if (isDef(attrs) || isDef(props)) { //如果存在data.attrs和data.props，说明组件上是绑定了属性的
     // 遍历props选项
     for (const key in propOptions) {
