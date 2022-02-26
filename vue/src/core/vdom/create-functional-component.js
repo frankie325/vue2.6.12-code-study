@@ -171,7 +171,7 @@ function cloneAndMarkFunctionalResult (vnode, data, contextVm, options, renderCo
   if (process.env.NODE_ENV !== 'production') {
     (clone.devtoolsMeta = clone.devtoolsMeta || {}).renderContext = renderContext
   }
-  if (data.slot) {
+  if (data.slot) { //函数式组件的data.slot会覆盖函数式组件内子vnode的data.slot
     (clone.data || (clone.data = {})).slot = data.slot
   }
   return clone

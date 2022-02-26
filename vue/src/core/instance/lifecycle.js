@@ -260,7 +260,8 @@ export function updateChildComponent (
   parentVnode: MountedComponentVNode, //新的组件VNode
   renderChildren: ?Array<VNode> //新组件标签内的子VNode
 ) {
-  debugger
+  // debugger
+  // console.log(Math.random())
   if (process.env.NODE_ENV !== 'production') {
     isUpdatingChildComponent = true
   }

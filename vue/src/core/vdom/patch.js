@@ -643,6 +643,7 @@ export function createPatchFunction (backend) {
     index,
     removeOnly
   ) {
+
     // 新VNode和旧VNode相等，直接返回
     // 静态标记的节点会进行缓存，所以新Vnode和旧VNode会相等
     if (oldVnode === vnode) {
@@ -688,6 +689,7 @@ export function createPatchFunction (backend) {
     if (isDef(data) && isDef(i = data.hook) && isDef(i = i.prepatch)) {
       i(oldVnode, vnode)
     }
+    // debugger
 
     const oldCh = oldVnode.children  //旧的子VNode
     const ch = vnode.children //新的子VNode

@@ -125,7 +125,11 @@ export function set(target: Array<any> | Object, key: any, val: any): any {
   // 拿到目标对象的__ob__属性
   const ob = (target: any).__ob__;
   if (target._isVue || (ob && ob.vmCount)) {
-    // 如果进行设置的是vue实例或者是根属性$data，报错
+    /*
+      如果进行是设置属性到vue实例，则需要提前声明该属性，报错
+      如果是设置属性到$data，报错
+    */ 
+    
     process.env.NODE_ENV !== "production" &&
       warn(
         "Avoid adding reactive properties to a Vue instance or its root $data " +

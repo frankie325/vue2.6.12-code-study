@@ -41,6 +41,7 @@ export default class Dep {
 
   // 通知dep实例收集的所有watcher进行更新
   notify () {
+    // debugger
     // stabilize the subscriber list first
     // 当前dep实例收集的所有watcher
     const subs = this.subs.slice()

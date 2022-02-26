@@ -41,7 +41,7 @@ export default class VNode {
   ) {
     this.tag = tag  //标签名
     this.data = data //VNode的属性
-    this.children = children //子VNode
+    this.children = children //子VNode，组件的子VNode在componentOptions属性中
     this.text = text //文本内容
     this.elm = elm // 标签VNode节点创建的DOM元素，以及组件VNode创建的实例的$el指向的DOM元素
     this.ns = undefined
