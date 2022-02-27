@@ -39,8 +39,7 @@ export function resolveSlots (
     // named slots should only be respected if the vnode was rendered in the
     // same context.
     // http://caibaojian.com/vue-design/more/vue-hoc.html#%E6%8E%A2%E7%B4%A2vue%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6
-    // 该组件经过高阶组件的包裹，该组件的context等于高阶组件，而高阶组件包裹的节点（作为该组件的插槽节点）的context等于高阶组件的父组件
-    // 组件的子节点所在父组件实例需要和组件所在的父组件实例一样
+    // 该组件包裹的作为插槽的VNode应该和该组件的上下文必须是同一个父组件，否则包裹的插槽VNode作为默认插槽处理
     if ((child.context === context || child.fnContext === context) &&
       data && data.slot != null
     ) {

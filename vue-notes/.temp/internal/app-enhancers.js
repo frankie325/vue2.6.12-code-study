@@ -1,7 +1,7 @@
-import m0 from "D:\\代码\\vue2源码学习\\vue-notes\\.temp\\app-enhancers\\0.js"
-import m1 from "D:\\代码\\vue2源码学习\\vue-notes\\.temp\\app-enhancers\\data-block.js"
-import m2 from "D:\\代码\\vue2源码学习\\vue-notes\\.temp\\app-enhancers\\global-components-1.js"
-import m3 from "D:\\代码\\vue2源码学习\\vue-notes\\.temp\\app-enhancers\\1.js"
+import m0 from "G:\\学习\\vue2.6.12-code-study\\vue-notes\\.temp\\app-enhancers\\0.js"
+import m1 from "G:\\学习\\vue2.6.12-code-study\\vue-notes\\.temp\\app-enhancers\\data-block.js"
+import m2 from "G:\\学习\\vue2.6.12-code-study\\vue-notes\\.temp\\app-enhancers\\global-components-1.js"
+import m3 from "G:\\学习\\vue2.6.12-code-study\\vue-notes\\.temp\\app-enhancers\\1.js"
 
 export default [
   m0,

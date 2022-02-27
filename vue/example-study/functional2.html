@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../dist/vue.js"></script>
+  <body>
+    <div id="app">
+      <comp>
+        <fragment slot="center1">
+          <div>哈哈1</div>
+          <div>哈哈2</div>
+        </fragment>
+      </comp>
+    </div>
+  </body>
+  <script>
+    Vue.component("comp", {
+      template: "<div>1<slot name='center'></slot>2</div>",
+    });
+    Vue.component("fragment", {
+      functional: true,
+      render(h, ctx) {
+        return ctx.children;
+      },
+    });
+    new Vue({
+      el: "#app",
+
+      methods: {},
+    });
+  </script>
+</html>
