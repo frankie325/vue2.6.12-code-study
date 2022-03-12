@@ -22,32 +22,12 @@ export const siteData = {
       "path": "/vue-code-study/"
     },
     {
-      "title": "Home",
-      "frontmatter": {
-        "home": true,
-        "heroImage": "/images/logo.png",
-        "actionText": "快速上手 →",
-        "actionLink": "/guide/",
-        "features": [
-          {
-            "title": "简洁至上",
-            "details": "以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。"
-          },
-          {
-            "title": "Vue驱动",
-            "details": "享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。"
-          },
-          {
-            "title": "高性能",
-            "details": "VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。"
-          }
-        ],
-        "footer": "MIT Licensed | Copyright © 2018-present Evan You"
-      },
-      "regularPath": "/",
-      "relativePath": "README.md",
-      "key": "v-19aff440",
-      "path": "/"
+      "title": "生成的AST对象",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/ast.html",
+      "relativePath": "vue-code-study/compile/ast.md",
+      "key": "v-4b89b893",
+      "path": "/vue-code-study/compile/ast.html"
     },
     {
       "title": "编译器入口",
@@ -815,14 +795,6 @@ export const siteData = {
       ]
     },
     {
-      "title": "生成的AST对象",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/compile/ast.html",
-      "relativePath": "vue-code-study/compile/ast.md",
-      "key": "v-4b89b893",
-      "path": "/vue-code-study/compile/ast.html"
-    },
-    {
       "title": "响应式入口",
       "frontmatter": {},
       "regularPath": "/vue-code-study/entry/state.html",
@@ -1118,66 +1090,6 @@ export const siteData = {
       ]
     },
     {
-      "title": "异步队列",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/observe/queue.html",
-      "relativePath": "vue-code-study/observe/queue.md",
-      "key": "v-2160ea3a",
-      "path": "/vue-code-study/observe/queue.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "resetSchedulerState",
-          "slug": "resetschedulerstate"
-        },
-        {
-          "level": 2,
-          "title": "flushSchedulerQueue",
-          "slug": "flushschedulerqueue"
-        },
-        {
-          "level": 2,
-          "title": "queueWatcher",
-          "slug": "queuewatcher"
-        },
-        {
-          "level": 2,
-          "title": "nextTick",
-          "slug": "nexttick"
-        },
-        {
-          "level": 2,
-          "title": "timerFunc",
-          "slug": "timerfunc"
-        },
-        {
-          "level": 2,
-          "title": "flushCallbacks",
-          "slug": "flushcallbacks"
-        },
-        {
-          "level": 2,
-          "title": "Q&A",
-          "slug": "q-a"
-        }
-      ]
-    },
-    {
-      "title": "生成组件VNode",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/render/create-component.html",
-      "relativePath": "vue-code-study/render/create-component.md",
-      "key": "v-056139ca",
-      "path": "/vue-code-study/render/create-component.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "createComponent",
-          "slug": "createcomponent"
-        }
-      ]
-    },
-    {
       "title": "响应式原理",
       "frontmatter": {},
       "regularPath": "/vue-code-study/observe/observe.html",
@@ -1344,6 +1256,66 @@ export const siteData = {
           "level": 2,
           "title": "initProvide，initInjections",
           "slug": "initprovide-initinjections"
+        }
+      ]
+    },
+    {
+      "title": "生成组件VNode",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/render/create-component.html",
+      "relativePath": "vue-code-study/render/create-component.md",
+      "key": "v-056139ca",
+      "path": "/vue-code-study/render/create-component.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "createComponent",
+          "slug": "createcomponent"
+        }
+      ]
+    },
+    {
+      "title": "异步队列",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/observe/queue.html",
+      "relativePath": "vue-code-study/observe/queue.md",
+      "key": "v-2160ea3a",
+      "path": "/vue-code-study/observe/queue.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "resetSchedulerState",
+          "slug": "resetschedulerstate"
+        },
+        {
+          "level": 2,
+          "title": "flushSchedulerQueue",
+          "slug": "flushschedulerqueue"
+        },
+        {
+          "level": 2,
+          "title": "queueWatcher",
+          "slug": "queuewatcher"
+        },
+        {
+          "level": 2,
+          "title": "nextTick",
+          "slug": "nexttick"
+        },
+        {
+          "level": 2,
+          "title": "timerFunc",
+          "slug": "timerfunc"
+        },
+        {
+          "level": 2,
+          "title": "flushCallbacks",
+          "slug": "flushcallbacks"
+        },
+        {
+          "level": 2,
+          "title": "Q&A",
+          "slug": "q-a"
         }
       ]
     },
@@ -1613,21 +1585,6 @@ export const siteData = {
       ]
     },
     {
-      "title": "web平台文件下的util目录",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/util/web-util.html",
-      "relativePath": "vue-code-study/util/web-util.md",
-      "key": "v-1be39c95",
-      "path": "/vue-code-study/util/web-util.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "aas",
-          "slug": "aas"
-        }
-      ]
-    },
-    {
       "title": "shared目录",
       "frontmatter": {},
       "regularPath": "/vue-code-study/util/shared.html",
@@ -1813,12 +1770,19 @@ export const siteData = {
       ]
     },
     {
-      "title": "performance",
+      "title": "web平台文件下的util目录",
       "frontmatter": {},
-      "regularPath": "/vue-code-study/window-api/window.html",
-      "relativePath": "vue-code-study/window-api/window.md",
-      "key": "v-093fc73e",
-      "path": "/vue-code-study/window-api/window.html"
+      "regularPath": "/vue-code-study/util/web-util.html",
+      "relativePath": "vue-code-study/util/web-util.md",
+      "key": "v-1be39c95",
+      "path": "/vue-code-study/util/web-util.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "aas",
+          "slug": "aas"
+        }
+      ]
     },
     {
       "title": "core文件下的util目录",
@@ -1926,6 +1890,14 @@ export const siteData = {
       ]
     },
     {
+      "title": "performance",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/window-api/window.html",
+      "relativePath": "vue-code-study/window-api/window.md",
+      "key": "v-093fc73e",
+      "path": "/vue-code-study/window-api/window.html"
+    },
+    {
       "title": "虚拟DOM",
       "frontmatter": {},
       "regularPath": "/vue-code-study/render/virtual-dom.html",
@@ -1954,6 +1926,34 @@ export const siteData = {
           "slug": "clonevnode"
         }
       ]
+    },
+    {
+      "title": "Home",
+      "frontmatter": {
+        "home": true,
+        "heroImage": "/images/logo.png",
+        "actionText": "快速上手 →",
+        "actionLink": "/guide/",
+        "features": [
+          {
+            "title": "简洁至上",
+            "details": "以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。"
+          },
+          {
+            "title": "Vue驱动",
+            "details": "享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。"
+          },
+          {
+            "title": "高性能",
+            "details": "VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。"
+          }
+        ],
+        "footer": "MIT Licensed | Copyright © 2018-present Evan You"
+      },
+      "regularPath": "/",
+      "relativePath": "README.md",
+      "key": "v-19aff440",
+      "path": "/"
     }
   ],
   "themeConfig": {

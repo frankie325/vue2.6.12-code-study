@@ -245,7 +245,7 @@ export function createPatchFunction (backend) {
     }
   }
 
-  // 处理组件VNode
+  // 处理组件VNode，创建子组件实例，并进入子组件的patch阶段
   function createComponent (vnode, insertedVnodeQueue, parentElm, refElm) {
     let i = vnode.data
     if (isDef(i)) {//如果VNode定义了data属性
@@ -972,6 +972,7 @@ export function createPatchFunction (backend) {
     }
 
     // 调用insert钩子，放在最后面保证所有DOM元素都已经插入到页面中，才执行insert钩子
+    // insertedVnodeQueue队列中是所有组件VNode，确保所有DOM元素都已经插入到页面，才执行mounted钩子
     invokeInsertHook(vnode, insertedVnodeQueue, isInitialPatch)
     
     // 返回生成DOM树

@@ -104,12 +104,12 @@ export function FunctionalRenderContext (
       return vnode
     }
   } else {
-    // 函数式组件使用的渲染函数
+    // 函数式组件使用的渲染函数，上面设置了contextVm保证了所有函数式组件内渲染的VNode
+    // 都指向同一个上下文contextVm，才能正确渲染出slot
     this._c = (a, b, c, d) => createElement(contextVm, a, b, c, d, needNormalization)
   }
 }
 
-// 
 installRenderHelpers(FunctionalRenderContext.prototype)
 
 export function createFunctionalComponent (

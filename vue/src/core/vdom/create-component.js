@@ -92,6 +92,7 @@ const componentVNodeHooks = {
         // be processed after the whole patch process ended.
         queueActivatedComponent(componentInstance)
       } else {
+        // 如果包裹在keepAlive组件中，调用该组件以及该组件内的所有子组件的activated钩子
         activateChildComponent(componentInstance, true /* direct */)
       }
     }
@@ -105,6 +106,7 @@ const componentVNodeHooks = {
         // 不在keep-alive组件内，则调用$destroy()直接销毁
         componentInstance.$destroy()
       } else {
+        // 如果包裹在keepAlive组件中，销毁时调用该组件以及该组件内的所有子组件的deactivated钩子
         deactivateChildComponent(componentInstance, true /* direct */)
       }
     }
