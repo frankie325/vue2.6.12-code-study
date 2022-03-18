@@ -22,14 +22,6 @@ export const siteData = {
       "path": "/vue-code-study/"
     },
     {
-      "title": "生成的AST对象",
-      "frontmatter": {},
-      "regularPath": "/vue-code-study/compile/ast.html",
-      "relativePath": "vue-code-study/compile/ast.md",
-      "key": "v-4b89b893",
-      "path": "/vue-code-study/compile/ast.html"
-    },
-    {
       "title": "编译器入口",
       "frontmatter": {},
       "regularPath": "/vue-code-study/compile/compile-entry.html",
@@ -345,52 +337,112 @@ export const siteData = {
       ]
     },
     {
-      "title": "v-model原理",
+      "title": "解析HTML模板",
       "frontmatter": {},
-      "regularPath": "/vue-code-study/compile/model.html",
-      "relativePath": "vue-code-study/compile/model.md",
-      "key": "v-4dea45c5",
-      "path": "/vue-code-study/compile/model.html",
+      "regularPath": "/vue-code-study/compile/parse-html.html",
+      "relativePath": "vue-code-study/compile/parse-html.md",
+      "key": "v-39a62c35",
+      "path": "/vue-code-study/compile/parse-html.html",
       "headers": [
         {
           "level": 2,
-          "title": "model",
-          "slug": "model"
-        },
-        {
-          "level": 2,
-          "title": "genAssignmentCode",
-          "slug": "genassignmentcode"
+          "title": "parseHTML中用到的正则",
+          "slug": "parsehtml中用到的正则"
         },
         {
           "level": 3,
-          "title": "parseModel",
-          "slug": "parsemodel"
+          "title": "attribute",
+          "slug": "attribute"
+        },
+        {
+          "level": 3,
+          "title": "dynamicArgAttribute",
+          "slug": "dynamicargattribute"
+        },
+        {
+          "level": 3,
+          "title": "startTagOpen",
+          "slug": "starttagopen"
+        },
+        {
+          "level": 3,
+          "title": "startTagClose",
+          "slug": "starttagclose"
+        },
+        {
+          "level": 3,
+          "title": "endTag",
+          "slug": "endtag"
+        },
+        {
+          "level": 3,
+          "title": "doctype",
+          "slug": "doctype"
+        },
+        {
+          "level": 3,
+          "title": "comment",
+          "slug": "comment"
+        },
+        {
+          "level": 3,
+          "title": "conditionalComment",
+          "slug": "conditionalcomment"
+        },
+        {
+          "level": 3,
+          "title": "encodedAttr",
+          "slug": "encodedattr"
+        },
+        {
+          "level": 3,
+          "title": "encodedAttrWithNewLines",
+          "slug": "encodedattrwithnewlines"
         },
         {
           "level": 2,
-          "title": "genDefaultModel-其他类型的input标签或者textarea标签上的v-model",
-          "slug": "gendefaultmodel-其他类型的input标签或者textarea标签上的v-model"
+          "title": "parseHTML用到的一些方法和变量",
+          "slug": "parsehtml用到的一些方法和变量"
         },
         {
           "level": 2,
-          "title": "genComponentModel-组件上的v-model",
-          "slug": "gencomponentmodel-组件上的v-model"
+          "title": "parseHTML",
+          "slug": "parsehtml"
         },
         {
-          "level": 2,
-          "title": "genSelect-select标签上的v-model",
-          "slug": "genselect-select标签上的v-model"
+          "level": 3,
+          "title": "左尖括号索引为0时",
+          "slug": "左尖括号索引为0时"
         },
         {
-          "level": 2,
-          "title": "genCheckboxModel-复选框上的v-model",
-          "slug": "gencheckboxmodel-复选框上的v-model"
+          "level": 3,
+          "title": "左尖括号索引大于等于0时",
+          "slug": "左尖括号索引大于等于0时"
         },
         {
-          "level": 2,
-          "title": "genRadioModel-单选框上的v-model",
-          "slug": "genradiomodel-单选框上的v-model"
+          "level": 3,
+          "title": "左尖括号索引没找到时",
+          "slug": "左尖括号索引没找到时"
+        },
+        {
+          "level": 3,
+          "title": "advance",
+          "slug": "advance"
+        },
+        {
+          "level": 3,
+          "title": "parseStartTag",
+          "slug": "parsestarttag"
+        },
+        {
+          "level": 3,
+          "title": "handleStartTag",
+          "slug": "handlestarttag"
+        },
+        {
+          "level": 3,
+          "title": "parseEndTag",
+          "slug": "parseendtag"
         }
       ]
     },
@@ -428,6 +480,14 @@ export const siteData = {
           "slug": "markstaticroots"
         }
       ]
+    },
+    {
+      "title": "生成的AST对象",
+      "frontmatter": {},
+      "regularPath": "/vue-code-study/compile/ast.html",
+      "relativePath": "vue-code-study/compile/ast.md",
+      "key": "v-4b89b893",
+      "path": "/vue-code-study/compile/ast.html"
     },
     {
       "title": "解析属性生成AST",
@@ -795,52 +855,52 @@ export const siteData = {
       ]
     },
     {
-      "title": "响应式入口",
+      "title": "v-model原理",
       "frontmatter": {},
-      "regularPath": "/vue-code-study/entry/state.html",
-      "relativePath": "vue-code-study/entry/state.md",
-      "key": "v-9ee2d192",
-      "path": "/vue-code-study/entry/state.html",
+      "regularPath": "/vue-code-study/compile/model.html",
+      "relativePath": "vue-code-study/compile/model.md",
+      "key": "v-4dea45c5",
+      "path": "/vue-code-study/compile/model.html",
       "headers": [
         {
           "level": 2,
-          "title": "initState",
-          "slug": "initstate"
+          "title": "model",
+          "slug": "model"
+        },
+        {
+          "level": 2,
+          "title": "genAssignmentCode",
+          "slug": "genassignmentcode"
         },
         {
           "level": 3,
-          "title": "proxy",
-          "slug": "proxy"
+          "title": "parseModel",
+          "slug": "parsemodel"
         },
         {
-          "level": 3,
-          "title": "initProps",
-          "slug": "initprops"
+          "level": 2,
+          "title": "genDefaultModel-其他类型的input标签或者textarea标签上的v-model",
+          "slug": "gendefaultmodel-其他类型的input标签或者textarea标签上的v-model"
         },
         {
-          "level": 3,
-          "title": "initMethods",
-          "slug": "initmethods"
+          "level": 2,
+          "title": "genComponentModel-组件上的v-model",
+          "slug": "gencomponentmodel-组件上的v-model"
         },
         {
-          "level": 3,
-          "title": "initData",
-          "slug": "initdata"
+          "level": 2,
+          "title": "genSelect-select标签上的v-model",
+          "slug": "genselect-select标签上的v-model"
         },
         {
-          "level": 3,
-          "title": "initComputed",
-          "slug": "initcomputed"
+          "level": 2,
+          "title": "genCheckboxModel-复选框上的v-model",
+          "slug": "gencheckboxmodel-复选框上的v-model"
         },
         {
-          "level": 3,
-          "title": "initWatch",
-          "slug": "initwatch"
-        },
-        {
-          "level": 3,
-          "title": "stateMixin",
-          "slug": "statemixin"
+          "level": 2,
+          "title": "genRadioModel-单选框上的v-model",
+          "slug": "genradiomodel-单选框上的v-model"
         }
       ]
     },
@@ -915,112 +975,52 @@ export const siteData = {
       ]
     },
     {
-      "title": "解析HTML模板",
+      "title": "响应式入口",
       "frontmatter": {},
-      "regularPath": "/vue-code-study/compile/parse-html.html",
-      "relativePath": "vue-code-study/compile/parse-html.md",
-      "key": "v-39a62c35",
-      "path": "/vue-code-study/compile/parse-html.html",
+      "regularPath": "/vue-code-study/entry/state.html",
+      "relativePath": "vue-code-study/entry/state.md",
+      "key": "v-9ee2d192",
+      "path": "/vue-code-study/entry/state.html",
       "headers": [
         {
           "level": 2,
-          "title": "parseHTML中用到的正则",
-          "slug": "parsehtml中用到的正则"
+          "title": "initState",
+          "slug": "initstate"
         },
         {
           "level": 3,
-          "title": "attribute",
-          "slug": "attribute"
+          "title": "proxy",
+          "slug": "proxy"
         },
         {
           "level": 3,
-          "title": "dynamicArgAttribute",
-          "slug": "dynamicargattribute"
+          "title": "initProps",
+          "slug": "initprops"
         },
         {
           "level": 3,
-          "title": "startTagOpen",
-          "slug": "starttagopen"
+          "title": "initMethods",
+          "slug": "initmethods"
         },
         {
           "level": 3,
-          "title": "startTagClose",
-          "slug": "starttagclose"
+          "title": "initData",
+          "slug": "initdata"
         },
         {
           "level": 3,
-          "title": "endTag",
-          "slug": "endtag"
+          "title": "initComputed",
+          "slug": "initcomputed"
         },
         {
           "level": 3,
-          "title": "doctype",
-          "slug": "doctype"
+          "title": "initWatch",
+          "slug": "initwatch"
         },
         {
           "level": 3,
-          "title": "comment",
-          "slug": "comment"
-        },
-        {
-          "level": 3,
-          "title": "conditionalComment",
-          "slug": "conditionalcomment"
-        },
-        {
-          "level": 3,
-          "title": "encodedAttr",
-          "slug": "encodedattr"
-        },
-        {
-          "level": 3,
-          "title": "encodedAttrWithNewLines",
-          "slug": "encodedattrwithnewlines"
-        },
-        {
-          "level": 2,
-          "title": "parseHTML用到的一些方法和变量",
-          "slug": "parsehtml用到的一些方法和变量"
-        },
-        {
-          "level": 2,
-          "title": "parseHTML",
-          "slug": "parsehtml"
-        },
-        {
-          "level": 3,
-          "title": "左尖括号索引为0时",
-          "slug": "左尖括号索引为0时"
-        },
-        {
-          "level": 3,
-          "title": "左尖括号索引大于等于0时",
-          "slug": "左尖括号索引大于等于0时"
-        },
-        {
-          "level": 3,
-          "title": "左尖括号索引没找到时",
-          "slug": "左尖括号索引没找到时"
-        },
-        {
-          "level": 3,
-          "title": "advance",
-          "slug": "advance"
-        },
-        {
-          "level": 3,
-          "title": "parseStartTag",
-          "slug": "parsestarttag"
-        },
-        {
-          "level": 3,
-          "title": "handleStartTag",
-          "slug": "handlestarttag"
-        },
-        {
-          "level": 3,
-          "title": "parseEndTag",
-          "slug": "parseendtag"
+          "title": "stateMixin",
+          "slug": "statemixin"
         }
       ]
     },

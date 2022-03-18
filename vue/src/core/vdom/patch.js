@@ -37,7 +37,7 @@ function sameVnode (a, b) {
   return (
     // key 必须相同
     a.key === b.key &&
-    // 如果是异步组件的占位注释节点， 那么步组件的工厂函数也必须相同
+    // 如果是异步组件的占位注释节点， 那么异步组件的工厂函数也必须相同
     a.asyncFactory === b.asyncFactory && (
       (
         a.tag === b.tag && //标签相同
@@ -973,6 +973,7 @@ export function createPatchFunction (backend) {
 
     // 调用insert钩子，放在最后面保证所有DOM元素都已经插入到页面中，才执行insert钩子
     // insertedVnodeQueue队列中是所有组件VNode，确保所有DOM元素都已经插入到页面，才执行mounted钩子
+    // 子组件排在前面父组件排在后面
     invokeInsertHook(vnode, insertedVnodeQueue, isInitialPatch)
     
     // 返回生成DOM树

@@ -33,14 +33,6 @@ export const routes = [
     redirect: "/vue-code-study/"
   },
   {
-    name: "v-4b89b893",
-    path: "/vue-code-study/compile/ast.html",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-4b89b893").then(next)
-    },
-  },
-  {
     name: "v-62ff1727",
     path: "/vue-code-study/compile/compile-entry.html",
     component: GlobalLayout,
@@ -73,11 +65,11 @@ export const routes = [
     },
   },
   {
-    name: "v-4dea45c5",
-    path: "/vue-code-study/compile/model.html",
+    name: "v-39a62c35",
+    path: "/vue-code-study/compile/parse-html.html",
     component: GlobalLayout,
     beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-4dea45c5").then(next)
+      ensureAsyncComponentsLoaded("Layout", "v-39a62c35").then(next)
     },
   },
   {
@@ -89,6 +81,14 @@ export const routes = [
     },
   },
   {
+    name: "v-4b89b893",
+    path: "/vue-code-study/compile/ast.html",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-4b89b893").then(next)
+    },
+  },
+  {
     name: "v-13d9fb31",
     path: "/vue-code-study/compile/parse.html",
     component: GlobalLayout,
@@ -97,11 +97,11 @@ export const routes = [
     },
   },
   {
-    name: "v-9ee2d192",
-    path: "/vue-code-study/entry/state.html",
+    name: "v-4dea45c5",
+    path: "/vue-code-study/compile/model.html",
     component: GlobalLayout,
     beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-9ee2d192").then(next)
+      ensureAsyncComponentsLoaded("Layout", "v-4dea45c5").then(next)
     },
   },
   {
@@ -113,11 +113,11 @@ export const routes = [
     },
   },
   {
-    name: "v-39a62c35",
-    path: "/vue-code-study/compile/parse-html.html",
+    name: "v-9ee2d192",
+    path: "/vue-code-study/entry/state.html",
     component: GlobalLayout,
     beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-39a62c35").then(next)
+      ensureAsyncComponentsLoaded("Layout", "v-9ee2d192").then(next)
     },
   },
   {
