@@ -9,18 +9,6 @@ import GlobalLayout from "D:\\代码\\vue2源码学习\\vue-notes\\node_modules\
 injectComponentOption(GlobalLayout, 'mixins', rootMixins)
 export const routes = [
   {
-    name: "v-6a8d73d3",
-    path: "/guide/",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-6a8d73d3").then(next)
-    },
-  },
-  {
-    path: "/guide/index.html",
-    redirect: "/guide/"
-  },
-  {
     name: "v-e67ddbba",
     path: "/vue-code-study/",
     component: GlobalLayout,
@@ -31,6 +19,18 @@ export const routes = [
   {
     path: "/vue-code-study/index.html",
     redirect: "/vue-code-study/"
+  },
+  {
+    name: "v-6a8d73d3",
+    path: "/guide/",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-6a8d73d3").then(next)
+    },
+  },
+  {
+    path: "/guide/index.html",
+    redirect: "/guide/"
   },
   {
     name: "v-62ff1727",
@@ -46,6 +46,14 @@ export const routes = [
     component: GlobalLayout,
     beforeEnter: (to, from, next) => {
       ensureAsyncComponentsLoaded("Layout", "v-cd48bbd6").then(next)
+    },
+  },
+  {
+    name: "v-4b89b893",
+    path: "/vue-code-study/compile/ast.html",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-4b89b893").then(next)
     },
   },
   {
@@ -65,11 +73,11 @@ export const routes = [
     },
   },
   {
-    name: "v-39a62c35",
-    path: "/vue-code-study/compile/parse-html.html",
+    name: "v-4dea45c5",
+    path: "/vue-code-study/compile/model.html",
     component: GlobalLayout,
     beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-39a62c35").then(next)
+      ensureAsyncComponentsLoaded("Layout", "v-4dea45c5").then(next)
     },
   },
   {
@@ -81,14 +89,6 @@ export const routes = [
     },
   },
   {
-    name: "v-4b89b893",
-    path: "/vue-code-study/compile/ast.html",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-4b89b893").then(next)
-    },
-  },
-  {
     name: "v-13d9fb31",
     path: "/vue-code-study/compile/parse.html",
     component: GlobalLayout,
@@ -97,43 +97,11 @@ export const routes = [
     },
   },
   {
-    name: "v-4dea45c5",
-    path: "/vue-code-study/compile/model.html",
+    name: "v-39a62c35",
+    path: "/vue-code-study/compile/parse-html.html",
     component: GlobalLayout,
     beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-4dea45c5").then(next)
-    },
-  },
-  {
-    name: "v-099cd021",
-    path: "/vue-code-study/global-api/global.html",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-099cd021").then(next)
-    },
-  },
-  {
-    name: "v-9ee2d192",
-    path: "/vue-code-study/entry/state.html",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-9ee2d192").then(next)
-    },
-  },
-  {
-    name: "v-1a6ce57d",
-    path: "/vue-code-study/global-api/instance.html",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-1a6ce57d").then(next)
-    },
-  },
-  {
-    name: "v-57cd00e6",
-    path: "/vue-code-study/observe/observe.html",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-57cd00e6").then(next)
+      ensureAsyncComponentsLoaded("Layout", "v-39a62c35").then(next)
     },
   },
   {
@@ -145,11 +113,27 @@ export const routes = [
     },
   },
   {
-    name: "v-056139ca",
-    path: "/vue-code-study/render/create-component.html",
+    name: "v-9ee2d192",
+    path: "/vue-code-study/entry/state.html",
     component: GlobalLayout,
     beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-056139ca").then(next)
+      ensureAsyncComponentsLoaded("Layout", "v-9ee2d192").then(next)
+    },
+  },
+  {
+    name: "v-099cd021",
+    path: "/vue-code-study/global-api/global.html",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-099cd021").then(next)
+    },
+  },
+  {
+    name: "v-1a6ce57d",
+    path: "/vue-code-study/global-api/instance.html",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-1a6ce57d").then(next)
     },
   },
   {
@@ -158,6 +142,22 @@ export const routes = [
     component: GlobalLayout,
     beforeEnter: (to, from, next) => {
       ensureAsyncComponentsLoaded("Layout", "v-2160ea3a").then(next)
+    },
+  },
+  {
+    name: "v-056139ca",
+    path: "/vue-code-study/render/create-component.html",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-056139ca").then(next)
+    },
+  },
+  {
+    name: "v-57cd00e6",
+    path: "/vue-code-study/observe/observe.html",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-57cd00e6").then(next)
     },
   },
   {
